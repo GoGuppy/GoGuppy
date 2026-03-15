@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Linux VM Deployment · Azure · Guppy's PS Cheat Sheets</title>
+<title>List Subscriptions, Groups & Resources · Azure · Guppy's PS Cheat Sheets</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0f1117; color: #c9d1d9; font-family: 'Segoe UI', system-ui, sans-serif; padding: 0 0 60px; min-height: 100vh; }
@@ -36,12 +36,9 @@
   .copy-btn:hover { background: #30363d; color: #e6edf3; }
   .copy-btn.done { background: #0d2b17; color: #3fb950; border-color: #1a4226; }
   .tag { font-size: 10px; font-weight: 500; padding: 1px 7px; border-radius: 999px; }
-  .tag-key    { background: #0d2341; color: #58a6ff; }
-  .tag-slow   { background: #2b1d04; color: #d29922; }
-  .tag-fire   { background: #2b0d0d; color: #f85149; }
-  .tag-warn   { background: #2b1d04; color: #e3b341; }
-  .tag-net    { background: #1a1230; color: #bc8cff; }
-  .tag-info   { background: #0d2626; color: #39c5cf; }
+  .tag-key  { background: #0d2341; color: #58a6ff; }
+  .tag-info { background: #0d2626; color: #39c5cf; }
+  .tag-net  { background: #1a1230; color: #bc8cff; }
   footer { max-width: 860px; margin: 48px auto 0; padding: 20px 32px 0; border-top: 1px solid #21262d; font-family: 'Consolas', monospace; font-size: 11px; color: #484f58; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
   footer a { color: #58a6ff; text-decoration: none; }
 </style>
@@ -57,12 +54,12 @@
 </header>
 
 <div class="wrap">
-  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Azure</a> › Linux VM Deployment</div>
-  <h1>🐧 Azure Linux VM Deployment</h1>
-  <div class="subtitle">Az PowerShell Module · AZ-104 · Ubuntu VM build, NSG, SSH, and teardown · run PowerShell as Administrator</div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Azure</a> › List Subscriptions, Groups & Resources</div>
+  <h1>📋 List Subscriptions, Groups & Resources</h1>
+  <div class="subtitle">Az PowerShell Module · AZ-104 · Query what exists in your tenant before touching anything</div>
 
   <div class="warning-box">
-    <strong>Don't be stupid!!!</strong> Make sure to test first before using in production. Always delete the NSG SSH rule (step 14) when not actively using SSH. Remove the resource group (step 17) when done to stop billing. If you see module errors, run <code style="font-family:Consolas,monospace">Update-Module Az</code> and restart PowerShell.
+    Read-only commands, nothing here creates or modifies resources. If you see token warnings on connect, run <code style="font-family:Consolas,monospace">Update-Module Az</code> and restart PowerShell.
   </div>
 
   <div id="root"></div>
@@ -77,111 +74,52 @@
 const steps = [
   {
     n:"1", title:"Connect to Azure", tag:"key",
-    desc:"Authenticate to your Azure subscription.",
+    desc:"Authenticate to your Azure tenant.",
     code:`Connect-AzAccount`
   },
   {
-    n:"2", title:"Create a Resource Group", tag:"key",
-    desc:"Container for all resources in this deployment.",
-    code:`New-AzResourceGroup -Name "MyRG" -Location "westus2"`
+    n:"2", title:"List All Subscriptions", tag:"info",
+    desc:"Shows every subscription available in the tenant.",
+    code:`Get-AzSubscription`
   },
   {
-    n:"3", title:"Deploy a Linux VM", tag:"slow",
-    desc:"Creates an Ubuntu VM with default networking. PowerShell must be run as Administrator or it will fail on credentials.",
-    code:`New-AzVM -ResourceGroupName "MyRG" -Name "MyLinuxVM" -Location "WestUS2" -Image "Ubuntu2204"`
+    n:"3", title:"Switch Subscription", tag:"info",
+    desc:"If you have multiple subscriptions, set the one you want to work in.",
+    code:`Set-AzContext -SubscriptionId "your-subscription-id"`
   },
   {
-    n:"4", title:"Create a Public IP Address", tag:"net",
-    desc:"Static public IP — required to SSH from outside Azure.",
-    code:`New-AzPublicIpAddress -Name "MyPublicIP" -ResourceGroupName "MyRG" -Location "WestUS2" -AllocationMethod Static`
+    n:"4", title:"List All Resource Groups", tag:"info",
+    desc:"Shows all resource groups in the current subscription.",
+    code:`Get-AzResourceGroup`
   },
   {
-    n:"5", title:"Associate Public IP to NIC", tag:"net",
-    desc:"Gets the VM's NIC and assigns the public IP to it.",
-    code:`$nic = Get-AzNetworkInterface -Name "mylinuxvm" -ResourceGroupName "MyRG"
-Set-AzNetworkInterfaceIpConfig -NetworkInterface $nic -Name $nic.IpConfigurations[0].Name -PublicIpAddress (Get-AzPublicIpAddress -Name "MyPublicIP" -ResourceGroupName "MyRG") | Set-AzNetworkInterface`
+    n:"5", title:"List All Resources in a Resource Group", tag:"info",
+    desc:"Dump everything inside a specific resource group.",
+    code:`Get-AzResource -ResourceGroupName "MyRG"`
   },
   {
-    n:"6", title:"Create a Network Security Group", tag:"net",
-    desc:"NSG controls inbound and outbound traffic rules for the VM.",
-    code:`New-AzNetworkSecurityGroup -Name "MyNewNSG" -ResourceGroupName "MyRG" -Location "WestUS2"`
+    n:"6", title:"List Resources by Type", tag:"info",
+    desc:"Filter resources by type across the whole subscription — useful for finding all VMs, NSGs, etc.",
+    code:`Get-AzResource -ResourceType "Microsoft.Compute/virtualMachines"`
   },
   {
-    n:"7", title:"Associate NSG to NIC", tag:"net",
-    desc:"NSG does nothing until it's attached to the NIC. This is the step most people miss.",
-    code:`$nic = Get-AzNetworkInterface -Name "mylinuxvm" -ResourceGroupName "MyRG"
-$nic.NetworkSecurityGroup = Get-AzNetworkSecurityGroup -Name "MyNewNSG" -ResourceGroupName "MyRG"
-Set-AzNetworkInterface -NetworkInterface $nic`
-  },
-  {
-    n:"8", title:"View Current NSG Rules", tag:"info",
-    desc:"SecurityRules = custom rules you've added (empty on a new NSG). DefaultSecurityRules = built-in Azure rules that always exist.",
-    code:`Get-AzNetworkSecurityGroup -Name "Mynewnsg" -ResourceGroupName "MyRG" | Select-Object SecurityRules, DefaultSecurityRules`
-  },
-  {
-    n:"9", title:"Get Public IP of the VM", tag:"info",
-    desc:"Retrieve the public IP address assigned to the resource.",
-    code:`Get-AzPublicIpAddress -ResourceGroupName "MyRG"`
-  },
-  {
-    n:"10", title:"Check Your Own Public IP", tag:"info",
-    desc:"Find your current public IP — needed for the SSH rule below.",
-    code:`(Invoke-WebRequest -Uri "https://api.ipify.org").Content`
-  },
-  {
-    n:"11", title:"Allow Inbound SSH from Your IP", tag:"warn",
-    desc:"Replace x.x.x.x with your public IP from step 10. Only allow your own IP.",
-    code:`$nsg = Get-AzNetworkSecurityGroup -Name "Mynewnsg" -ResourceGroupName "MyRG"
-Add-AzNetworkSecurityRuleConfig -NetworkSecurityGroup $nsg -Name "Allow-SSH" -Protocol Tcp -Direction Inbound -Priority 300 -SourceAddressPrefix "x.x.x.x" -SourcePortRange "*" -DestinationAddressPrefix "*" -DestinationPortRange 22 -Access Allow | Set-AzNetworkSecurityGroup`
-  },
-  {
-    n:"12", title:"Check VM Status", tag:"info",
-    desc:"Confirm the VM is running before attempting SSH.",
-    code:`Get-AzVM -ResourceGroupName "MyRG" -Name "MyLinuxVM" -Status`
-  },
-  {
-    n:"13", title:"SSH to the VM", tag:"key",
-    desc:"Replace adminuser and x.x.x.x with your admin username and public IP from step 9.",
-    code:`ssh adminuser@x.x.x.x`
-  },
-  {
-    n:"14", title:"Delete the SSH NSG Rule When Done", tag:"fire",
-    desc:"Always remove SSH access when you're finished. Don't leave port 22 open.",
-    code:`Get-AzNetworkSecurityGroup -Name "Mynewnsg" -ResourceGroupName "MyRG" | Remove-AzNetworkSecurityRuleConfig -Name "Allow-SSH" | Set-AzNetworkSecurityGroup`
-  },
-  {
-    n:"15", title:"Stop the VM (stop billing)", tag:"warn",
-    desc:"Deallocates the VM. Compute billing stops — storage still runs.",
-    code:`Stop-AzVM -ResourceGroupName "MyRG" -Name "mylinuxvm" -Force`
-  },
-  {
-    n:"16", title:"Start the VM", tag:"info",
-    desc:"Power the VM back on.",
-    code:`Start-AzVM -ResourceGroupName "MyRG" -Name "mylinuxvm"`
-  },
-  {
-    n:"17", title:"Delete the Resource Group", tag:"fire",
-    desc:"Removes everything in the group. No undo. Stops all billing.",
-    code:`Remove-AzResourceGroup "MyRG"`
+    n:"7", title:"List All Resources in Subscription", tag:"info",
+    desc:"Dump everything across the entire subscription. Can be a long list.",
+    code:`Get-AzResource`
   },
 ];
 
 const tagMap = {
-  key:  { label:"required",    cls:"tag-key"  },
-  slow: { label:"slow",        cls:"tag-slow" },
-  fire: { label:"destructive", cls:"tag-fire" },
-  warn: { label:"caution",     cls:"tag-warn" },
-  net:  { label:"networking",  cls:"tag-net"  },
-  info: { label:"info",        cls:"tag-info" },
+  key:  { label:"required", cls:"tag-key"  },
+  info: { label:"info",     cls:"tag-info" },
+  net:  { label:"networking",cls:"tag-net" },
 };
 
 const sectionBreaks = {
-  "1":  "Setup",
-  "3":  "Deploy",
-  "4":  "Networking",
-  "8":  "Inspect",
-  "11": "SSH Access",
-  "14": "Manage & Teardown",
+  "1": "Setup",
+  "2": "Subscriptions",
+  "4": "Resource Groups",
+  "5": "Resources",
 };
 
 const root = document.getElementById('root');
