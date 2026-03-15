@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSG with Rules · Azure · Guppy's PS Cheat Sheets</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1117; color: #c9d1d9; font-family: 'Segoe UI', system-ui, sans-serif; padding: 0 0 60px; min-height: 100vh; }
+  header { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-box { background: #58a6ff; color: #0d1117; font-family: 'Consolas', monospace; font-size: 13px; font-weight: 700; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .logo-name { font-family: 'Consolas', monospace; font-size: 14px; font-weight: 600; color: #e6edf3; }
+  .logo-name span { color: #58a6ff; }
+  .back { font-family: 'Consolas', monospace; font-size: 11px; color: #58a6ff; text-decoration: none; }
+  .back:hover { text-decoration: underline; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 32px 0; }
+  .breadcrumb { font-family: 'Consolas', monospace; font-size: 11px; color: #484f58; margin-bottom: 16px; }
+  .breadcrumb a { color: #58a6ff; text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  h1 { font-size: 22px; font-weight: 600; color: #e6edf3; margin-bottom: 6px; }
+  .subtitle { font-size: 12px; color: #6e7681; margin-bottom: 24px; }
+  .warning-box { background: #2b1d04; border: 1px solid #d29922; border-radius: 8px; padding: 10px 14px; margin-bottom: 24px; font-size: 12px; color: #e3b341; line-height: 1.6; }
+  .warning-box strong { color: #f0c040; }
+  .section-label { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #484f58; margin: 28px 0 8px 2px; }
+  .card { background: #161b22; border: 1px solid #21262d; border-radius: 8px; margin-bottom: 7px; overflow: hidden; transition: border-color .15s; }
+  .card:hover { border-color: #30363d; }
+  .card-top { display: flex; align-items: center; gap: 10px; padding: 10px 12px 9px; }
+  .step { min-width: 22px; height: 22px; border-radius: 50%; background: #21262d; border: 1px solid #30363d; color: #6e7681; font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .card-info { flex: 1; }
+  .card-title { font-size: 13px; font-weight: 500; color: #e6edf3; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+  .card-desc { font-size: 11px; color: #6e7681; margin-top: 2px; line-height: 1.4; }
+  .code-wrap { position: relative; margin: 0 12px 10px 44px; }
+  .code-block { background: #0d1117; border: 1px solid #21262d; border-radius: 6px; padding: 8px 44px 8px 10px; font-family: 'Cascadia Code','Fira Code','Consolas',monospace; font-size: 11.5px; color: #79c0ff; white-space: pre-wrap; word-break: break-all; line-height: 1.65; }
+  .copy-btn { position: absolute; top: 6px; right: 6px; background: #21262d; border: 1px solid #30363d; border-radius: 5px; color: #8b949e; font-size: 10px; padding: 3px 8px; cursor: pointer; font-family: inherit; transition: background .1s, color .1s; }
+  .copy-btn:hover { background: #30363d; color: #e6edf3; }
+  .copy-btn.done { background: #0d2b17; color: #3fb950; border-color: #1a4226; }
+  .tag { font-size: 10px; font-weight: 500; padding: 1px 7px; border-radius: 999px; }
+  .tag-key    { background: #0d2341; color: #58a6ff; }
+  .tag-slow   { background: #2b1d04; color: #d29922; }
+  .tag-fire   { background: #2b0d0d; color: #f85149; }
+  .tag-warn   { background: #2b1d04; color: #e3b341; }
+  .tag-net    { background: #1a1230; color: #bc8cff; }
+  .tag-info   { background: #0d2626; color: #39c5cf; }
+  footer { max-width: 860px; margin: 48px auto 0; padding: 20px 32px 0; border-top: 1px solid #21262d; font-family: 'Consolas', monospace; font-size: 11px; color: #484f58; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  footer a { color: #58a6ff; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="../index.html">
+    <div class="logo-box">PS</div>
+    <div class="logo-name">Guppy's<span>PowerShell</span>CheatSheet</div>
+  </a>
+  <a class="back" href="index.html">← Azure</a>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Azure</a> › NSG with Rules</div>
+  <h1>🛡️ Azure NSG with Rules</h1>
+  <div class="subtitle">Az PowerShell Module · AZ-700 · Create an NSG, define rules, and associate to a NIC or subnet</div>
+
+  <div class="warning-box">
+    <strong>Don't be stupid!!!</strong> Make sure to test first before using in production. Always clean up inbound rules (RDP/SSH) when not in use. Priority lower number = higher priority — plan your rule order before deploying.
+  </div>
+
+  <div id="root"></div>
+</div>
+
+<footer>
+  <span>GoGuppy · GuppysPowershellCheatSheet</span>
+  <a href="https://github.com/GoGuppy/GuppysPowershellCheatSheet" target="_blank">github.com/GoGuppy/GuppysPowershellCheatSheet</a>
+</footer>
+
+<script>
+const steps = [
+  {
+    n:"1", title:"Connect to Azure", tag:"key",
+    desc:"Authenticate to your Azure subscription.",
+    code:`Connect-AzAccount`
+  },
+  {
+    n:"2", title:"Create a Resource Group", tag:"key",
+    desc:"Container for all resources in this deployment.",
+    code:`New-AzResourceGroup -Name "MyRG" -Location "westus2"`
+  },
+  {
+    n:"3", title:"Create the NSG", tag:"net",
+    desc:"Creates a bare NSG with no custom rules. Default Azure rules are applied automatically.",
+    code:`New-AzNetworkSecurityGroup -Name "MyNSG" -ResourceGroupName "MyRG" -Location "WestUS2"`
+  },
+  {
+    n:"4", title:"Allow Inbound from Specific IP", tag:"warn",
+    desc:"Locks a port down to a single source IP. Replace x.x.x.x and the port as needed.",
+    code:`Get-AzNetworkSecurityGroup -Name "MyNSG" -ResourceGroupName "MyRG" | Add-AzNetworkSecurityRuleConfig -Name "Allow-MyIP" -Protocol Tcp -Direction Inbound -Priority 100 -SourceAddressPrefix "x.x.x.x" -SourcePortRange "*" -DestinationAddressPrefix "*" -DestinationPortRange 3389 -Access Allow | Set-AzNetworkSecurityGroup`
+  },
+  {
+    n:"5", title:"Allow Inbound HTTP (port 80)", tag:"net",
+    desc:"Opens port 80 from any source. Common for web servers.",
+    code:`Get-AzNetworkSecurityGroup -Name "MyNSG" -ResourceGroupName "MyRG" | Add-AzNetworkSecurityRuleConfig -Name "Allow-HTTP" -Protocol Tcp -Direction Inbound -Priority 200 -SourceAddressPrefix "*" -SourcePortRange "*" -DestinationAddressPrefix "*" -DestinationPortRange 80 -Access Allow | Set-AzNetworkSecurityGroup`
+  },
+  {
+    n:"6", title:"Allow Inbound HTTPS (port 443)", tag:"net",
+    desc:"Opens port 443 from any source. Use alongside HTTP or on its own.",
+    code:`Get-AzNetworkSecurityGroup -Name "MyNSG" -ResourceGroupName "MyRG" | Add-AzNetworkSecurityRuleConfig -Name "Allow-HTTPS" -Protocol Tcp -Direction Inbound -Priority 210 -SourceAddressPrefix "*" -SourcePortRange "*" -DestinationAddressPrefix "*" -DestinationPortRange 443 -Access Allow | Set-AzNetworkSecurityGroup`
+  },
+  {
+    n:"7", title:"Allow Inbound from a Subnet", tag:"net",
+    desc:"Restricts access to traffic originating from a specific subnet address range.",
+    code:`Get-AzNetworkSecurityGroup -Name "MyNSG" -ResourceGroupName "MyRG" | Add-AzNetworkSecurityRuleConfig -Name "Allow-Subnet" -Protocol "*" -Direction Inbound -Priority 300 -SourceAddressPrefix "10.0.1.0/24" -SourcePortRange "*" -DestinationAddressPrefix "*" -DestinationPortRange "*" -Access Allow | Set-AzNetworkSecurityGroup`
+  },
+  {
+    n:"8", title:"Allow ICMP (ping)", tag:"net",
+    desc:"Allows ping traffic inbound. Useful for connectivity testing.",
+    code:`Get-AzNetworkSecurityGroup -Name "MyNSG" -ResourceGroupName "MyRG" | Add-AzNetworkSecurityRuleConfig -Name "Allow-ICMP" -Protocol Icmp -Direction Inbound -Priority 400 -SourceAddressPrefix "*" -SourcePortRange "*" -DestinationAddressPrefix "*" -DestinationPortRange "*" -Access Allow | Set-AzNetworkSecurityGroup`
+  },
+  {
+    n:"9", title:"Deny All Inbound (explicit)", tag:"fire",
+    desc:"Explicit deny-all at a high priority number — only blocks what isn't already allowed above it. Azure has a default DenyAllInbound at 65500 but this gives you control.",
+    code:`Get-AzNetworkSecurityGroup -Name "MyNSG" -ResourceGroupName "MyRG" | Add-AzNetworkSecurityRuleConfig -Name "Deny-All-Inbound" -Protocol "*" -Direction Inbound -Priority 4000 -SourceAddressPrefix "*" -SourcePortRange "*" -DestinationAddressPrefix "*" -DestinationPortRange "*" -Access Deny | Set-AzNetworkSecurityGroup`
+  },
+  {
+    n:"10", title:"View NSG Rules", tag:"info",
+    desc:"SecurityRules = custom rules you've added. DefaultSecurityRules = built-in Azure rules.",
+    code:`Get-AzNetworkSecurityGroup -Name "MyNSG" -ResourceGroupName "MyRG" | Select-Object SecurityRules, DefaultSecurityRules`
+  },
+  {
+    n:"11", title:"Associate NSG to a NIC", tag:"net",
+    desc:"Applies the NSG to a specific VM's network interface.",
+    code:`$nic = Get-AzNetworkInterface -Name "MyVM" -ResourceGroupName "MyRG"
+$nic.NetworkSecurityGroup = Get-AzNetworkSecurityGroup -Name "MyNSG" -ResourceGroupName "MyRG"
+Set-AzNetworkInterface -NetworkInterface $nic`
+  },
+  {
+    n:"12", title:"Associate NSG to a Subnet", tag:"net",
+    desc:"Applies the NSG to an entire subnet — affects all resources in it. Requires the subnet address prefix.",
+    code:`$nsg = Get-AzNetworkSecurityGroup -Name "MyNSG" -ResourceGroupName "MyRG"
+Get-AzVirtualNetwork -Name "MyVNet" -ResourceGroupName "MyRG" | Set-AzVirtualNetworkSubnetConfig -Name "Subnet-1" -AddressPrefix "10.0.1.0/24" -NetworkSecurityGroup $nsg | Set-AzVirtualNetwork`
+  },
+  {
+    n:"13", title:"Remove a Rule", tag:"fire",
+    desc:"Delete a specific rule from the NSG by name.",
+    code:`Get-AzNetworkSecurityGroup -Name "MyNSG" -ResourceGroupName "MyRG" | Remove-AzNetworkSecurityRuleConfig -Name "Allow-HTTP" | Set-AzNetworkSecurityGroup`
+  },
+  {
+    n:"14", title:"Delete the Resource Group", tag:"fire",
+    desc:"Removes everything in the group. No undo.",
+    code:`Remove-AzResourceGroup "MyRG"`
+  },
+];
+
+const tagMap = {
+  key:  { label:"required",    cls:"tag-key"  },
+  slow: { label:"slow",        cls:"tag-slow" },
+  fire: { label:"destructive", cls:"tag-fire" },
+  warn: { label:"caution",     cls:"tag-warn" },
+  net:  { label:"networking",  cls:"tag-net"  },
+  info: { label:"info",        cls:"tag-info" },
+};
+
+const sectionBreaks = {
+  "1":  "Setup",
+  "3":  "Deploy",
+  "4":  "Example Rules",
+  "10": "Inspect",
+  "11": "Associate",
+  "13": "Manage & Teardown",
+};
+
+const root = document.getElementById('root');
+let currentSection = null;
+
+steps.forEach(s => {
+  if (sectionBreaks[s.n] && sectionBreaks[s.n] !== currentSection) {
+    const lbl = document.createElement('div');
+    lbl.className = 'section-label';
+    lbl.textContent = sectionBreaks[s.n];
+    root.appendChild(lbl);
+    currentSection = sectionBreaks[s.n];
+  }
+
+  const tagHTML = s.tag && tagMap[s.tag]
+    ? `<span class="tag ${tagMap[s.tag].cls}">${tagMap[s.tag].label}</span>` : '';
+
+  const escaped = s.code
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="card-top">
+      <div class="step">${s.n}</div>
+      <div class="card-info">
+        <div class="card-title">${s.title} ${tagHTML}</div>
+        <div class="card-desc">${s.desc}</div>
+      </div>
+    </div>
+    <div class="code-wrap">
+      <div class="code-block">${escaped}</div>
+      <button class="copy-btn">copy</button>
+    </div>`;
+
+  card.querySelector('.copy-btn').addEventListener('click', function() {
+    navigator.clipboard.writeText(s.code).then(() => {
+      this.textContent = '✓ copied';
+      this.classList.add('done');
+      setTimeout(() => { this.textContent = 'copy'; this.classList.remove('done'); }, 1600);
+    });
+  });
+
+  root.appendChild(card);
+});
+</script>
+</body>
+</html>
