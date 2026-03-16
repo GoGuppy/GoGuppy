@@ -83,67 +83,60 @@ const steps = [
   {
     n:"2", title:"Create a Resource Group", tag:"key",
     desc:"Container for all resources in this deployment.",
-    code:`New-AzResourceGroup -Name "MyRG" -Location "eastus"`
+    code:`New-AzResourceGroup -Name "MyRG" -Location "westus2"`
   },
   {
     n:"3", title:"Create a Storage Account", tag:"key",
     desc:"File shares live inside a storage account. StorageV2 + LRS is fine for testing.",
-    code:`New-AzStorageAccount -ResourceGroupName "MyRG" -Name "mystorageacct001" -Location "eastus" -SkuName "Standard_LRS" -Kind "StorageV2"`
+    code:`New-AzStorageAccount -ResourceGroupName "MyRG" -Name "mystorageacct001" -Location "westus2" -SkuName "Standard_LRS" -Kind "StorageV2"`
   },
   {
-    n:"4", title:"Create a Storage Context", tag:"key",
-    desc:"Grab key1 and build a context object — required for all file share operations.",
-    code:`$key = (Get-AzStorageAccountKey -ResourceGroupName "MyRG" -Name "mystorageacct001")[0].Value
-$ctx = New-AzStorageContext -StorageAccountName "mystorageacct001" -StorageAccountKey $key`
-  },
-  {
-    n:"5", title:"Create a File Share", tag:"key",
+    n:"4", title:"Create a File Share", tag:"key",
     desc:"Creates a new share with a 100 GiB quota. Increase -Quota up to 5120 for standard tier.",
-    code:`New-AzStorageShare -Name "myfileshare" -Quota 100 -Context $ctx`
+    code:`New-AzStorageShare -Name "myfileshare" -Quota 100 -Context (New-AzStorageContext -StorageAccountName "mystorageacct001" -StorageAccountKey (Get-AzStorageAccountKey -ResourceGroupName "MyRG" -Name "mystorageacct001")[0].Value)`
   },
   {
-    n:"6", title:"List File Shares in the Account", tag:"info",
+    n:"5", title:"List File Shares in the Account", tag:"info",
     desc:"Verify the share was created and see current quota usage.",
-    code:`Get-AzStorageShare -Context $ctx`
+    code:`Get-AzStorageShare -Context (New-AzStorageContext -StorageAccountName "mystorageacct001" -StorageAccountKey (Get-AzStorageAccountKey -ResourceGroupName "MyRG" -Name "mystorageacct001")[0].Value)`
   },
   {
-    n:"7", title:"Upload a File to the Share", tag:"key",
+    n:"6", title:"Upload a File to the Share", tag:"key",
     desc:"Uploads a local file to the root of the share.",
-    code:`Set-AzStorageFileContent -ShareName "myfileshare" -Source "C:\Temp\test.txt" -Path "test.txt" -Context $ctx`
+    code:`Set-AzStorageFileContent -ShareName "myfileshare" -Source "C:\\Temp\\test.txt" -Path "test.txt" -Context (New-AzStorageContext -StorageAccountName "mystorageacct001" -StorageAccountKey (Get-AzStorageAccountKey -ResourceGroupName "MyRG" -Name "mystorageacct001")[0].Value)`
   },
   {
-    n:"8", title:"List Files in the Share", tag:"info",
+    n:"7", title:"List Files in the Share", tag:"info",
     desc:"Show all files and directories at the root of the share.",
-    code:`Get-AzStorageFile -ShareName "myfileshare" -Context $ctx`
+    code:`Get-AzStorageFile -ShareName "myfileshare" -Context (New-AzStorageContext -StorageAccountName "mystorageacct001" -StorageAccountKey (Get-AzStorageAccountKey -ResourceGroupName "MyRG" -Name "mystorageacct001")[0].Value)`
   },
   {
-    n:"9", title:"Download a File from the Share", tag:"info",
+    n:"8", title:"Download a File from the Share", tag:"info",
     desc:"Downloads a file from the share to a local destination.",
-    code:`Get-AzStorageFileContent -ShareName "myfileshare" -Path "test.txt" -Destination "C:\Temp\downloaded.txt" -Context $ctx`
+    code:`Get-AzStorageFileContent -ShareName "myfileshare" -Path "test.txt" -Destination "C:\\Temp\\downloaded.txt" -Context (New-AzStorageContext -StorageAccountName "mystorageacct001" -StorageAccountKey (Get-AzStorageAccountKey -ResourceGroupName "MyRG" -Name "mystorageacct001")[0].Value)`
   },
   {
-    n:"10", title:"Generate a SAS Token for the Share", tag:"warn",
-    desc:"Creates a time-limited SAS URL. Anyone with this URL can read the share — keep it secret.",
-    code:`$expire = (Get-Date).AddHours(4)
-New-AzStorageShareSASToken -ShareName "myfileshare" -Permission "rwdl" -ExpiryTime $expire -Context $ctx`
+    n:"9", title:"Generate a SAS Token for the Share", tag:"warn",
+    desc:"Creates a time-limited SAS URL good for 4 hours. Anyone with this URL can read/write the share — treat it like a password.",
+    code:`New-AzStorageShareSASToken -ShareName "myfileshare" -Permission "rwdl" -ExpiryTime (Get-Date).AddHours(4) -Context (New-AzStorageContext -StorageAccountName "mystorageacct001" -StorageAccountKey (Get-AzStorageAccountKey -ResourceGroupName "MyRG" -Name "mystorageacct001")[0].Value)`
   },
   {
-    n:"11", title:"Map Share as a Drive (Windows)", tag:"info",
-    desc:"Mounts the file share as a persistent Z: drive. Replace the account name and key accordingly.",
+    n:"10", title:"Map Share as a Drive (Windows)", tag:"info",
+    desc:"Mounts the file share as a persistent Z: drive. Port 445 must be open — many ISPs block it.",
     code:`net use Z: \\mystorageacct001.file.core.windows.net\myfileshare /u:AZURE\mystorageacct001 "<storageAccountKey>" /persistent:yes`
   },
   {
-    n:"12", title:"Update Share Quota", tag:"warn",
+    n:"11", title:"Update Share Quota", tag:"warn",
     desc:"Resize the quota on an existing share. Cannot shrink below current usage.",
-    code:`Set-AzStorageShareQuota -ShareName "myfileshare" -Quota 250 -Context $ctx`
+    code:`Set-AzStorageShareQuota -ShareName "myfileshare" -Quota 250 -Context (New-AzStorageContext -StorageAccountName "mystorageacct001" -StorageAccountKey (Get-AzStorageAccountKey -ResourceGroupName "MyRG" -Name "mystorageacct001")[0].Value)`
   },
   {
-    n:"13", title:"Delete the File Share", tag:"fire",
+    n:"12", title:"Delete the File Share", tag:"fire",
     desc:"Permanently removes the share and all files in it.",
-    code:`Remove-AzStorageShare -Name "myfileshare" -Context $ctx -Force`
+    code:`Remove-AzStorageShare -Name "myfileshare" -Force -Context (New-AzStorageContext -StorageAccountName "mystorageacct001" -StorageAccountKey (Get-AzStorageAccountKey -ResourceGroupName "MyRG" -Name "mystorageacct001")[0].Value)`
   },
   {
-    n:"14", title:"Delete the Resource Group", tag:"fire",
+    n:"13", title:"Delete the Resource Group", tag:"fire",
     desc:"Nukes everything in the group. Stops all billing.",
     code:`Remove-AzResourceGroup -Name "MyRG" -Force`
   },
@@ -161,11 +154,11 @@ const tagMap = {
 const sectionBreaks = {
   "1":  "Setup",
   "3":  "Storage Account",
-  "5":  "File Share",
-  "7":  "File Operations",
-  "10": "Access & Mapping",
-  "12": "Manage",
-  "13": "Teardown",
+  "4":  "File Share",
+  "6":  "File Operations",
+  "9":  "Access & Mapping",
+  "11": "Manage",
+  "12": "Teardown",
 };
 
 const root = document.getElementById('root');
