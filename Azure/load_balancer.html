@@ -197,7 +197,7 @@ const steps = [
   {
     n:"25", title:"Build VM Config and Deploy", tag:"slow",
     desc:"Chains VM config through the pipeline and deploys. Uses $cred from the step above.",
-    code:`New-AzVMConfig -VMName "MyVM1" -VMSize "Standard_B1s" -SecurityType "TrustedLaunch" |
+    code:`New-AzVMConfig -VMName "MyVM1" -VMSize "Standard_D2s_v3" -SecurityType "TrustedLaunch" |
   Set-AzVMOperatingSystem -Windows -ComputerName "MyVM1" -Credential $cred |
   Set-AzVMSourceImage -PublisherName "MicrosoftWindowsServer" -Offer "WindowsServer" -Skus "2022-datacenter-azure-edition" -Version "latest" |
   Add-AzVMNetworkInterface -Id (Get-AzNetworkInterface -Name "MyVM1-NIC" -ResourceGroupName "MyRG").Id |
