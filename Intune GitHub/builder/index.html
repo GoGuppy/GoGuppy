@@ -162,4 +162,11 @@ btnGen.onclick = () => {
   a.click();
   URL.revokeObjectURL(a.href);
   document.getElementById('deployCmd').textContent =
-    '.\\tools\\Deploy-Bundle.ps1 -BundlePath .\\' 
+    '.\\tools\\Deploy-Bundle.ps1 -BundlePath .\\' + fileName;
+};
+
+render();
+refresh();
+</script>
+</body>
+</html>
