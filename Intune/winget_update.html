@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Winget Update All Apps · Intune · Guppy's PS Cheat Sheets</title>
+<title>Winget Update All Apps · Intune · Guppys Lab</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0f1117; color: #c9d1d9; font-family: 'Segoe UI', system-ui, sans-serif; padding: 0 0 60px; min-height: 100vh; }
@@ -54,8 +54,8 @@
 
 <header>
   <a class="logo" href="../index.html">
-    <div class="logo-box">PS</div>
-    <div class="logo-name">Guppy's<span>PowerShell</span>CheatSheet</div>
+    <div class="logo-box">GL</div>
+    <div class="logo-name">Guppys<span>Lab</span></div>
   </a>
   <a class="back" href="index.html">← Intune</a>
 </header>
@@ -63,14 +63,14 @@
 <div class="wrap">
   <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Intune</a> › Winget Update All Apps</div>
   <h1>📦 Winget Update All Apps</h1>
-  <div class="subtitle">Intune Platform Script · MD-102 · Deploys a daily scheduled task that silently upgrades all apps via winget</div>
+  <div class="subtitle">Intune Platform Script · Deploys a daily scheduled task that silently upgrades all apps via winget</div>
 
   <div class="warning-box">
     Runs as the <strong>logged-on user</strong> — winget is user-context. The platform script runs once via Intune to drop the scheduled task, then the task handles the recurring updates. Works on Windows 11 and Win10 20H2+ with App Installer.
   </div>
 
   <div class="info-box">
-    MD-102 angle: Platform scripts run once. Instead of fighting that, use the script to register a Windows Scheduled Task that runs winget daily at 9am. No E3 license required, no remediation needed.
+    Heads up: Platform scripts run once. Instead of fighting that, use the script to register a Windows Scheduled Task that runs winget daily at 9am. No E3 license required, no remediation needed.
   </div>
 
   <div class="section-label">Script</div>
@@ -147,7 +147,7 @@ Register-ScheduledTask -TaskName "WingetDailyUpdate" -Action $action -Trigger $t
 </div>
 
 <footer>
-  <span>GoGuppy · GuppysPowershellCheatSheet</span>
+  <span>GoGuppy · Guppys Lab</span>
 </footer>
 
 <script>

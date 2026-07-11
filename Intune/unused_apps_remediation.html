@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Uninstall Unused Apps · Intune · Guppy's PS Cheat Sheets</title>
+<title>Uninstall Unused Apps · Intune · Guppys Lab</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0f1117; color: #c9d1d9; font-family: 'Segoe UI', system-ui, sans-serif; padding: 0 0 60px; min-height: 100vh; }
@@ -56,8 +56,8 @@
 
 <header>
   <a class="logo" href="../index.html">
-    <div class="logo-box">PS</div>
-    <div class="logo-name">Guppy's<span>PowerShell</span>CheatSheet</div>
+    <div class="logo-box">GL</div>
+    <div class="logo-name">Guppys<span>Lab</span></div>
   </a>
   <a class="back" href="index.html">← Intune</a>
 </header>
@@ -65,14 +65,14 @@
 <div class="wrap">
   <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Intune</a> › Uninstall Unused Apps</div>
   <h1>🗑️ Uninstall Unused Apps (6 Months)</h1>
-  <div class="subtitle">Intune Remediation · MD-102 · Detects and removes Win32 apps not launched in over 6 months</div>
+  <div class="subtitle">Intune Remediation · Detects and removes Win32 apps not launched in over 6 months</div>
 
   <div class="warning-box">
     Uses <code style="font-family:Consolas,monospace">EstimatedLastUsed</code> from the Uninstall registry key — this data is written by Windows but not every installer populates it. Apps with no last-used date are <strong>skipped</strong> to avoid nuking something critical. Test in a pilot group first.
   </div>
 
   <div class="info-box">
-    MD-102 angle: Intune Remediations are two-script pairs — a <strong>detect</strong> script that exits 0 (compliant) or 1 (non-compliant), and a <strong>remediate</strong> script that fixes it. Intune only runs the remediation script if detection exits 1.
+    Heads up: Intune Remediations are two-script pairs — a <strong>detect</strong> script that exits 0 (compliant) or 1 (non-compliant), and a <strong>remediate</strong> script that fixes it. Intune only runs the remediation script if detection exits 1.
   </div>
 
   <div class="section-label">Detection Script</div>
@@ -170,7 +170,7 @@ foreach ($app in $stale) {
 </div>
 
 <footer>
-  <span>GoGuppy · GuppysPowershellCheatSheet</span>
+  <span>GoGuppy · Guppys Lab</span>
 </footer>
 
 <script>
