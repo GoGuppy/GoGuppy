@@ -1,0 +1,38 @@
+{
+  "_meta": {
+    "id": "dc-hardware-models",
+    "name": "Catalog - Approved Hardware Models",
+    "description": "Standard-issue device list per role tier. Edit to match what you actually buy.",
+    "type": "reference"
+  },
+  "models": [
+    {
+      "tier": "standard",
+      "manufacturer": "Dell",
+      "model": "Latitude 5450",
+      "specs": "i5 / 16GB / 512GB",
+      "notes": "Default issue for all staff"
+    },
+    {
+      "tier": "power",
+      "manufacturer": "Dell",
+      "model": "Precision 5690",
+      "specs": "i7 / 32GB / 1TB",
+      "notes": "Engineering and design roles"
+    },
+    {
+      "tier": "executive",
+      "manufacturer": "Microsoft",
+      "model": "Surface Laptop 7",
+      "specs": "Snapdragon X Elite / 16GB / 512GB",
+      "notes": "Verify ARM64 app compatibility before issuing"
+    },
+    {
+      "tier": "kiosk",
+      "manufacturer": "Lenovo",
+      "model": "ThinkCentre M70q",
+      "specs": "i3 / 8GB / 256GB",
+      "notes": "Shared workstations and signage"
+    }
+  ]
+}

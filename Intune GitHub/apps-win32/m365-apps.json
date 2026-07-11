@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "id": "app-m365",
+    "name": "App - Microsoft 365 Apps",
+    "description": "M365 Apps x64, Monthly Enterprise Channel, shared activation off, removes older Office",
+    "type": "officeSuiteApp"
+  },
+  "@odata.type": "#microsoft.graph.officeSuiteApp",
+  "displayName": "Microsoft 365 Apps for Enterprise",
+  "publisher": "Microsoft",
+  "description": "Deployed native via Intune (Apps > Windows > Microsoft 365 Apps), not Win32. Kept here so the catalog is complete.",
+  "officePlatformArchitecture": "x64",
+  "updateChannel": "monthlyEnterprise",
+  "autoAcceptEula": true,
+  "shouldUninstallOlderVersionsOfOffice": true,
+  "useSharedComputerActivation": false,
+  "localesToInstall": ["en-us"],
+  "excludedApps": {
+    "access": true,
+    "publisher": true,
+    "skypeForBusiness": true,
+    "groove": true,
+    "infoPath": true,
+    "sharePointDesigner": true
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "id": "cf-wifi-corporate",
+    "name": "Config - Corporate Wi-Fi",
+    "description": "WPA2 Enterprise Wi-Fi template. Replace SSID and cert references per tenant.",
+    "type": "deviceConfiguration"
+  },
+  "@odata.type": "#microsoft.graph.windowsWifiEnterpriseEAPConfiguration",
+  "displayName": "Config - Corporate Wi-Fi",
+  "description": "WPA2-Enterprise with EAP-TLS. REPLACE SSID-HERE and attach your trusted cert + SCEP profiles per tenant.",
+  "ssid": "SSID-HERE",
+  "networkName": "SSID-HERE",
+  "connectAutomatically": true,
+  "connectToPreferredNetwork": true,
+  "connectWhenNetworkNameIsHidden": false,
+  "wifiSecurityType": "wpa2Enterprise",
+  "eapType": "eapTls",
+  "authenticationMethod": "certificate",
+  "trustedServerCertificateNames": [
+    "radius.yourdomain.com"
+  ]
+}

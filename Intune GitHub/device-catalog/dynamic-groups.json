@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "id": "dc-dynamic-groups",
+    "name": "Catalog - Dynamic Groups",
+    "description": "Standard dynamic group definitions. Redeploy to any tenant with Import-DynamicGroups.ps1, refresh from a tenant with Export-DynamicGroups.ps1.",
+    "type": "reference"
+  },
+  "groups": [
+    {
+      "displayName": "DEV-WIN-Autopilot",
+      "description": "All Autopilot-registered devices",
+      "membershipRule": "(device.devicePhysicalIds -any (_ -startsWith \"[ZTDId]\"))",
+      "membershipRuleProcessingState": "On"
+    },
+    {
+      "displayName": "DEV-WIN-Corporate",
+      "description": "All corporate-owned Windows devices",
+      "membershipRule": "(device.deviceOSType -eq \"Windows\") and (device.deviceOwnership -eq \"Company\")",
+      "membershipRuleProcessingState": "On"
+    },
+    {
+      "displayName": "DEV-WIN-Personal",
+      "description": "All personal Windows devices (BYOD policy target)",
+      "membershipRule": "(device.deviceOSType -eq \"Windows\") and (device.deviceOwnership -eq \"Personal\")",
+      "membershipRuleProcessingState": "On"
+    }
+  ]
+}

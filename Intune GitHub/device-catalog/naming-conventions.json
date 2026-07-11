@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "id": "dc-naming",
+    "name": "Catalog - Naming Conventions",
+    "description": "Device, group, and policy naming standards so every tenant looks the same",
+    "type": "reference"
+  },
+  "devices": {
+    "template": "GUPPY-%SERIAL%",
+    "note": "Set in the Autopilot profile. 15 char max, no spaces."
+  },
+  "groups": {
+    "devices": "DEV-<Platform>-<Purpose>  e.g. DEV-WIN-Standard",
+    "users": "USR-<Dept>-<Purpose>  e.g. USR-Sales-Licensing",
+    "dynamicExample": "(device.devicePhysicalIds -any (_ -startsWith \"[ZTDId]\"))"
+  },
+  "policies": {
+    "compliance": "Compliance - <Platform> <Tier>",
+    "configuration": "Config - <What it does>",
+    "baseline": "Baseline - <Component>",
+    "apps": "App - <Name>"
+  }
+}

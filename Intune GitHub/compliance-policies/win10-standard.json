@@ -1,0 +1,38 @@
+{
+  "_meta": {
+    "id": "cp-win10-standard",
+    "name": "Compliance - Win10 Standard",
+    "description": "Same corporate baseline for remaining Win10 fleet, min 22H2",
+    "type": "compliance"
+  },
+  "@odata.type": "#microsoft.graph.windows10CompliancePolicy",
+  "displayName": "Compliance - Win10 Standard",
+  "description": "Standard corporate compliance for Windows 10 devices still in the fleet.",
+  "bitLockerEnabled": true,
+  "secureBootEnabled": true,
+  "codeIntegrityEnabled": true,
+  "tpmRequired": true,
+  "defenderEnabled": true,
+  "rtpEnabled": true,
+  "antivirusRequired": true,
+  "antiSpywareRequired": true,
+  "osMinimumVersion": "10.0.19045.0",
+  "passwordRequired": true,
+  "passwordBlockSimple": true,
+  "passwordMinimumLength": 8,
+  "passwordRequiredType": "alphanumeric",
+  "storageRequireEncryption": true,
+  "activeFirewallRequired": true,
+  "scheduledActionsForRule": [
+    {
+      "ruleName": "PasswordRequired",
+      "scheduledActionConfigurations": [
+        {
+          "actionType": "block",
+          "gracePeriodHours": 72,
+          "notificationTemplateId": ""
+        }
+      ]
+    }
+  ]
+}
