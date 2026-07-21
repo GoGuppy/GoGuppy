@@ -18,13 +18,13 @@
 
   <a href="Win-Policy-D-ScriptFileAssociations.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">📜 Script File Associations</div><div class="row-right"><span class="count">1 setting</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">.bat, .js, .vbs, .ps1, .hta and a dozen more open in Notepad instead of executing on double click.</div>
+    <div class="row-desc">.appx, .bat, .cab, .com, .cmd, .hta, .js, .jse, .ps1, .ps1m, .sct, .shb, .shs, .wsf, .wsh, .vbe, .vbs open in Notepad instead of executing on double-click.</div>
     <div class="chips"><span class="chip">17 script types → Notepad</span></div>
   </a>
 
   <a href="Win-Policy-D-EndpointSecurity.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🛡️ Endpoint Security Baseline</div><div class="row-right"><span class="count">34 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">General device hardening: UAC, autoplay, account lockdown, logging, and the usual suspects.</div>
+    <div class="row-desc">Security baseline hardening: UAC enforced, Autoplay off, Guest and built-in Admin disabled, anonymous SAM enumeration blocked, Remote Assistance off, PowerShell script block logging, DMA and boot driver protections</div>
     <div class="chips"><span class="chip">UAC hardening</span><span class="chip">autoplay/autorun off</span><span class="chip">admin + guest accounts disabled</span><span class="chip">anonymous SAM enumeration blocked</span><span class="chip">PS script block logging</span><span class="chip">DMA protection</span><span class="chip">remote assistance off</span><span class="chip">network bridge blocked</span><span class="chip">+26 more</span></div>
   </a>
 
@@ -36,7 +36,7 @@
 
   <a href="Win-Policy-D-DisableEdgePasswordManager.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🔑 Disable Edge Password Manager</div><div class="row-right"><span class="count">1 setting</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Turns off the built-in password manager so no new credentials get stored. Existing passwords stay available until deleted, so users don't scream.</div>
+    <div class="row-desc">Disables Edge Password Manager. Prevents users from storing more passwords but allows continued use of already stored credentials until manually deleted.</div>
     <div class="chips"><span class="chip">password manager disabled</span></div>
   </a>
 
@@ -48,7 +48,7 @@
 
   <a href="Win-Policy-D-LockScreen.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🔒 Lock Screen</div><div class="row-right"><span class="count">11 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Locks down what is visible and usable from the lock screen.</div>
+    <div class="row-desc">Locks down the lock screen: no camera, slideshow, notifications, or voice above lock; display off at 5/10 min, lock at 15 min idle; SSPR allowed from lock screen</div>
     <div class="chips"><span class="chip">camera blocked</span><span class="chip">slideshow blocked</span><span class="chip">no app notifications</span><span class="chip">no toasts above lock</span><span class="chip">no Cortana above lock</span><span class="chip">no voice apps above lock</span><span class="chip">display timeouts</span><span class="chip">password reveal off</span><span class="chip">password required</span><span class="chip">AAD password reset</span></div>
   </a>
 
@@ -56,7 +56,7 @@
 
   <a href="Win-Policy-D-AutoTimezone.json" download class="row" style="--accent:#3fb950">
     <div class="row-top"><div class="row-title">🌍 Auto Timezone</div><div class="row-right"><span class="count">3 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Detects timezone via location services and updates the device automatically.</div>
+    <div class="row-desc">Syncs device time to time.windows.com via NTP; users can still change their timezone if needed.</div>
     <div class="chips"><span class="chip">NTP client enabled</span><span class="chip">NTP client configured</span><span class="chip">users can change timezone</span></div>
   </a>
 
@@ -68,7 +68,7 @@
 
   <a href="Win-Policy-D-OneDriveSettings.json" download class="row" style="--accent:#3fb950">
     <div class="row-top"><div class="row-title">☁️ OneDrive Settings</div><div class="row-right"><span class="count">15 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Locks OneDrive to your tenant, signs users in silently, and moves their folders before they notice.</div>
+    <div class="row-desc">Auto start, silent sign-in, tenant locked (no personal OneDrive), silent KFM with opt-out blocked, Files On-Demand, risky and clutter prone file types excluded from sync</div>
     <div class="chips"><span class="chip">silent account config</span><span class="chip">KFM no wizard</span><span class="chip">KFM opt-out blocked</span><span class="chip">Files On-Demand</span><span class="chip">personal sync blocked</span><span class="chip">tenant allow list</span><span class="chip">auto start</span><span class="chip">update ring</span><span class="chip">sync admin reports</span><span class="chip">+6 more</span></div>
   </a>
 
