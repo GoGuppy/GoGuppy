@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Winget Update All Apps · Intune · Guppys Lab</title>
+<title>Clear Windows Update Cache &middot; Intune &middot; Guppys Lab</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0f1117; color: #c9d1d9; font-family: 'Segoe UI', system-ui, sans-serif; padding: 0 0 60px; min-height: 100vh; }
@@ -20,7 +20,7 @@
   .breadcrumb a:hover { text-decoration: underline; }
   h1 { font-size: 22px; font-weight: 600; color: #e6edf3; margin-bottom: 6px; }
   .subtitle { font-size: 12px; color: #6e7681; margin-bottom: 24px; }
-  .warning-box { background: #2b1d04; border: 1px solid #d29922; border-radius: 8px; padding: 10px 14px; margin-bottom: 24px; font-size: 12px; color: #e3b341; line-height: 1.6; }
+  .warning-box { background: #2b1d04; border: 1px solid #d29922; border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 12px; color: #e3b341; line-height: 1.6; }
   .info-box { background: #0d1f35; border: 1px solid #1f4060; border-radius: 8px; padding: 10px 14px; margin-bottom: 24px; font-size: 12px; color: #58a6ff; line-height: 1.6; }
   .section-label { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #484f58; margin: 28px 0 8px 2px; }
   .card { background: #161b22; border: 1px solid #21262d; border-radius: 8px; margin-bottom: 7px; overflow: hidden; transition: border-color .15s; }
@@ -36,9 +36,12 @@
   .copy-btn:hover { background: #30363d; color: #e6edf3; }
   .copy-btn.done { background: #0d2b17; color: #3fb950; border-color: #1a4226; }
   .tag { font-size: 10px; font-weight: 500; padding: 1px 7px; border-radius: 999px; }
-  .tag-key  { background: #0d2341; color: #58a6ff; }
-  .tag-info { background: #0d2626; color: #39c5cf; }
-  .tag-warn { background: #2b1d04; color: #e3b341; }
+  .tag-key    { background: #0d2341; color: #58a6ff; }
+  .tag-yellow { background: #2b2000; color: #e3b341; }
+  .tag-green  { background: #0d2b17; color: #3fb950; }
+  .tag-red    { background: #2b0d0d; color: #f85149; }
+  .remediation-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 7px; }
+  .rem-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #484f58; margin-bottom: 6px; }
   .settings-panel { background: #161b22; border: 1px solid #21262d; border-radius: 8px; overflow: hidden; margin-bottom: 7px; }
   .settings-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; border-bottom: 1px solid #21262d; }
   .settings-row:last-child { border-bottom: none; }
@@ -47,7 +50,6 @@
   .badge-yes { background: #0d2b17; color: #3fb950; border: 1px solid #1a4226; }
   .badge-no  { background: #2b0d0d; color: #f85149; border: 1px solid #4a1515; }
   footer { max-width: 860px; margin: 48px auto 0; padding: 20px 32px 0; border-top: 1px solid #21262d; font-family: 'Consolas', monospace; font-size: 11px; color: #484f58; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-  footer a { color: #58a6ff; text-decoration: none; }
 </style>
 </head>
 <body>
@@ -57,82 +59,65 @@
     <div class="logo-box">GL</div>
     <div class="logo-name">Guppys<span>Lab</span></div>
   </a>
-  <a class="back" href="index.html">← Intune</a>
+  <a class="back" href="index.html">&larr; Intune</a>
 </header>
 
 <div class="wrap">
-  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Intune</a> › Winget Update All Apps</div>
-  <h1>📦 Winget Update All Apps</h1>
-  <div class="subtitle">Intune Platform Script · Deploys a daily scheduled task that silently upgrades all apps via winget</div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="index.html">Intune</a> &rsaquo; Clear Windows Update Cache</div>
+  <h1>🧹 Clear Windows Update Cache</h1>
+  <div class="subtitle">Intune Remediation &middot; Purges SoftwareDistribution\Download when it bloats past 1 GB</div>
 
   <div class="warning-box">
-    Runs as the <strong>logged-on user</strong> — winget is user-context. The platform script runs once via Intune to drop the scheduled task, then the task handles the recurring updates. Works on Windows 11 and Win10 20H2+ with App Installer.
+    Draft placeholder scripts. Swap in your final versions before deploying. Test in a pilot group first.
   </div>
 
-  <div class="info-box">
-    Heads up: Platform scripts run once. Instead of fighting that, use the script to register a Windows Scheduled Task that runs winget daily at 9am. No E3 license required, no remediation needed.
-  </div>
-
-  <div class="section-label">Script</div>
+  <div class="section-label">Detection Script</div>
 
   <div class="card">
     <div class="card-top">
-      <div class="step">1</div>
+      <div class="step">D</div>
       <div class="card-info">
-        <div class="card-title">Guard — exit if winget missing <span class="tag tag-warn">guard</span></div>
-        <div class="card-desc">Exits cleanly if winget isn't present so Intune doesn't report a false error.</div>
+        <div class="card-title">Detect cache over 1 GB <span class="tag tag-yellow">detection</span></div>
+        <div class="card-desc">Exits 1 (non-compliant) to trigger remediation. Exits 0 if clean.</div>
       </div>
     </div>
     <div class="code-wrap">
-      <div class="code-block" id="s1"># Exit if winget is not installed
-if (-not (Get-Command winget -ErrorAction SilentlyContinue)) { exit 1 }</div>
-      <button class="copy-btn" onclick="copyScript(this,'s1')">copy</button>
+      <div class="code-block" id="sdetect"># Detect Windows Update cache over 1 GB
+$path = &quot;$env:WinDir\SoftwareDistribution\Download&quot;
+$size = (Get-ChildItem $path -Recurse -ErrorAction SilentlyContinue |
+    Measure-Object Length -Sum).Sum / 1GB
+if ($size -gt 1) { Write-Output &quot;Non-compliant: $([math]::Round($size,2)) GB&quot;; exit 1 }
+Write-Output &quot;Compliant&quot;
+exit 0</div>
+      <button class="copy-btn" onclick="copyScript(this,'sdetect')">copy</button>
     </div>
   </div>
+
+  <div class="section-label">Remediation Script</div>
 
   <div class="card">
     <div class="card-top">
-      <div class="step">2</div>
+      <div class="step">R</div>
       <div class="card-info">
-        <div class="card-title">Register daily scheduled task <span class="tag tag-key">main</span></div>
-        <div class="card-desc">Creates a task that runs winget upgrade every day at 9am as the current user. -ExecutionTimeLimit 0 lets it run as long as it needs.</div>
+        <div class="card-title">Stop services, purge, restart <span class="tag tag-red">remediation</span></div>
+        <div class="card-desc">Runs only when detection exits 1.</div>
       </div>
     </div>
     <div class="code-wrap">
-      <div class="code-block" id="s2"># Register daily winget upgrade task at 9am
-$action  = New-ScheduledTaskAction -Execute "winget" -Argument "upgrade --all --silent --accept-package-agreements --accept-source-agreements"
-$trigger = New-ScheduledTaskTrigger -Daily -At 9am
-$settings = New-ScheduledTaskSettingsSet -ExecutionTimeLimit 0 -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
-Register-ScheduledTask -TaskName "WingetDailyUpdate" -Action $action -Trigger $trigger -Settings $settings -Force</div>
-      <button class="copy-btn" onclick="copyScript(this,'s2')">copy</button>
+      <div class="code-block" id="sremediate"># Stop update services, clear cache, restart services
+Stop-Service wuauserv,bits -Force
+Remove-Item &quot;$env:WinDir\SoftwareDistribution\Download\*&quot; -Recurse -Force -ErrorAction SilentlyContinue
+Start-Service bits,wuauserv</div>
+      <button class="copy-btn" onclick="copyScript(this,'sremediate')">copy</button>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-top">
-      <div class="step">✦</div>
-      <div class="card-info">
-        <div class="card-title">Full script — upload this to Intune <span class="tag tag-key">deploy</span></div>
-        <div class="card-desc">Runs once via Intune, registers the task, done. winget handles updates every day after that.</div>
-      </div>
-    </div>
-    <div class="code-wrap">
-      <div class="code-block" id="sfull"># Deploy daily winget auto-updater via scheduled task
-if (-not (Get-Command winget -ErrorAction SilentlyContinue)) { exit 1 }
-$action   = New-ScheduledTaskAction -Execute "winget" -Argument "upgrade --all --silent --accept-package-agreements --accept-source-agreements"
-$trigger  = New-ScheduledTaskTrigger -Daily -At 9am
-$settings = New-ScheduledTaskSettingsSet -ExecutionTimeLimit 0 -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
-Register-ScheduledTask -TaskName "WingetDailyUpdate" -Action $action -Trigger $trigger -Settings $settings -Force</div>
-      <button class="copy-btn" onclick="copyScript(this,'sfull')">copy</button>
-    </div>
-  </div>
-
-  <div class="section-label">Intune Platform Script Settings</div>
+  <div class="section-label">Intune Remediation Settings</div>
 
   <div class="settings-panel">
     <div class="settings-row">
       <span class="settings-key">Run this script using the logged on credentials</span>
-      <span class="badge badge-yes">Yes</span>
+      <span class="badge badge-no">No</span>
     </div>
     <div class="settings-row">
       <span class="settings-key">Enforce script signature check</span>
@@ -142,19 +127,23 @@ Register-ScheduledTask -TaskName "WingetDailyUpdate" -Action $action -Trigger $t
       <span class="settings-key">Run script in 64-bit PowerShell host</span>
       <span class="badge badge-yes">Yes</span>
     </div>
+    <div class="settings-row">
+      <span class="settings-key">Schedule (recommended)</span>
+      <span style="font-family:Consolas,monospace;font-size:11px;color:#8b949e;">Weekly</span>
+    </div>
   </div>
 
 </div>
 
 <footer>
-  <span>GoGuppy · Guppys Lab</span>
+  <span>GoGuppy &middot; Guppys Lab</span>
 </footer>
 
 <script>
 function copyScript(btn, id) {
   const code = document.getElementById(id).textContent;
   navigator.clipboard.writeText(code).then(() => {
-    btn.textContent = '✓ copied';
+    btn.textContent = '\u2713 copied';
     btn.classList.add('done');
     setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('done'); }, 1600);
   });

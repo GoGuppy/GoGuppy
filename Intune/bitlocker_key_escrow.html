@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Remove Bloatware · Intune · Guppys Lab</title>
+<title>BitLocker Key Escrow &middot; Intune &middot; Guppys Lab</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0f1117; color: #c9d1d9; font-family: 'Segoe UI', system-ui, sans-serif; padding: 0 0 60px; min-height: 100vh; }
@@ -20,7 +20,7 @@
   .breadcrumb a:hover { text-decoration: underline; }
   h1 { font-size: 22px; font-weight: 600; color: #e6edf3; margin-bottom: 6px; }
   .subtitle { font-size: 12px; color: #6e7681; margin-bottom: 24px; }
-  .warning-box { background: #2b1d04; border: 1px solid #d29922; border-radius: 8px; padding: 10px 14px; margin-bottom: 24px; font-size: 12px; color: #e3b341; line-height: 1.6; }
+  .warning-box { background: #2b1d04; border: 1px solid #d29922; border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 12px; color: #e3b341; line-height: 1.6; }
   .info-box { background: #0d1f35; border: 1px solid #1f4060; border-radius: 8px; padding: 10px 14px; margin-bottom: 24px; font-size: 12px; color: #58a6ff; line-height: 1.6; }
   .section-label { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #484f58; margin: 28px 0 8px 2px; }
   .card { background: #161b22; border: 1px solid #21262d; border-radius: 8px; margin-bottom: 7px; overflow: hidden; transition: border-color .15s; }
@@ -36,10 +36,12 @@
   .copy-btn:hover { background: #30363d; color: #e6edf3; }
   .copy-btn.done { background: #0d2b17; color: #3fb950; border-color: #1a4226; }
   .tag { font-size: 10px; font-weight: 500; padding: 1px 7px; border-radius: 999px; }
-  .tag-key  { background: #0d2341; color: #58a6ff; }
-  .tag-info { background: #0d2626; color: #39c5cf; }
-  .tag-warn { background: #2b1d04; color: #e3b341; }
-  .tag-danger { background: #2b0d0d; color: #f85149; }
+  .tag-key    { background: #0d2341; color: #58a6ff; }
+  .tag-yellow { background: #2b2000; color: #e3b341; }
+  .tag-green  { background: #0d2b17; color: #3fb950; }
+  .tag-red    { background: #2b0d0d; color: #f85149; }
+  .remediation-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 7px; }
+  .rem-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #484f58; margin-bottom: 6px; }
   .settings-panel { background: #161b22; border: 1px solid #21262d; border-radius: 8px; overflow: hidden; margin-bottom: 7px; }
   .settings-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; border-bottom: 1px solid #21262d; }
   .settings-row:last-child { border-bottom: none; }
@@ -48,7 +50,6 @@
   .badge-yes { background: #0d2b17; color: #3fb950; border: 1px solid #1a4226; }
   .badge-no  { background: #2b0d0d; color: #f85149; border: 1px solid #4a1515; }
   footer { max-width: 860px; margin: 48px auto 0; padding: 20px 32px 0; border-top: 1px solid #21262d; font-family: 'Consolas', monospace; font-size: 11px; color: #484f58; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-  footer a { color: #58a6ff; text-decoration: none; }
 </style>
 </head>
 <body>
@@ -58,127 +59,65 @@
     <div class="logo-box">GL</div>
     <div class="logo-name">Guppys<span>Lab</span></div>
   </a>
-  <a class="back" href="index.html">← Intune</a>
+  <a class="back" href="index.html">&larr; Intune</a>
 </header>
 
 <div class="wrap">
-  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Intune</a> › Remove Bloatware</div>
-  <h1>🍬 Remove Bloatware</h1>
-  <div class="subtitle">Intune Platform Script · Removes preinstalled junk apps for all users on the device</div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="index.html">Intune</a> &rsaquo; BitLocker Key Escrow</div>
+  <h1>🔐 BitLocker Key Escrow</h1>
+  <div class="subtitle">Intune Remediation &middot; Backs up the recovery key to Entra ID</div>
 
   <div class="warning-box">
-    Runs as <strong>SYSTEM</strong> — required to remove provisioned packages from the device image. If you run this as the logged-on user, <code style="font-family:Consolas,monospace">Remove-AppxProvisionedPackage</code> will fail silently and new user accounts will still get the bloat.
+    Draft placeholder scripts. Swap in your final versions before deploying. Test in a pilot group first.
   </div>
 
-  <div class="info-box">
-    Two commands per app: <code style="font-family:Consolas,monospace">Remove-AppxPackage</code> kills it for existing users, <code style="font-family:Consolas,monospace">Remove-AppxProvisionedPackage</code> removes it from the Windows image so new accounts don't get it either.
-  </div>
-
-  <div class="section-label">Script</div>
+  <div class="section-label">Detection Script</div>
 
   <div class="card">
     <div class="card-top">
-      <div class="step">1</div>
+      <div class="step">D</div>
       <div class="card-info">
-        <div class="card-title">Define bloatware list <span class="tag tag-info">array</span></div>
-        <div class="card-desc">Edit this list to match what you want gone. Add or remove package names as needed.</div>
+        <div class="card-title">Detect missing recovery password protector <span class="tag tag-yellow">detection</span></div>
+        <div class="card-desc">Exits 1 (non-compliant) to trigger remediation. Exits 0 if clean.</div>
       </div>
     </div>
     <div class="code-wrap">
-      <div class="code-block" id="s1"># Bloatware package names to remove
-$apps = @(
-    "Microsoft.BingWeather",
-    "Microsoft.GetHelp",
-    "Microsoft.Getstarted",
-    "Microsoft.MicrosoftOfficeHub",
-    "Microsoft.MicrosoftSolitaireCollection",
-    "Microsoft.People",
-    "Microsoft.WindowsFeedbackHub",
-    "Microsoft.Xbox.TCUI",
-    "Microsoft.XboxApp",
-    "Microsoft.XboxGameOverlay",
-    "Microsoft.XboxGamingOverlay",
-    "Microsoft.XboxIdentityProvider",
-    "Microsoft.ZuneMusic",
-    "Microsoft.ZuneVideo",
-    "Microsoft.WindowsMaps",
-    "Microsoft.Messaging",
-    "Microsoft.SkypeApp",
-    "king.com.CandyCrushSaga",
-    "king.com.CandyCrushFriends",
-    "Microsoft.3DBuilder",
-    "Microsoft.Office.OneNote"
-)</div>
-      <button class="copy-btn" onclick="copyScript(this,'s1')">copy</button>
+      <div class="code-block" id="sdetect"># Detect BitLocker without recovery password protector
+$vol = Get-BitLockerVolume -MountPoint $env:SystemDrive
+if ($vol.ProtectionStatus -ne &quot;On&quot;) { Write-Output &quot;Non-compliant: BitLocker off&quot;; exit 1 }
+$key = $vol.KeyProtector | Where-Object KeyProtectorType -eq &quot;RecoveryPassword&quot;
+if (-not $key) { Write-Output &quot;Non-compliant: no recovery password&quot;; exit 1 }
+Write-Output &quot;Compliant&quot;
+exit 0</div>
+      <button class="copy-btn" onclick="copyScript(this,'sdetect')">copy</button>
     </div>
   </div>
 
+  <div class="section-label">Remediation Script</div>
+
   <div class="card">
     <div class="card-top">
-      <div class="step">2</div>
+      <div class="step">R</div>
       <div class="card-info">
-        <div class="card-title">Remove for all users + deprovision <span class="tag tag-key">main</span></div>
-        <div class="card-desc">Hits existing user accounts AND removes from the device image for future users.</div>
+        <div class="card-title">Escrow recovery key to Entra ID <span class="tag tag-red">remediation</span></div>
+        <div class="card-desc">Runs only when detection exits 1.</div>
       </div>
     </div>
     <div class="code-wrap">
-      <div class="code-block" id="s2"># Remove from existing users and deprovision from device image
-foreach ($app in $apps) {
-    Get-AppxPackage -Name $app -AllUsers |
-        Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
-    Get-AppxProvisionedPackage -Online |
-        Where-Object DisplayName -EQ $app |
-        Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+      <div class="code-block" id="sremediate"># Escrow BitLocker recovery key to Entra ID
+$vol = Get-BitLockerVolume -MountPoint $env:SystemDrive
+$keys = $vol.KeyProtector | Where-Object KeyProtectorType -eq &quot;RecoveryPassword&quot;
+if (-not $keys) { Add-BitLockerKeyProtector -MountPoint $env:SystemDrive -RecoveryPasswordProtector }
+$keys = (Get-BitLockerVolume -MountPoint $env:SystemDrive).KeyProtector |
+    Where-Object KeyProtectorType -eq &quot;RecoveryPassword&quot;
+foreach ($k in $keys) {
+    BackupToAAD-BitLockerKeyProtector -MountPoint $env:SystemDrive -KeyProtectorId $k.KeyProtectorId
 }</div>
-      <button class="copy-btn" onclick="copyScript(this,'s2')">copy</button>
+      <button class="copy-btn" onclick="copyScript(this,'sremediate')">copy</button>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-top">
-      <div class="step">✦</div>
-      <div class="card-info">
-        <div class="card-title">Full script — upload this to Intune <span class="tag tag-key">deploy</span></div>
-        <div class="card-desc">Combined, ready to paste into your .ps1 platform script file.</div>
-      </div>
-    </div>
-    <div class="code-wrap">
-      <div class="code-block" id="sfull"># Remove bloatware for all users and deprovision from device image
-$apps = @(
-    "Microsoft.BingWeather",
-    "Microsoft.GetHelp",
-    "Microsoft.Getstarted",
-    "Microsoft.MicrosoftOfficeHub",
-    "Microsoft.MicrosoftSolitaireCollection",
-    "Microsoft.People",
-    "Microsoft.WindowsFeedbackHub",
-    "Microsoft.Xbox.TCUI",
-    "Microsoft.XboxApp",
-    "Microsoft.XboxGameOverlay",
-    "Microsoft.XboxGamingOverlay",
-    "Microsoft.XboxIdentityProvider",
-    "Microsoft.ZuneMusic",
-    "Microsoft.ZuneVideo",
-    "Microsoft.WindowsMaps",
-    "Microsoft.Messaging",
-    "Microsoft.SkypeApp",
-    "king.com.CandyCrushSaga",
-    "king.com.CandyCrushFriends",
-    "Microsoft.3DBuilder",
-    "Microsoft.Office.OneNote"
-)
-foreach ($app in $apps) {
-    Get-AppxPackage -Name $app -AllUsers |
-        Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
-    Get-AppxProvisionedPackage -Online |
-        Where-Object DisplayName -EQ $app |
-        Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
-}</div>
-      <button class="copy-btn" onclick="copyScript(this,'sfull')">copy</button>
-    </div>
-  </div>
-
-  <div class="section-label">Intune Platform Script Settings</div>
+  <div class="section-label">Intune Remediation Settings</div>
 
   <div class="settings-panel">
     <div class="settings-row">
@@ -193,19 +132,23 @@ foreach ($app in $apps) {
       <span class="settings-key">Run script in 64-bit PowerShell host</span>
       <span class="badge badge-yes">Yes</span>
     </div>
+    <div class="settings-row">
+      <span class="settings-key">Schedule (recommended)</span>
+      <span style="font-family:Consolas,monospace;font-size:11px;color:#8b949e;">Weekly</span>
+    </div>
   </div>
 
 </div>
 
 <footer>
-  <span>GoGuppy · Guppys Lab</span>
+  <span>GoGuppy &middot; Guppys Lab</span>
 </footer>
 
 <script>
 function copyScript(btn, id) {
   const code = document.getElementById(id).textContent;
   navigator.clipboard.writeText(code).then(() => {
-    btn.textContent = '✓ copied';
+    btn.textContent = '\u2713 copied';
     btn.classList.add('done');
     setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('done'); }, 1600);
   });

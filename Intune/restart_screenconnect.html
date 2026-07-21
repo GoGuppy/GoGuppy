@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Uninstall Unused Apps · Intune · Guppys Lab</title>
+<title>Restart Stopped ScreenConnect &middot; Intune &middot; Guppys Lab</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0f1117; color: #c9d1d9; font-family: 'Segoe UI', system-ui, sans-serif; padding: 0 0 60px; min-height: 100vh; }
@@ -59,20 +59,16 @@
     <div class="logo-box">GL</div>
     <div class="logo-name">Guppys<span>Lab</span></div>
   </a>
-  <a class="back" href="index.html">← Intune</a>
+  <a class="back" href="index.html">&larr; Intune</a>
 </header>
 
 <div class="wrap">
-  <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Intune</a> › Uninstall Unused Apps</div>
-  <h1>🗑️ Uninstall Unused Apps (6 Months)</h1>
-  <div class="subtitle">Intune Remediation · Detects and removes Win32 apps not launched in over 6 months</div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="index.html">Intune</a> &rsaquo; Restart Stopped ScreenConnect</div>
+  <h1>🔌 Restart Stopped ScreenConnect</h1>
+  <div class="subtitle">Intune Remediation &middot; Starts the ScreenConnect client service if it stopped</div>
 
   <div class="warning-box">
-    Uses <code style="font-family:Consolas,monospace">EstimatedLastUsed</code> from the Uninstall registry key — this data is written by Windows but not every installer populates it. Apps with no last-used date are <strong>skipped</strong> to avoid nuking something critical. Test in a pilot group first.
-  </div>
-
-  <div class="info-box">
-    Heads up: Intune Remediations are two-script pairs — a <strong>detect</strong> script that exits 0 (compliant) or 1 (non-compliant), and a <strong>remediate</strong> script that fixes it. Intune only runs the remediation script if detection exits 1.
+    Draft placeholder scripts. Swap in your final versions before deploying. Test in a pilot group first.
   </div>
 
   <div class="section-label">Detection Script</div>
@@ -81,28 +77,16 @@
     <div class="card-top">
       <div class="step">D</div>
       <div class="card-info">
-        <div class="card-title">Detect apps unused for 6+ months <span class="tag tag-yellow">detection</span></div>
-        <div class="card-desc">Exits 1 (non-compliant) if any qualifying unused apps are found. Exits 0 if the device is clean.</div>
+        <div class="card-title">Detect stopped ScreenConnect service <span class="tag tag-yellow">detection</span></div>
+        <div class="card-desc">Exits 1 (non-compliant) to trigger remediation. Exits 0 if clean.</div>
       </div>
     </div>
     <div class="code-wrap">
-      <div class="code-block" id="sdetect"># Detect Win32 apps not used in 6+ months
-$cutoff   = (Get-Date).AddMonths(-6)
-$regPaths = @(
-    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*",
-    "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*"
-)
-$stale = Get-ItemProperty $regPaths -ErrorAction SilentlyContinue |
-    Where-Object {
-        $_.DisplayName -and
-        $_.EstimatedLastUsed -and
-        [datetime]::ParseExact($_.EstimatedLastUsed,'yyyyMMdd',$null) -lt $cutoff
-    }
-if ($stale) {
-    Write-Output "Non-compliant: $($stale.Count) unused app(s) found"
-    exit 1
-}
-Write-Output "Compliant: no unused apps found"
+      <div class="code-block" id="sdetect"># Detect stopped ScreenConnect client service
+$svc = Get-Service &quot;ScreenConnect Client*&quot; -ErrorAction SilentlyContinue
+if (-not $svc) { Write-Output &quot;Compliant: not installed&quot;; exit 0 }
+if ($svc | Where-Object Status -ne &quot;Running&quot;) { Write-Output &quot;Non-compliant: stopped&quot;; exit 1 }
+Write-Output &quot;Compliant&quot;
 exit 0</div>
       <button class="copy-btn" onclick="copyScript(this,'sdetect')">copy</button>
     </div>
@@ -114,34 +98,15 @@ exit 0</div>
     <div class="card-top">
       <div class="step">R</div>
       <div class="card-info">
-        <div class="card-title">Uninstall stale apps silently <span class="tag tag-red">remediation</span></div>
-        <div class="card-desc">Runs the app's own uninstall string silently. Skips anything missing a DisplayName or UninstallString.</div>
+        <div class="card-title">Start the service <span class="tag tag-red">remediation</span></div>
+        <div class="card-desc">Runs only when detection exits 1.</div>
       </div>
     </div>
     <div class="code-wrap">
-      <div class="code-block" id="sremediate"># Uninstall Win32 apps not used in 6+ months
-$cutoff   = (Get-Date).AddMonths(-6)
-$regPaths = @(
-    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*",
-    "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*"
-)
-$stale = Get-ItemProperty $regPaths -ErrorAction SilentlyContinue |
-    Where-Object {
-        $_.DisplayName -and
-        $_.UninstallString -and
-        $_.EstimatedLastUsed -and
-        [datetime]::ParseExact($_.EstimatedLastUsed,'yyyyMMdd',$null) -lt $cutoff
-    }
-foreach ($app in $stale) {
-    Write-Output "Removing: $($app.DisplayName)"
-    $uninstall = $app.UninstallString -replace 'MsiExec.exe','MsiExec.exe'
-    if ($app.UninstallString -match 'MsiExec') {
-        $guid = $app.UninstallString -replace '.*(\{[^}]+\}).*','$1'
-        Start-Process msiexec.exe -ArgumentList "/x $guid /qn /norestart" -Wait
-    } else {
-        Start-Process cmd.exe -ArgumentList "/c `"$($app.UninstallString)`" /S /silent /quiet" -Wait -ErrorAction SilentlyContinue
-    }
-}</div>
+      <div class="code-block" id="sremediate"># Start stopped ScreenConnect client service
+Get-Service &quot;ScreenConnect Client*&quot; |
+    Where-Object Status -ne &quot;Running&quot; |
+    ForEach-Object { Set-Service $_ -StartupType Automatic; Start-Service $_ }</div>
       <button class="copy-btn" onclick="copyScript(this,'sremediate')">copy</button>
     </div>
   </div>
@@ -163,21 +128,21 @@ foreach ($app in $stale) {
     </div>
     <div class="settings-row">
       <span class="settings-key">Schedule (recommended)</span>
-      <span style="font-family:Consolas,monospace;font-size:11px;color:#8b949e;">Weekly</span>
+      <span style="font-family:Consolas,monospace;font-size:11px;color:#8b949e;">Hourly</span>
     </div>
   </div>
 
 </div>
 
 <footer>
-  <span>GoGuppy · Guppys Lab</span>
+  <span>GoGuppy &middot; Guppys Lab</span>
 </footer>
 
 <script>
 function copyScript(btn, id) {
   const code = document.getElementById(id).textContent;
   navigator.clipboard.writeText(code).then(() => {
-    btn.textContent = '✓ copied';
+    btn.textContent = '\u2713 copied';
     btn.classList.add('done');
     setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('done'); }, 1600);
   });
