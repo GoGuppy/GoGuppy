@@ -30,6 +30,14 @@
   .card-info { flex: 1; }
   .card-title { font-size: 13px; font-weight: 500; color: #e6edf3; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
   .card-desc { font-size: 11px; color: #6e7681; margin-top: 2px; line-height: 1.4; }
+  details.card > summary { cursor: pointer; list-style: none; }
+  details.card > summary::-webkit-details-marker { display: none; }
+  .chevron { color: #484f58; font-size: 11px; flex-shrink: 0; transition: transform .15s, color .15s; }
+  details.card[open] .chevron { transform: rotate(90deg); }
+  details.card > summary:hover .chevron { color: #58a6ff; }
+  details.card[open] > summary { border-bottom: 1px solid #21262d; margin-bottom: 10px; }
+  details.card[open] .step { background: #0d2341; border-color: #1f4060; color: #58a6ff; }
+
   .code-wrap { position: relative; margin: 0 12px 10px 44px; }
   .code-block { background: #0d1117; border: 1px solid #21262d; border-radius: 6px; padding: 8px 44px 8px 10px; font-family: 'Cascadia Code','Fira Code','Consolas',monospace; font-size: 11.5px; color: #79c0ff; white-space: pre-wrap; word-break: break-all; line-height: 1.65; }
   .copy-btn { position: absolute; top: 6px; right: 6px; background: #21262d; border: 1px solid #30363d; border-radius: 5px; color: #8b949e; font-size: 10px; padding: 3px 8px; cursor: pointer; font-family: inherit; transition: background .1s, color .1s; }
@@ -68,49 +76,56 @@
   <div class="subtitle">Intune Remediation &middot; Stops and disables Dell SupportAssist services fleet-wide</div>
 
   <div class="warning-box">
-    Draft placeholder scripts. Swap in your final versions before deploying. Test in a pilot group first.
+    Test in a pilot group before you point this at the fleet. Detection exits 1 to trigger remediation, 0 to stay put.
   </div>
 
   <div class="section-label">Detection Script</div>
 
-  <div class="card">
-    <div class="card-top">
+  <details class="card">
+    <summary class="card-top">
       <div class="step">D</div>
       <div class="card-info">
         <div class="card-title">Detect active SupportAssist services <span class="tag tag-yellow">detection</span></div>
         <div class="card-desc">Exits 1 (non-compliant) to trigger remediation. Exits 0 if clean.</div>
       </div>
-    </div>
+      <span class="chevron">›</span>
+    </summary>
     <div class="code-wrap">
-      <div class="code-block" id="sdetect"># Detect running Dell SupportAssist services
-$svc = Get-Service &quot;SupportAssistAgent&quot;,&quot;DellClientManagementService&quot; -ErrorAction SilentlyContinue |
-    Where-Object { $_.Status -eq &quot;Running&quot; -or $_.StartType -ne &quot;Disabled&quot; }
-if ($svc) { Write-Output &quot;Non-compliant: SupportAssist active&quot;; exit 1 }
-Write-Output &quot;Compliant&quot;
+      <div class="code-block" id="sdetect"># Flags Dell SupportAssist services that are not disabled.
+$svc = Get-Service *SupportAssist*, DellClientManagementService -ErrorAction SilentlyContinue |
+    Where-Object { $_.Status -eq 'Running' -or $_.StartType -ne 'Disabled' }
+
+if ($svc) {
+    Write-Output 'Non-compliant: SupportAssist active'
+    exit 1
+}
+
+Write-Output 'Compliant'
 exit 0</div>
       <button class="copy-btn" onclick="copyScript(this,'sdetect')">copy</button>
     </div>
-  </div>
+  </details>
 
   <div class="section-label">Remediation Script</div>
 
-  <div class="card">
-    <div class="card-top">
+  <details class="card">
+    <summary class="card-top">
       <div class="step">R</div>
       <div class="card-info">
         <div class="card-title">Stop and disable the services <span class="tag tag-red">remediation</span></div>
         <div class="card-desc">Runs only when detection exits 1.</div>
       </div>
-    </div>
+      <span class="chevron">›</span>
+    </summary>
     <div class="code-wrap">
-      <div class="code-block" id="sremediate"># Stop and disable Dell SupportAssist services
-foreach ($n in &quot;SupportAssistAgent&quot;,&quot;DellClientManagementService&quot;) {
-    Stop-Service $n -Force -ErrorAction SilentlyContinue
-    Set-Service $n -StartupType Disabled -ErrorAction SilentlyContinue
+      <div class="code-block" id="sremediate"># Stops and disables every Dell SupportAssist service.
+Get-Service *SupportAssist*, DellClientManagementService -ErrorAction SilentlyContinue | ForEach-Object {
+    Stop-Service $_.Name -Force -ErrorAction SilentlyContinue
+    Set-Service $_.Name -StartupType Disabled
 }</div>
       <button class="copy-btn" onclick="copyScript(this,'sremediate')">copy</button>
     </div>
-  </div>
+  </details>
 
   <div class="section-label">Intune Remediation Settings</div>
 

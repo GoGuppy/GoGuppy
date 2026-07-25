@@ -30,6 +30,14 @@
   .card-info { flex: 1; }
   .card-title { font-size: 13px; font-weight: 500; color: #e6edf3; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
   .card-desc { font-size: 11px; color: #6e7681; margin-top: 2px; line-height: 1.4; }
+  details.card > summary { cursor: pointer; list-style: none; }
+  details.card > summary::-webkit-details-marker { display: none; }
+  .chevron { color: #484f58; font-size: 11px; flex-shrink: 0; transition: transform .15s, color .15s; }
+  details.card[open] .chevron { transform: rotate(90deg); }
+  details.card > summary:hover .chevron { color: #58a6ff; }
+  details.card[open] > summary { border-bottom: 1px solid #21262d; margin-bottom: 10px; }
+  details.card[open] .step { background: #0d2341; border-color: #1f4060; color: #58a6ff; }
+
   .code-wrap { position: relative; margin: 0 12px 10px 44px; }
   .code-block { background: #0d1117; border: 1px solid #21262d; border-radius: 6px; padding: 8px 44px 8px 10px; font-family: 'Cascadia Code','Fira Code','Consolas',monospace; font-size: 11.5px; color: #79c0ff; white-space: pre-wrap; word-break: break-all; line-height: 1.65; }
   .copy-btn { position: absolute; top: 6px; right: 6px; background: #21262d; border: 1px solid #30363d; border-radius: 5px; color: #8b949e; font-size: 10px; padding: 3px 8px; cursor: pointer; font-family: inherit; transition: background .1s, color .1s; }
@@ -68,54 +76,67 @@
   <div class="subtitle">Intune Remediation &middot; Backs up the recovery key to Entra ID</div>
 
   <div class="warning-box">
-    Draft placeholder scripts. Swap in your final versions before deploying. Test in a pilot group first.
+    Test in a pilot group before you point this at the fleet. Detection exits 1 to trigger remediation, 0 to stay put.
   </div>
 
   <div class="section-label">Detection Script</div>
 
-  <div class="card">
-    <div class="card-top">
+  <details class="card">
+    <summary class="card-top">
       <div class="step">D</div>
       <div class="card-info">
-        <div class="card-title">Detect missing recovery password protector <span class="tag tag-yellow">detection</span></div>
-        <div class="card-desc">Exits 1 (non-compliant) to trigger remediation. Exits 0 if clean.</div>
+        <div class="card-title">Detect missing recovery password <span class="tag tag-yellow">detection</span></div>
+        <div class="card-desc">Exits 1 when the OS drive is encrypted but has no recovery password. Unencrypted drives exit 0, since enabling BitLocker is the Settings Catalog policy’s job, not this script’s. Caveat: Windows exposes no way to check whether a key already reached Entra, so this catches missing protectors, not un-escrowed ones.</div>
       </div>
-    </div>
+      <span class="chevron">›</span>
+    </summary>
     <div class="code-wrap">
-      <div class="code-block" id="sdetect"># Detect BitLocker without recovery password protector
+      <div class="code-block" id="sdetect"># Flags encrypted OS drives with no recovery password.
 $vol = Get-BitLockerVolume -MountPoint $env:SystemDrive
-if ($vol.ProtectionStatus -ne &quot;On&quot;) { Write-Output &quot;Non-compliant: BitLocker off&quot;; exit 1 }
-$key = $vol.KeyProtector | Where-Object KeyProtectorType -eq &quot;RecoveryPassword&quot;
-if (-not $key) { Write-Output &quot;Non-compliant: no recovery password&quot;; exit 1 }
-Write-Output &quot;Compliant&quot;
-exit 0</div>
+
+if ($vol.ProtectionStatus -ne 'On') {
+    Write-Output 'Compliant: BitLocker off, policy handles that'
+    exit 0
+}
+
+if ($vol.KeyProtector | Where-Object KeyProtectorType -eq 'RecoveryPassword') {
+    Write-Output 'Compliant'
+    exit 0
+}
+
+Write-Output 'Non-compliant: no recovery password'
+exit 1</div>
       <button class="copy-btn" onclick="copyScript(this,'sdetect')">copy</button>
     </div>
-  </div>
+  </details>
 
   <div class="section-label">Remediation Script</div>
 
-  <div class="card">
-    <div class="card-top">
+  <details class="card">
+    <summary class="card-top">
       <div class="step">R</div>
       <div class="card-info">
         <div class="card-title">Escrow recovery key to Entra ID <span class="tag tag-red">remediation</span></div>
         <div class="card-desc">Runs only when detection exits 1.</div>
       </div>
-    </div>
+      <span class="chevron">›</span>
+    </summary>
     <div class="code-wrap">
-      <div class="code-block" id="sremediate"># Escrow BitLocker recovery key to Entra ID
-$vol = Get-BitLockerVolume -MountPoint $env:SystemDrive
-$keys = $vol.KeyProtector | Where-Object KeyProtectorType -eq &quot;RecoveryPassword&quot;
-if (-not $keys) { Add-BitLockerKeyProtector -MountPoint $env:SystemDrive -RecoveryPasswordProtector }
-$keys = (Get-BitLockerVolume -MountPoint $env:SystemDrive).KeyProtector |
-    Where-Object KeyProtectorType -eq &quot;RecoveryPassword&quot;
-foreach ($k in $keys) {
-    BackupToAAD-BitLockerKeyProtector -MountPoint $env:SystemDrive -KeyProtectorId $k.KeyProtectorId
+      <div class="code-block" id="sremediate"># Adds a recovery password, then escrows it to Entra.
+$drive = $env:SystemDrive
+$vol = Get-BitLockerVolume -MountPoint $drive
+
+if (-not ($vol.KeyProtector | Where-Object KeyProtectorType -eq 'RecoveryPassword')) {
+    Add-BitLockerKeyProtector -MountPoint $drive -RecoveryPasswordProtector
+    $vol = Get-BitLockerVolume -MountPoint $drive
+}
+
+$vol.KeyProtector | Where-Object KeyProtectorType -eq 'RecoveryPassword' | ForEach-Object {
+    BackupToAAD-BitLockerKeyProtector -MountPoint $drive -KeyProtectorId $_.KeyProtectorId
 }</div>
       <button class="copy-btn" onclick="copyScript(this,'sremediate')">copy</button>
     </div>
-  </div>
+  </details>
 
   <div class="section-label">Intune Remediation Settings</div>
 
