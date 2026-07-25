@@ -10,6 +10,12 @@
     <div class="chips"><span class="chip">require device encryption</span><span class="chip">warn on third-party encryption</span><span class="chip">recovery password rotation</span><span class="chip">encryption method by drive type</span><span class="chip">system drive encryption type</span><span class="chip">startup authentication</span><span class="chip">recovery options</span></div>
   </a>
 
+  <a href="Win-Policy-D-LAPS.json" download class="row" style="--accent:#f85149">
+    <div class="row-top"><div class="row-title">🗝️ LAPS</div><div class="row-right"><span class="count">5 settings</span><span class="dl">↓ JSON</span></div></div>
+    <div class="row-desc">Rotates the built-in Administrator password every 90 days and escrows it to Entra ID. 14 characters, full complexity. No account name is set, so LAPS manages the built-in Administrator, which is why Endpoint Security enables that account.</div>
+    <div class="chips"><span class="chip">backup to Entra ID</span><span class="chip">90 day rotation</span><span class="chip">14 characters</span><span class="chip">full complexity</span><span class="chip">post auth reset 24h</span></div>
+  </a>
+
   <a href="Win-Policy-D-AdvancedPhishingProtection.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🎣 Advanced Phishing Protection</div><div class="row-right"><span class="count">4 settings</span><span class="dl">↓ JSON</span></div></div>
     <div class="row-desc">SmartScreen warns when a user types credentials into a phishing page or stores them somewhere dumb.</div>
@@ -24,14 +30,14 @@
 
   <a href="Win-Policy-D-ScriptFileAssociations.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">📜 Script File Associations</div><div class="row-right"><span class="count">1 setting</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">.appx, .bat, .cab, .com, .cmd, .hta, .js, .jse, .ps1, .ps1m, .sct, .shb, .shs, .wsf, .wsh, .vbe, .vbs open in Notepad instead of executing on double-click.</div>
+    <div class="row-desc">.appx, .bat, .cab, .com, .cmd, .hta, .js, .jse, .ps1, .psm1, .sct, .shb, .shs, .wsf, .wsh, .vbe, .vbs open in Notepad instead of executing on double-click.</div>
     <div class="chips"><span class="chip">17 script types → Notepad</span></div>
   </a>
 
   <a href="Win-Policy-D-EndpointSecurity.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🛡️ Endpoint Security Baseline</div><div class="row-right"><span class="count">31 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Security baseline hardening: UAC enforced, Autoplay off, Guest and built-in Admin disabled, anonymous SAM enumeration blocked, Remote Assistance off, Sudo blocked, Wi-Fi Sense off, DMA and boot driver protections</div>
-    <div class="chips"><span class="chip">UAC hardening</span><span class="chip">autoplay/autorun off</span><span class="chip">admin + guest accounts disabled</span><span class="chip">anonymous SAM enumeration blocked</span><span class="chip">sudo blocked</span><span class="chip">DMA protection</span><span class="chip">remote assistance off</span><span class="chip">network bridge blocked</span><span class="chip">+23 more</span></div>
+    <div class="row-desc">Security baseline hardening: UAC enforced, Autoplay off, Guest disabled, built-in Administrator enabled on purpose so LAPS can manage it, anonymous SAM enumeration blocked, Remote Assistance off, Sudo blocked, Wi-Fi Sense off, DMA and boot driver protections</div>
+    <div class="chips"><span class="chip">UAC hardening</span><span class="chip">autoplay/autorun off</span><span class="chip">guest account disabled</span><span class="chip">built-in admin enabled for LAPS</span><span class="chip">anonymous SAM enumeration blocked</span><span class="chip">sudo blocked</span><span class="chip">DMA protection</span><span class="chip">remote assistance off</span><span class="chip">+23 more</span></div>
   </a>
 
   <a href="Win-Policy-D-DisableInsecureProtocols.json" download class="row" style="--accent:#f85149">

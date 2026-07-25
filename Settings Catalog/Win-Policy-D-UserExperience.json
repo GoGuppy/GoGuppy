@@ -1,1 +1,588 @@
-﻿{"@odata.context":"https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity","createdDateTime":"2026-07-23T22:35:14.8801721Z","creationSource":null,"description":"","lastModifiedDateTime":"2026-07-25T00:19:36.2223379Z","name":"Win-Policy-D-UserExperience","platforms":"windows10","priorityMetaData":null,"roleScopeTagIds":["0"],"settingCount":15,"technologies":"mdm","id":"cecd6226-10d2-40b5-af12-e318e5f1cf8b","templateReference":{"templateId":"","templateFamily":"none","templateDisplayName":null,"templateDisplayVersion":null},"settings":[{"id":"0","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_1","children":[{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsfeedbackhub","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsfeedbackhub_1","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftofficehub","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftofficehub_1","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_clipchamp","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_clipchamp_1","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_copilot","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_copilot_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingnews","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingnews_1","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_photos","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_photos_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftsolitairecollection","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftsolitairecollection_1","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftstickynotes","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftstickynotes_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_msteams","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_msteams_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_todo","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_todo_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingweather","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingweather_1","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_outlookforwindows","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_outlookforwindows_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_paint","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_paint_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_quickassist","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_quickassist_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_screensketch","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_screensketch_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscalculator","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscalculator_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscamera","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscamera_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_mediaplayer","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_mediaplayer_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsnotepad","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsnotepad_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowssoundrecorder","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowssoundrecorder_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsterminal","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsterminal_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_gamingapp","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_gamingapp_1","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxidentityprovider","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxidentityprovider_1","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxspeechtotextoverlay","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxspeechtotextoverlay_1","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxtcui","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxtcui_1","children":[]}}]}}},{"id":"1","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance","settingDefinitionId":"user_vendor_msft_policy_config_experience_allowspotlightcollection","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingValue":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationIntegerSettingValue","settingValueTemplateReference":null,"value":0}}},{"id":"2","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"user_vendor_msft_policy_config_experience_allowwindowsspotlight","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"user_vendor_msft_policy_config_experience_allowwindowsspotlight_1","children":[{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"user_vendor_msft_policy_config_experience_allowtailoredexperienceswithdiagnosticdata","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"user_vendor_msft_policy_config_experience_allowtailoredexperienceswithdiagnosticdata_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"user_vendor_msft_policy_config_experience_allowthirdpartysuggestionsinwindowsspotlight","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"user_vendor_msft_policy_config_experience_allowthirdpartysuggestionsinwindowsspotlight_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_experience_allowwindowsconsumerfeatures","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_experience_allowwindowsconsumerfeatures_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"user_vendor_msft_policy_config_experience_allowwindowsspotlightonactioncenter","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"user_vendor_msft_policy_config_experience_allowwindowsspotlightonactioncenter_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"user_vendor_msft_policy_config_experience_allowwindowsspotlightwindowswelcomeexperience","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"user_vendor_msft_policy_config_experience_allowwindowsspotlightwindowswelcomeexperience_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_experience_allowwindowstips","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_experience_allowwindowstips_0","children":[]}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"user_vendor_msft_policy_config_experience_configurewindowsspotlightonlockscreen","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"user_vendor_msft_policy_config_experience_configurewindowsspotlightonlockscreen_0","children":[]}}]}}},{"id":"3","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"user_vendor_msft_policy_config_experience_allowwindowsspotlightonsettings","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"user_vendor_msft_policy_config_experience_allowwindowsspotlightonsettings_0","children":[]}}},{"id":"4","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_experience_configurechaticon","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_experience_configurechaticon_3","children":[]}}},{"id":"5","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_experience_disablecloudoptimizedcontent","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_experience_disablecloudoptimizedcontent_1","children":[]}}},{"id":"6","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_experience_donotshowfeedbacknotifications","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_experience_donotshowfeedbacknotifications_1","children":[]}}},{"id":"7","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"user_vendor_msft_policy_config_experience_enableorganizationalmessages","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"user_vendor_msft_policy_config_experience_enableorganizationalmessages_1","children":[]}}},{"id":"8","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_applicationmanagement_allowgamedvr","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_applicationmanagement_allowgamedvr_0","children":[]}}},{"id":"9","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_microsoft_edgev86~policy~microsoft_edge~contentsettings_spotlightexperiencesandrecommendationsenabled","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_microsoft_edgev86~policy~microsoft_edge~contentsettings_spotlightexperiencesandrecommendationsenabled_0","children":[]}}},{"id":"10","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_privacy_disableadvertisingid","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_privacy_disableadvertisingid_1","children":[]}}},{"id":"11","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_search_allowcloudsearch","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_search_allowcloudsearch_1","children":[]}}},{"id":"12","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_search_allowsearchhighlights","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingValue":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationIntegerSettingValue","settingValueTemplateReference":null,"value":0}}},{"id":"13","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_search_donotusewebresults","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_search_donotusewebresults_0","children":[]}}},{"id":"14","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_newsandinterests_allownewsandinterests","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_newsandinterests_allownewsandinterests_0","children":[]}}}]}
+﻿{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
+    "createdDateTime": "2026-07-23T22:35:14.8801721Z",
+    "creationSource": null,
+    "description": "",
+    "lastModifiedDateTime": "2026-07-25T00:19:36.2223379Z",
+    "name": "Win-Policy-D-UserExperience",
+    "platforms": "windows10",
+    "priorityMetaData": null,
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 15,
+    "technologies": "mdm",
+    "id": "cecd6226-10d2-40b5-af12-e318e5f1cf8b",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_1",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsfeedbackhub",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsfeedbackhub_1",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftofficehub",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftofficehub_1",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_clipchamp",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_clipchamp_1",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_copilot",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_copilot_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingnews",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingnews_1",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_photos",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_photos_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftsolitairecollection",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftsolitairecollection_1",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftstickynotes",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftstickynotes_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_msteams",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_msteams_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_todo",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_todo_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingweather",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingweather_1",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_outlookforwindows",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_outlookforwindows_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_paint",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_paint_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_quickassist",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_quickassist_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_screensketch",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_screensketch_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscalculator",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscalculator_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscamera",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscamera_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_mediaplayer",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_mediaplayer_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsnotepad",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsnotepad_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowssoundrecorder",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowssoundrecorder_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsterminal",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsterminal_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_gamingapp",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_gamingapp_1",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxidentityprovider",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxidentityprovider_1",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxspeechtotextoverlay",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxspeechtotextoverlay_1",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxtcui",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxtcui_1",
+                                "children": []
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowspotlightcollection",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "simpleSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": 0
+                }
+            }
+        },
+        {
+            "id": "2",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowwindowsspotlight",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_experience_allowwindowsspotlight_1",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowtailoredexperienceswithdiagnosticdata",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "user_vendor_msft_policy_config_experience_allowtailoredexperienceswithdiagnosticdata_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowthirdpartysuggestionsinwindowsspotlight",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "user_vendor_msft_policy_config_experience_allowthirdpartysuggestionsinwindowsspotlight_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_experience_allowwindowsconsumerfeatures",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_experience_allowwindowsconsumerfeatures_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowwindowsspotlightonactioncenter",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "user_vendor_msft_policy_config_experience_allowwindowsspotlightonactioncenter_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowwindowsspotlightwindowswelcomeexperience",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "user_vendor_msft_policy_config_experience_allowwindowsspotlightwindowswelcomeexperience_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_experience_allowwindowstips",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_experience_allowwindowstips_0",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "user_vendor_msft_policy_config_experience_configurewindowsspotlightonlockscreen",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "user_vendor_msft_policy_config_experience_configurewindowsspotlightonlockscreen_0",
+                                "children": []
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "3",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowwindowsspotlightonsettings",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_experience_allowwindowsspotlightonsettings_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "4",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_experience_configurechaticon",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_experience_configurechaticon_3",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "5",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_experience_disablecloudoptimizedcontent",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_experience_disablecloudoptimizedcontent_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "6",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_experience_donotshowfeedbacknotifications",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_experience_donotshowfeedbacknotifications_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "7",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "user_vendor_msft_policy_config_experience_enableorganizationalmessages",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_experience_enableorganizationalmessages_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "8",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_allowgamedvr",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_applicationmanagement_allowgamedvr_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "9",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev86~policy~microsoft_edge~contentsettings_spotlightexperiencesandrecommendationsenabled",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_microsoft_edgev86~policy~microsoft_edge~contentsettings_spotlightexperiencesandrecommendationsenabled_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "10",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_privacy_disableadvertisingid",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_privacy_disableadvertisingid_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "11",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_search_allowcloudsearch",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_search_allowcloudsearch_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "12",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_search_allowsearchhighlights",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "simpleSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": 0
+                }
+            }
+        },
+        {
+            "id": "13",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_search_donotusewebresults",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_search_donotusewebresults_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "14",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_newsandinterests_allownewsandinterests",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_newsandinterests_allownewsandinterests_0",
+                    "children": []
+                }
+            }
+        }
+    ]
+}

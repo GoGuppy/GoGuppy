@@ -1,1 +1,214 @@
-﻿{"@odata.context":"https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity","createdDateTime":"2026-07-06T01:00:57.0536741Z","creationSource":null,"description":"No camera or message text from lock screen","lastModifiedDateTime":"2026-07-10T16:20:05.8274026Z","name":"Win-Policy-D-LockScreen","platforms":"windows10","priorityMetaData":null,"roleScopeTagIds":["0"],"settingCount":11,"technologies":"mdm","id":"bd0695ee-9b5e-45a4-9178-af650ca4fdc9","templateReference":{"templateId":"","templateFamily":"none","templateDisplayName":null,"templateDisplayVersion":null},"settings":[{"id":"0","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_abovelock_allowcortanaabovelock","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_abovelock_allowcortanaabovelock_0","children":[]}}},{"id":"1","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_abovelock_allowtoasts","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_abovelock_allowtoasts_0","children":[]}}},{"id":"2","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_devicelock_preventenablinglockscreencamera","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_devicelock_preventenablinglockscreencamera_1","children":[]}}},{"id":"3","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_devicelock_preventlockscreenslideshow","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_devicelock_preventlockscreenslideshow_1","children":[]}}},{"id":"4","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_windowslogon_disablelockscreenappnotifications","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_windowslogon_disablelockscreenappnotifications_1","children":[]}}},{"id":"5","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_power_displayofftimeoutonbattery","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_power_displayofftimeoutonbattery_1","children":[{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_power_displayofftimeoutonbattery_entervideodcpowerdowntimeout","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingValue":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationIntegerSettingValue","settingValueTemplateReference":null,"value":300}}]}}},{"id":"6","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_power_displayofftimeoutpluggedin","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_power_displayofftimeoutpluggedin_1","children":[{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_power_displayofftimeoutpluggedin_entervideoacpowerdowntimeout","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingValue":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationIntegerSettingValue","settingValueTemplateReference":null,"value":600}}]}}},{"id":"7","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_credentialsui_disablepasswordreveal","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_credentialsui_disablepasswordreveal_0","children":[]}}},{"id":"8","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_authentication_allowaadpasswordreset","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_authentication_allowaadpasswordreset_1","children":[]}}},{"id":"9","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_devicelock_devicepasswordenabled","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_devicelock_devicepasswordenabled_0","children":[{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_devicelock_maxinactivitytimedevicelock","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingValue":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationIntegerSettingValue","settingValueTemplateReference":null,"value":15}}]}}},{"id":"10","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_privacy_letappsactivatewithvoiceabovelock","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_privacy_letappsactivatewithvoiceabovelock_2","children":[]}}}]}
+﻿{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
+    "createdDateTime": "2026-07-06T01:00:57.0536741Z",
+    "creationSource": null,
+    "description": "No camera or message text from lock screen",
+    "lastModifiedDateTime": "2026-07-10T16:20:05.8274026Z",
+    "name": "Win-Policy-D-LockScreen",
+    "platforms": "windows10",
+    "priorityMetaData": null,
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 11,
+    "technologies": "mdm",
+    "id": "bd0695ee-9b5e-45a4-9178-af650ca4fdc9",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_abovelock_allowcortanaabovelock",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_abovelock_allowcortanaabovelock_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_abovelock_allowtoasts",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_abovelock_allowtoasts_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "2",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_preventenablinglockscreencamera",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_devicelock_preventenablinglockscreencamera_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "3",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_preventlockscreenslideshow",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_devicelock_preventlockscreenslideshow_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "4",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_windowslogon_disablelockscreenappnotifications",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_windowslogon_disablelockscreenappnotifications_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "5",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_power_displayofftimeoutonbattery",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_power_displayofftimeoutonbattery_1",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_power_displayofftimeoutonbattery_entervideodcpowerdowntimeout",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "simpleSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": 300
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "6",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_power_displayofftimeoutpluggedin",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_power_displayofftimeoutpluggedin_1",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_power_displayofftimeoutpluggedin_entervideoacpowerdowntimeout",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "simpleSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": 600
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "7",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "8",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_authentication_allowaadpasswordreset",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_authentication_allowaadpasswordreset_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "9",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_devicepasswordenabled",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_devicelock_devicepasswordenabled_0",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_maxinactivitytimedevicelock",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "simpleSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": 15
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "10",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_privacy_letappsactivatewithvoiceabovelock",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_privacy_letappsactivatewithvoiceabovelock_2",
+                    "children": []
+                }
+            }
+        }
+    ]
+}

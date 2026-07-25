@@ -56,7 +56,7 @@
          "auditRuleInformation": null,
          "choiceSettingValue": {
           "settingValueTemplateReference": null,
-          "value": "device_vendor_msft_policy_config_webthreatdefense_notifypasswordreuse_0",
+          "value": "device_vendor_msft_policy_config_webthreatdefense_notifypasswordreuse_1",
           "children": []
          }
         }
@@ -1570,7 +1570,7 @@
     {
      "id": "sc-win-policy-d-endpointsecurity",
      "name": "Win-Policy-D-EndpointSecurity",
-     "description": "Security baseline hardening: UAC enforced, Autoplay off, Guest and built-in Admin disabled, anonymous SAM enumeration blocked, Remote Assistance off, Sudo blocked, Wi-Fi Sense off, DMA and boot driver protections",
+     "description": "Security baseline hardening: UAC enforced, Autoplay off, Guest disabled, built-in Administrator enabled on purpose so LAPS can manage it, anonymous SAM enumeration blocked, Remote Assistance off, Sudo blocked, Wi-Fi Sense off, DMA and boot driver protections",
      "type": "configurationPolicy",
      "file": "../Settings Catalog/Win-Policy-D-EndpointSecurity.json",
      "content": {
@@ -1740,7 +1740,7 @@
          "auditRuleInformation": null,
          "choiceSettingValue": {
           "settingValueTemplateReference": null,
-          "value": "device_vendor_msft_policy_config_autoplay_disallowautoplayfornonvolumedevices_0",
+          "value": "device_vendor_msft_policy_config_autoplay_disallowautoplayfornonvolumedevices_1",
           "children": []
          }
         }
@@ -2081,6 +2081,147 @@
      }
     },
     {
+     "id": "sc-win-policy-d-laps",
+     "name": "Win-Policy-D-LAPS",
+     "description": "Configures LAPS policy on PCs",
+     "type": "configurationPolicy",
+     "file": "../Settings Catalog/Win-Policy-D-LAPS.json",
+     "content": {
+      "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
+      "createdDateTime": "2026-07-13T16:13:07.6290608Z",
+      "creationSource": null,
+      "description": "Configures LAPS policy on PCs",
+      "lastModifiedDateTime": "2026-07-13T16:13:07.6290608Z",
+      "name": "Win-Policy-D-LAPS",
+      "platforms": "windows10",
+      "priorityMetaData": null,
+      "roleScopeTagIds": [
+       "0"
+      ],
+      "settingCount": 5,
+      "technologies": "mdm",
+      "id": "d46aab88-be36-411d-8ea9-0d26453faffc",
+      "templateReference": {
+       "templateId": "adc46e5a-f4aa-4ff6-aeff-4f27bc525796_1",
+       "templateFamily": "endpointSecurityAccountProtection",
+       "templateDisplayName": "Local admin password solution (Windows LAPS)",
+       "templateDisplayVersion": "Version 1"
+      },
+      "settings": [
+       {
+        "id": "0",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_laps_policies_backupdirectory",
+         "auditRuleInformation": null,
+         "settingInstanceTemplateReference": {
+          "settingInstanceTemplateId": "a3270f64-e493-499d-8900-90290f61ed8a"
+         },
+         "choiceSettingValue": {
+          "value": "device_vendor_msft_laps_policies_backupdirectory_1",
+          "settingValueTemplateReference": {
+           "settingValueTemplateId": "4d90f03d-e14c-43c4-86da-681da96a2f92",
+           "useTemplateDefault": false
+          },
+          "children": [
+           {
+            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+            "settingDefinitionId": "device_vendor_msft_laps_policies_passwordagedays_aad",
+            "settingInstanceTemplateReference": null,
+            "auditRuleInformation": null,
+            "simpleSettingValue": {
+             "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+             "value": 90,
+             "settingValueTemplateReference": {
+              "settingValueTemplateId": "4d90f03d-e14c-43c4-86da-681da96a2f92",
+              "useTemplateDefault": false
+             }
+            }
+           }
+          ]
+         }
+        }
+       },
+       {
+        "id": "1",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_laps_policies_passwordcomplexity",
+         "auditRuleInformation": null,
+         "settingInstanceTemplateReference": {
+          "settingInstanceTemplateId": "8a7459e8-1d1c-458a-8906-7b27d216de52"
+         },
+         "choiceSettingValue": {
+          "value": "device_vendor_msft_laps_policies_passwordcomplexity_4",
+          "settingValueTemplateReference": {
+           "settingValueTemplateId": "aa883ab5-625e-4e3b-b830-a37a4bb8ce01",
+           "useTemplateDefault": false
+          },
+          "children": []
+         }
+        }
+       },
+       {
+        "id": "2",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_laps_policies_passwordlength",
+         "auditRuleInformation": null,
+         "settingInstanceTemplateReference": {
+          "settingInstanceTemplateId": "da7a1dbd-caf7-4341-ab63-ece6f994ff02"
+         },
+         "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 14,
+          "settingValueTemplateReference": {
+           "settingValueTemplateId": "d08f1266-5345-4f53-8ae1-4c20e6cb5ec9",
+           "useTemplateDefault": false
+          }
+         }
+        }
+       },
+       {
+        "id": "3",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_laps_policies_postauthenticationactions",
+         "auditRuleInformation": null,
+         "settingInstanceTemplateReference": {
+          "settingInstanceTemplateId": "d9282eb1-d187-42ae-b366-7081f32dcfff"
+         },
+         "choiceSettingValue": {
+          "value": "device_vendor_msft_laps_policies_postauthenticationactions_1",
+          "settingValueTemplateReference": {
+           "settingValueTemplateId": "68ff4f78-baa8-4b32-bf3d-5ad5566d8142",
+           "useTemplateDefault": false
+          },
+          "children": []
+         }
+        }
+       },
+       {
+        "id": "4",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_laps_policies_postauthenticationresetdelay",
+         "auditRuleInformation": null,
+         "settingInstanceTemplateReference": {
+          "settingInstanceTemplateId": "a9e21166-4055-4042-9372-efaf3ef41868"
+         },
+         "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 24,
+          "settingValueTemplateReference": {
+           "settingValueTemplateId": "0deb6aee-8dac-40c4-a9dd-c3718e5c1d52",
+           "useTemplateDefault": false
+          }
+         }
+        }
+       }
+      ]
+     }
+    },
+    {
      "id": "sc-win-policy-d-lockscreen",
      "name": "Win-Policy-D-LockScreen",
      "description": "No camera or message text from lock screen",
@@ -2239,7 +2380,7 @@
          "auditRuleInformation": null,
          "choiceSettingValue": {
           "settingValueTemplateReference": null,
-          "value": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal_0",
+          "value": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal_1",
           "children": []
          }
         }
@@ -2782,14 +2923,14 @@
     {
      "id": "sc-win-policy-d-scriptfileassociations",
      "name": "Win-Policy-D-ScriptFileAssociations",
-     "description": ".appx, .bat, .cab, .com, .cmd, .hta, .js, .jse, .ps1, .ps1m, .sct, .shb, .shs, .wsf, .wsh, .vbe, .vbs open with Notepad instead of executing automatically after double clicking to minimize ClickFix-style attacks.",
+     "description": ".appx, .bat, .cab, .com, .cmd, .hta, .js, .jse, .ps1, .psm1, .sct, .shb, .shs, .wsf, .wsh, .vbe, .vbs open with Notepad instead of executing automatically after double clicking to minimize ClickFix-style attacks.",
      "type": "configurationPolicy",
      "file": "../Settings Catalog/Win-Policy-D-ScriptFileAssociations.json",
      "content": {
       "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
       "createdDateTime": "2026-07-06T01:18:50.1599585Z",
       "creationSource": null,
-      "description": ".appx, .bat, .cab, .com, .cmd, .hta, .js, .jse, .ps1, .ps1m, .sct, .shb, .shs, .wsf, .wsh, .vbe, .vbs open with Notepad instead of executing automatically after double clicking to minimize ClickFix-style attacks.",
+      "description": ".appx, .bat, .cab, .com, .cmd, .hta, .js, .jse, .ps1, .psm1, .sct, .shb, .shs, .wsf, .wsh, .vbe, .vbs open with Notepad instead of executing automatically after double clicking to minimize ClickFix-style attacks.",
       "lastModifiedDateTime": "2026-07-10T16:02:29.9262195Z",
       "name": "Win-Policy-D-ScriptFileAssociations",
       "platforms": "windows10",
@@ -2817,7 +2958,7 @@
          "simpleSettingValue": {
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
           "settingValueTemplateReference": null,
-          "value": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxEZWZhdWx0QXNzb2NpYXRpb25zPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmFwcHgiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuYmF0IiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmNhYiIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5jb20iIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuY21kIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmh0YSIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5qcyIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5qc2UiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIucHMxIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLnBzMW0iIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuc2N0IiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLnNoYiIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5zaHMiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIud3NmIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLndzaCIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii52YmUiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIudmJzIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KPC9EZWZhdWx0QXNzb2NpYXRpb25zPg=="
+          "value": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxEZWZhdWx0QXNzb2NpYXRpb25zPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmFwcHgiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuYmF0IiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmNhYiIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5jb20iIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuY21kIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmh0YSIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5qcyIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5qc2UiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIucHMxIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLnBzbTEiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuc2N0IiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLnNoYiIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5zaHMiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIud3NmIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLndzaCIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii52YmUiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIudmJzIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KPC9EZWZhdWx0QXNzb2NpYXRpb25zPg=="
          }
         }
        }
@@ -3369,7 +3510,7 @@
          "auditRuleInformation": null,
          "choiceSettingValue": {
           "settingValueTemplateReference": null,
-          "value": "device_vendor_msft_policy_config_search_allowcloudsearch_1",
+          "value": "device_vendor_msft_policy_config_search_allowcloudsearch_0",
           "children": []
          }
         }
@@ -3397,7 +3538,7 @@
          "auditRuleInformation": null,
          "choiceSettingValue": {
           "settingValueTemplateReference": null,
-          "value": "device_vendor_msft_policy_config_search_donotusewebresults_0",
+          "value": "device_vendor_msft_policy_config_search_donotusewebresults_1",
           "children": []
          }
         }
