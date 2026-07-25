@@ -85,6 +85,12 @@ body {
 .row:hover { background: var(--row); border-left-color: var(--violet); padding-left: 8px; }
 .row:hover .name { color: var(--violet); }
 .row .idx { display: none; }
+.row.empty {
+  color: var(--faint);
+  cursor: default;
+  pointer-events: none;
+}
+.row.empty .name, .row.empty .desc { color: var(--faint); }
 .row .name { color: var(--ink); }
 .row .desc { color: var(--dim); }
 
