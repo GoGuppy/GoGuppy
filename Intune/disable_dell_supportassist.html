@@ -3,76 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Disable Dell SupportAssist &middot; Intune &middot; Guppys Lab</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #0f1117; color: #c9d1d9; font-family: 'Segoe UI', system-ui, sans-serif; padding: 0 0 60px; min-height: 100vh; }
-  header { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
-  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .logo-box { background: #58a6ff; color: #0d1117; font-family: 'Consolas', monospace; font-size: 13px; font-weight: 700; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
-  .logo-name { font-family: 'Consolas', monospace; font-size: 14px; font-weight: 600; color: #e6edf3; }
-  .logo-name span { color: #58a6ff; }
-  .back { font-family: 'Consolas', monospace; font-size: 11px; color: #58a6ff; text-decoration: none; }
-  .back:hover { text-decoration: underline; }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 32px 0; }
-  .breadcrumb { font-family: 'Consolas', monospace; font-size: 11px; color: #484f58; margin-bottom: 16px; }
-  .breadcrumb a { color: #58a6ff; text-decoration: none; }
-  .breadcrumb a:hover { text-decoration: underline; }
-  h1 { font-size: 22px; font-weight: 600; color: #e6edf3; margin-bottom: 6px; }
-  .subtitle { font-size: 12px; color: #6e7681; margin-bottom: 24px; }
-  .warning-box { background: #2b1d04; border: 1px solid #d29922; border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 12px; color: #e3b341; line-height: 1.6; }
-  .info-box { background: #0d1f35; border: 1px solid #1f4060; border-radius: 8px; padding: 10px 14px; margin-bottom: 24px; font-size: 12px; color: #58a6ff; line-height: 1.6; }
-  .section-label { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #484f58; margin: 28px 0 8px 2px; }
-  .card { background: #161b22; border: 1px solid #21262d; border-radius: 8px; margin-bottom: 7px; overflow: hidden; transition: border-color .15s; }
-  .card:hover { border-color: #30363d; }
-  .card-top { display: flex; align-items: center; gap: 10px; padding: 10px 12px 9px; }
-  .step { min-width: 22px; height: 22px; border-radius: 50%; background: #21262d; border: 1px solid #30363d; color: #6e7681; font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .card-info { flex: 1; }
-  .card-title { font-size: 13px; font-weight: 500; color: #e6edf3; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
-  .card-desc { font-size: 11px; color: #6e7681; margin-top: 2px; line-height: 1.4; }
-  details.card > summary { cursor: pointer; list-style: none; }
-  details.card > summary::-webkit-details-marker { display: none; }
-  .chevron { color: #484f58; font-size: 11px; flex-shrink: 0; transition: transform .15s, color .15s; }
-  details.card[open] .chevron { transform: rotate(90deg); }
-  details.card > summary:hover .chevron { color: #58a6ff; }
-  details.card[open] > summary { border-bottom: 1px solid #21262d; margin-bottom: 10px; }
-  details.card[open] .step { background: #0d2341; border-color: #1f4060; color: #58a6ff; }
-
-  .code-wrap { position: relative; margin: 0 12px 10px 44px; }
-  .code-block { background: #0d1117; border: 1px solid #21262d; border-radius: 6px; padding: 8px 44px 8px 10px; font-family: 'Cascadia Code','Fira Code','Consolas',monospace; font-size: 11.5px; color: #79c0ff; white-space: pre-wrap; word-break: break-all; line-height: 1.65; }
-  .copy-btn { position: absolute; top: 6px; right: 6px; background: #21262d; border: 1px solid #30363d; border-radius: 5px; color: #8b949e; font-size: 10px; padding: 3px 8px; cursor: pointer; font-family: inherit; transition: background .1s, color .1s; }
-  .copy-btn:hover { background: #30363d; color: #e6edf3; }
-  .copy-btn.done { background: #0d2b17; color: #3fb950; border-color: #1a4226; }
-  .tag { font-size: 10px; font-weight: 500; padding: 1px 7px; border-radius: 999px; }
-  .tag-key    { background: #0d2341; color: #58a6ff; }
-  .tag-yellow { background: #2b2000; color: #e3b341; }
-  .tag-green  { background: #0d2b17; color: #3fb950; }
-  .tag-red    { background: #2b0d0d; color: #f85149; }
-  .remediation-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 7px; }
-  .rem-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #484f58; margin-bottom: 6px; }
-  .settings-panel { background: #161b22; border: 1px solid #21262d; border-radius: 8px; overflow: hidden; margin-bottom: 7px; }
-  .settings-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; border-bottom: 1px solid #21262d; }
-  .settings-row:last-child { border-bottom: none; }
-  .settings-key { font-size: 12px; color: #8b949e; }
-  .badge { font-family: 'Consolas', monospace; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
-  .badge-yes { background: #0d2b17; color: #3fb950; border: 1px solid #1a4226; }
-  .badge-no  { background: #2b0d0d; color: #f85149; border: 1px solid #4a1515; }
-  footer { max-width: 860px; margin: 48px auto 0; padding: 20px 32px 0; border-top: 1px solid #21262d; font-family: 'Consolas', monospace; font-size: 11px; color: #484f58; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-</style>
+<title>Disable Dell SupportAssist &middot; Intune &middot; GoGuppy</title>
+<link rel="stylesheet" href="../assets/gl.css">
 </head>
 <body>
 
-<header>
-  <a class="logo" href="../index.html">
-    <div class="logo-box">GL</div>
-    <div class="logo-name">Guppys<span>Lab</span></div>
-  </a>
-  <a class="back" href="index.html">&larr; Intune</a>
-</header>
-
 <div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html">goguppy.com</a>
+    <a href="index.html">&larr; scripts and remediations</a>
+  </div>
+
   <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="index.html">Intune</a> &rsaquo; Disable Dell SupportAssist</div>
-  <h1>🚫 Disable Dell SupportAssist</h1>
+  <h1>Disable Dell SupportAssist</h1>
   <div class="subtitle">Intune Remediation &middot; Stops and disables Dell SupportAssist services fleet-wide</div>
 
   <div class="warning-box">
@@ -149,10 +93,6 @@ Get-Service *SupportAssist*, DellClientManagementService -ErrorAction SilentlyCo
   </div>
 
 </div>
-
-<footer>
-  <span>GoGuppy &middot; Guppys Lab</span>
-</footer>
 
 <script>
 function copyScript(btn, id) {

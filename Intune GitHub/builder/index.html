@@ -3,54 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guppys Lab Deployment Kit</title>
+<title>GoGuppy · Deployment Kit</title>
+<link rel="stylesheet" href="../../assets/gl.css">
 <style>
-  :root {
-    --bg: #0f1420; --panel: #171e2e; --panel2: #1e2740; --border: #2a3654;
-    --text: #dce3f2; --dim: #8b96b0; --accent: #4da3ff; --green: #3ddc84; --amber: #ffb454;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font: 15px/1.5 "Segoe UI", system-ui, sans-serif; padding: 24px; }
-  .wrap { max-width: 980px; margin: 0 auto; }
-  h1 { font-size: 24px; margin-bottom: 4px; }
-  h1 span { color: var(--accent); }
-  .sub { color: var(--dim); margin-bottom: 24px; }
-  .toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
-  .count { color: var(--green); font-weight: 600; }
+  body { padding: 0 0 60px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 28px; }
+  h1 { font-size: 22px; font-weight: 500; margin: 26px 0 4px; }
+  h1 span { color: var(--violet); }
+  p.sub { color: var(--dim); font-size: 12px; margin-bottom: 24px; }
+  .toolbar { display: flex; gap: 10px; align-items: center; margin-bottom: 22px; flex-wrap: wrap; }
+  .count { color: var(--cyan); font-size: 12px; }
   button {
-    background: var(--accent); color: #0b1220; border: 0; border-radius: 8px;
-    padding: 10px 20px; font-size: 15px; font-weight: 600; cursor: pointer;
+    background: transparent; color: var(--violet); border: 1px solid var(--faint);
+    padding: 6px 14px; font-family: var(--mono); font-size: 12px; cursor: pointer;
+    letter-spacing: .06em; text-transform: uppercase;
   }
-  button:disabled { background: var(--border); color: var(--dim); cursor: not-allowed; }
-  button.ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
-  .section { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+  button:hover { border-color: var(--violet); }
+  button:disabled { color: var(--faint); border-color: var(--rule); cursor: not-allowed; }
+  button.ghost { color: var(--dim); }
+  button.ghost:hover { color: var(--ink); }
+  .section { border: 1px solid var(--rule); margin-bottom: 12px; }
   .section-head {
-    display: flex; align-items: center; gap: 10px; padding: 14px 18px;
-    background: var(--panel2); cursor: pointer; user-select: none;
+    display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+    background: var(--panel); cursor: pointer; user-select: none;
   }
-  .section-head h2 { font-size: 16px; flex: 1; }
-  .section-head .pill { color: var(--dim); font-size: 13px; }
-  .item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 18px; border-top: 1px solid var(--border); }
-  .item input { margin-top: 5px; accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
+  .section-head h2 { font-size: 12px; flex: 1; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .section-head .pill { color: var(--dim); font-size: 11px; }
+  .item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 14px; border-top: 1px solid var(--rule); }
+  .item input { margin-top: 4px; accent-color: #a37acc; width: 14px; height: 14px; cursor: pointer; }
   .item label { cursor: pointer; flex: 1; }
-  .item .name { font-weight: 600; }
-  .item .desc { color: var(--dim); font-size: 13px; }
-  .item .view { color: var(--accent); font-size: 13px; cursor: pointer; background: none; border: none; padding: 4px 8px; font-weight: 400; }
-  .preview { display: none; background: #0b101c; border-top: 1px solid var(--border); padding: 14px 18px; overflow-x: auto; }
-  .preview pre { font: 12px/1.5 Consolas, monospace; color: #9fd0ff; white-space: pre; }
-  .output { background: var(--panel); border: 1px solid var(--green); border-radius: 12px; padding: 18px; margin-top: 20px; display: none; }
-  .output h3 { color: var(--green); margin-bottom: 10px; }
-  .output pre {
-    background: #0b101c; border-radius: 8px; padding: 12px; font: 13px/1.6 Consolas, monospace;
-    color: #ffd9a0; overflow-x: auto; margin: 8px 0;
+  .item .name { color: var(--ink); font-size: 13px; }
+  .item .desc { color: var(--dim); font-size: 12px; }
+  .item .view {
+    color: var(--dim); font-size: 11px; cursor: pointer; background: none;
+    border: 1px solid var(--rule); padding: 2px 8px; text-transform: none; letter-spacing: 0;
   }
-  .note { color: var(--dim); font-size: 13px; margin-top: 8px; }
-  .footer { color: var(--dim); font-size: 13px; margin-top: 28px; text-align: center; }
+  .preview { display: none; background: #060606; border-top: 1px solid var(--rule); padding: 12px 14px; overflow-x: auto; }
+  .preview pre { font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--cyan); white-space: pre; }
+  .output { border: 1px solid var(--faint); padding: 16px; margin-top: 20px; display: none; }
+  .output h3 { color: var(--cyan); font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+  .output pre {
+    background: #060606; padding: 12px; font-family: var(--mono); font-size: 12px;
+    line-height: 1.6; color: var(--violet); overflow-x: auto; margin: 8px 0;
+  }
+  .note { color: var(--dim); font-size: 12px; margin-top: 8px; }
+  .footer { color: var(--dim); font-size: 12px; margin-top: 30px; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Guppy's <span>Intune</span> Deployment Kit</h1>
+
+  <div class="topbar">
+    <a href="../../index.html">goguppy.com</a>
+    <a href="../../index.html">&larr; home</a>
+  </div>
+
+  <h1>Intune <span>Deployment Kit</span></h1>
   <p class="sub">Check what you want, generate one bundle JSON, deploy it to any tenant.</p>
 
   <div class="toolbar">

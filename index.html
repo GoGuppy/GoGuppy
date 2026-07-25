@@ -3,153 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guppys Lab</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #0d1117; color: #e6edf3; font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; padding-bottom: 80px; }
-  header { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
-  .logo { display: flex; align-items: center; gap: 10px; }
-  .logo-box { background: #58a6ff; color: #0d1117; font-family: 'Consolas', monospace; font-size: 13px; font-weight: 700; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
-  .logo-name { font-family: 'Consolas', monospace; font-size: 14px; font-weight: 600; color: #e6edf3; }
-  .logo-name span { color: #58a6ff; }
-  .header-right { font-family: 'Consolas', monospace; font-size: 11px; color: #484f58; }
-  .hero { max-width: 860px; margin: 0 auto; padding: 52px 32px 36px; }
-  .hero h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
-  .hero h1 span { color: #58a6ff; }
-  .hero p { font-size: 13px; color: #8b949e; line-height: 1.6; max-width: 500px; }
-  .pills { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-  .pill { font-family: 'Consolas', monospace; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
-  .pill-blue   { background: #0d1f35; color: #58a6ff; border: 1px solid #1f4060; }
-  .pill-green  { background: #0d2b17; color: #3fb950; border: 1px solid #1a4226; }
-  .pill-purple { background: #1a1230; color: #bc8cff; border: 1px solid #2a1a4a; }
-  .main { max-width: 860px; margin: 0 auto; padding: 0 32px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-  .card { background: #161b22; border: 1px solid #21262d; border-radius: 12px; padding: 22px 20px 18px; text-decoration: none; display: block; transition: border-color .15s, transform .12s; position: relative; overflow: hidden; }
-  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent, #58a6ff); opacity: 0; transition: opacity .15s; }
-  .card:hover { border-color: #30363d; transform: translateY(-2px); }
-  .card:hover::before { opacity: 1; }
-  .card-icon { font-size: 26px; margin-bottom: 12px; display: block; }
-  .card-title { font-size: 15px; font-weight: 600; color: #e6edf3; margin-bottom: 6px; }
-  .card-desc { font-size: 12px; color: #6e7681; line-height: 1.55; margin-bottom: 16px; }
-  .card-footer { display: flex; align-items: center; justify-content: space-between; }
-  .card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
-  .card-tag { font-family: 'Consolas', monospace; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
-  .t-blue   { background: #0d1f35; color: #58a6ff; }
-  .t-green  { background: #0d2b17; color: #3fb950; }
-  .t-orange { background: #2b1d04; color: #ffa657; }
-  .t-red    { background: #2b0d0d; color: #f85149; }
-  .t-purple { background: #1a1230; color: #bc8cff; }
-  .t-teal   { background: #0d2626; color: #39c5cf; }
-  .t-yellow { background: #2b2000; color: #e3b341; }
-  .card-arrow { color: #484f58; font-size: 18px; transition: color .15s, transform .15s; }
-  .card:hover .card-arrow { color: var(--accent, #58a6ff); transform: translateX(4px); }
-  .card-count { font-family: 'Consolas', monospace; font-size: 10px; color: #484f58; margin-top: 10px; }
-  footer { max-width: 860px; margin: 60px auto 0; padding: 20px 32px 0; border-top: 1px solid #21262d; font-family: 'Consolas', monospace; font-size: 11px; color: #484f58; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-  footer a { color: #58a6ff; text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
-
-  /* === Theme Toggle === */
-  .theme-toggle { display: flex; align-items: center; gap: 6px; }
-  .theme-label { font-family: 'Consolas', monospace; font-size: 11px; color: #484f58; user-select: none; }
-  .toggle-track { position: relative; width: 52px; height: 24px; background: #21262d; border: 1px solid #30363d; border-radius: 999px; cursor: pointer; transition: background .2s; }
-  .toggle-thumb { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; background: #58a6ff; border-radius: 50%; transition: transform .2s, background .2s; }
-  .toggle-icons { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 5px; pointer-events: none; font-size: 10px; }
-
-  /* Darker theme overrides */
-  body.darker { background: #080b10; }
-  body.darker header { background: #080b10; border-color: #161b22; }
-  body.darker .card { background: #0d1117; border-color: #161b22; }
-  body.darker .card:hover { border-color: #21262d; }
-  body.darker footer { border-color: #161b22; }
-  body.darker .toggle-thumb { transform: translateX(28px); background: #bc8cff; }
-</style>
+<title>GoGuppy</title>
+<link rel="stylesheet" href="assets/gl.css">
 </head>
 <body>
 
-<header>
-  <div class="logo">
-    <div class="logo-box">GL</div>
-    <div class="logo-name">Guppys<span>Lab</span></div>
-  </div>
-  <div style="display:flex;align-items:center;gap:16px;">
-    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark / Darker">
-      <span class="theme-label" id="theme-label">Dark</span>
-      <div class="toggle-track">
-        <div class="toggle-thumb" id="toggle-thumb"></div>
-        <div class="toggle-icons"><span>🌑</span><span>⬛</span></div>
-      </div>
-    </div>
-    
-  </div>
-</header>
+<div class="wrap">
 
-<div class="hero">
-  <h1><span>Intune</span> Stuff</h1>
-  <p>Scripts, remediations, and Settings Catalog policies for managed Windows devices. Test before deploying.</p>
-  <div class="pills">
-    
-    <span class="pill pill-blue">Intune</span>
+  <div class="topbar">
+    <span>goguppy.com</span>
+    <span>rev 2026.07</span>
   </div>
+
+<div class="banner">  ____        ____
+ / ___| ___  / ___|_   _ _ __  _ __  _   _
+| |  _ / _ \| |  _| | | | '_ \| '_ \| | | |
+| |_| | (_) | |_| | |_| | |_) | |_) | |_| |
+ \____|\___/ \____|\__,_| .__/| .__/ \__, |
+                        |_|   |_|    |___/</div>
+
+  <div class="tagline"><span class="hl">Platform scripts, Remediations, Settings Catalog policies and other Stuff</span></div>
+
+  <div class="sec-label">Sections</div>
+  <div class="out">3 sections | 5 remediations | 15 policies</div>
+
+  <a class="row" href="Intune/index.html">
+    <span class="name">Scripts and Remediations</span>
+    <span class="desc">Platform scripts and remediations.</span>
+  </a>
+
+  <a class="row" href="Settings Catalog/index.html">
+    <span class="name">Settings Catalog</span>
+    <span class="desc">Policy JSON ready to import.</span>
+  </a>
+
+  <a class="row" href="Intune GitHub/builder/index.html">
+    <span class="name">Deployment Kit</span>
+    <span class="desc">Pick policies, generate one combined bundle JSON.</span>
+  </a>
+
 </div>
 
-<div class="main">
-  <div class="grid">
-
-    <a href="Intune/index.html" class="card" style="--accent:#58a6ff">
-      <span class="card-icon">💻</span>
-      <div class="card-title">Scripts &amp; Remediations</div>
-      <div class="card-desc">Scripts and remediations.</div>
-      <div class="card-footer">
-        <div class="card-tags"></div>
-        <span class="card-arrow">›</span>
-      </div>
-      <div class="card-count">Platform Scripts · Remediations</div>
-    </a>
-
-    <a href="Settings Catalog/index.html" class="card" style="--accent:#3fb950">
-      <span class="card-icon">⚙️</span>
-      <div class="card-title">Settings Catalog Policies</div>
-      <div class="card-desc">Policy JSON ready to import.</div>
-      <div class="card-footer">
-        <div class="card-tags"><span class="card-tag t-green">JSON</span></div>
-        <span class="card-arrow">›</span>
-      </div>
-      <div class="card-count">Security Hardening · Device &amp; User Experience</div>
-    </a>
-
-    <a href="Intune GitHub/builder/index.html" class="card" style="--accent:#bc8cff">
-      <span class="card-icon">🧰</span>
-      <div class="card-title">Intune Deployment Kit</div>
-      <div class="card-desc">Pick policies, generate one combined bundle JSON.</div>
-      <div class="card-footer">
-        <div class="card-tags"><span class="card-tag t-purple">Builder</span></div>
-        <span class="card-arrow">›</span>
-      </div>
-      <div class="card-count">Settings Catalog · Bundle Builder</div>
-    </a>
-
-  </div>
-</div>
-
-<footer>
-  <span>GoGuppy · Guppys Lab</span>
-  
-</footer>
-
-<script>
-  const label = document.getElementById('theme-label');
-  function applyTheme(isDarker) {
-    document.body.classList.toggle('darker', isDarker);
-    label.textContent = isDarker ? 'Darker' : 'Dark';
-  }
-  function toggleTheme() {
-    const isDarker = !document.body.classList.contains('darker');
-    applyTheme(isDarker);
-    localStorage.setItem('theme', isDarker ? 'darker' : 'dark');
-  }
-  // Apply saved preference on load
-  applyTheme(localStorage.getItem('theme') === 'darker');
-</script>
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
