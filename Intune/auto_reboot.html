@@ -73,7 +73,7 @@
 <div class="wrap">
   <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="index.html">Intune</a> &rsaquo; Auto Reboot</div>
   <h1>🔄 Auto Reboot</h1>
-  <div class="subtitle">Intune Remediation &middot; Reboots devices with uptime over 14 days</div>
+  <div class="subtitle">Intune Remediation &middot; Reboots devices with uptime over 10 days</div>
 
   <div class="warning-box">
     Test in a pilot group before you point this at the fleet. Detection exits 1 to trigger remediation, 0 to stay put.
@@ -85,16 +85,16 @@
     <summary class="card-top">
       <div class="step">D</div>
       <div class="card-info">
-        <div class="card-title">Detect uptime over 14 days <span class="tag tag-yellow">detection</span></div>
+        <div class="card-title">Detect uptime over 10 days <span class="tag tag-yellow">detection</span></div>
         <div class="card-desc">Exits 1 (non-compliant) to trigger remediation. Exits 0 if clean.</div>
       </div>
       <span class="chevron">›</span>
     </summary>
     <div class="code-wrap">
-      <div class="code-block" id="sdetect"># Flags devices up for 14 days or more.
+      <div class="code-block" id="sdetect"># Flags devices up for 10 days or more.
 $days = (New-TimeSpan -Start (Get-CimInstance Win32_OperatingSystem).LastBootUpTime).Days
 
-if ($days -ge 14) {
+if ($days -ge 10) {
     Write-Output &quot;Non-compliant: up $days days&quot;
     exit 1
 }

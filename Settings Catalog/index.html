@@ -1,66 +1,66 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Settings Catalog · Guppys Lab</title><style>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; } body { background: #0d1117; color: #e6edf3; font-family: "Segoe UI", system-ui, sans-serif; min-height: 100vh; padding-bottom: 80px; } header { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; } .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; } .logo-box { background: #58a6ff; color: #0d1117; font-family: "Consolas", monospace; font-size: 13px; font-weight: 700; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; } .logo-name { font-family: "Consolas", monospace; font-size: 14px; font-weight: 600; color: #e6edf3; } .logo-name span { color: #58a6ff; } .back { font-family: "Consolas", monospace; font-size: 11px; color: #58a6ff; text-decoration: none; } .hero { max-width: 920px; margin: 0 auto; padding: 44px 32px 28px; } .breadcrumb { font-family: "Consolas", monospace; font-size: 11px; color: #484f58; margin-bottom: 14px; } .breadcrumb a { color: #58a6ff; text-decoration: none; } .hero h1 { font-size: 24px; font-weight: 600; margin-bottom: 8px; } .hero p { font-size: 13px; color: #8b949e; line-height: 1.6; max-width: 560px; } .pills { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; } .pill { font-family: "Consolas", monospace; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 999px; } .pill-blue { background: #0d1f35; color: #58a6ff; border: 1px solid #1f4060; } .main { max-width: 920px; margin: 0 auto; padding: 0 32px; } .subsection-label { font-family: "Consolas", monospace; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #484f58; margin: 28px 0 10px 2px; } .row { background: #161b22; border: 1px solid #21262d; border-radius: 10px; padding: 14px 18px; margin-bottom: 8px; text-decoration: none; display: block; transition: border-color .15s, transform .1s; position: relative; overflow: hidden; } .row::before { content: ""; position: absolute; top: 0; left: 0; bottom: 0; width: 2px; background: var(--accent, #58a6ff); opacity: 0; transition: opacity .15s; } .row:hover { border-color: #30363d; transform: translateY(-1px); } .row:hover::before { opacity: 1; } .row-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; } .row-title { font-size: 14px; font-weight: 600; color: #e6edf3; } .row-right { display: flex; gap: 6px; align-items: center; } .count { font-family: "Consolas", monospace; font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 999px; background: #0d1f35; color: #58a6ff; } .dl { font-family: "Consolas", monospace; font-size: 11px; color: #58a6ff; } .row-desc { font-size: 12px; color: #8b949e; margin: 4px 0 8px; line-height: 1.5; } .chips { display: flex; gap: 5px; flex-wrap: wrap; } .chip { font-family: "Consolas", monospace; font-size: 10px; padding: 2px 8px; border-radius: 999px; background: #0d1117; border: 1px solid #21262d; color: #6e7681; } footer { max-width: 920px; margin: 48px auto 0; padding: 20px 32px 0; border-top: 1px solid #21262d; font-family: "Consolas", monospace; font-size: 11px; color: #484f58; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; } footer a { color: #58a6ff; text-decoration: none; }</style></head><body>
 <header><a class="logo" href="../index.html"><div class="logo-box">GL</div><div class="logo-name">Guppys<span>Lab</span></div></a><a class="back" href="../index.html">← Home</a></header>
-<div class="hero"><div class="breadcrumb"><a href="../index.html">Home</a> › Settings Catalog</div><h1>⚙️ Settings Catalog Policies</h1><p>Settings Catalog policies as ready-to-import JSON. Click a row to download. As always: test before production.</p><div class="pills"><span class="pill pill-blue">Windows</span></div></div>
+<div class="hero"><div class="breadcrumb"><a href="../index.html">Home</a> › Settings Catalog</div><h1>⚙️ Settings Catalog Policies</h1><p>Settings Catalog policies as importable JSON. Click a row to download.</p><div class="pills"><span class="pill pill-blue">Windows</span></div></div>
 <div class="main">
   <div class="subsection-label">Security Hardening</div>
 
   <a href="Win-Policy-D-Bitlocker.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🔐 BitLocker</div><div class="row-right"><span class="count">7 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Enables BitLocker on devices and escrows the recovery key in Entra ID. Silent enablement, XTS-AES 256 on fixed and OS drives, recovery password rotation on.</div>
+    <div class="row-desc">Encrypts OS and fixed drives silently and escrows the recovery key to Entra ID.</div>
     <div class="chips"><span class="chip">require device encryption</span><span class="chip">warn on third-party encryption</span><span class="chip">recovery password rotation</span><span class="chip">encryption method by drive type</span><span class="chip">system drive encryption type</span><span class="chip">startup authentication</span><span class="chip">recovery options</span></div>
   </a>
 
   <a href="Win-Policy-D-LAPS.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🗝️ LAPS</div><div class="row-right"><span class="count">5 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Rotates the built-in Administrator password every 90 days and escrows it to Entra ID. 14 characters, full complexity. No account name is set, so LAPS manages the built-in Administrator, which is why Endpoint Security enables that account.</div>
+    <div class="row-desc">Rotates and escrows the built-in Administrator password to Entra ID.</div>
     <div class="chips"><span class="chip">backup to Entra ID</span><span class="chip">90 day rotation</span><span class="chip">14 characters</span><span class="chip">full complexity</span><span class="chip">post auth reset 24h</span></div>
   </a>
 
   <a href="Win-Policy-D-AdvancedPhishingProtection.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🎣 Advanced Phishing Protection</div><div class="row-right"><span class="count">4 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">SmartScreen warns when a user types credentials into a phishing page or stores them somewhere dumb.</div>
+    <div class="row-desc">SmartScreen alerts when users type or store work credentials unsafely.</div>
     <div class="chips"><span class="chip">service enabled</span><span class="chip">notify malicious site</span><span class="chip">notify password reuse</span><span class="chip">notify unsafe storage</span></div>
   </a>
 
   <a href="Win-Policy-D-DisableWinR.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">⌨️ Disable Win+R</div><div class="row-right"><span class="count">1 setting</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Kills the Run dialog to block ClickFix and paste-and-run social engineering attacks.</div>
+    <div class="row-desc">Blocks the Run dialog, killing ClickFix and paste and run attacks.</div>
     <div class="chips"><span class="chip">Run dialog disabled</span></div>
   </a>
 
   <a href="Win-Policy-D-ScriptFileAssociations.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">📜 Script File Associations</div><div class="row-right"><span class="count">1 setting</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">.appx, .bat, .cab, .com, .cmd, .hta, .js, .jse, .ps1, .psm1, .sct, .shb, .shs, .wsf, .wsh, .vbe, .vbs open in Notepad instead of executing on double-click.</div>
+    <div class="row-desc">Script files open in Notepad instead of executing on double click.</div>
     <div class="chips"><span class="chip">17 script types → Notepad</span></div>
   </a>
 
   <a href="Win-Policy-D-EndpointSecurity.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🛡️ Endpoint Security Baseline</div><div class="row-right"><span class="count">31 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Security baseline hardening: UAC enforced, Autoplay off, Guest disabled, built-in Administrator enabled on purpose so LAPS can manage it, anonymous SAM enumeration blocked, Remote Assistance off, Sudo blocked, Wi-Fi Sense off, DMA and boot driver protections</div>
+    <div class="row-desc">Core account, UAC, and device protections. Enables the built-in Administrator on purpose so LAPS can manage it.</div>
     <div class="chips"><span class="chip">UAC hardening</span><span class="chip">autoplay/autorun off</span><span class="chip">guest account disabled</span><span class="chip">built-in admin enabled for LAPS</span><span class="chip">anonymous SAM enumeration blocked</span><span class="chip">sudo blocked</span><span class="chip">DMA protection</span><span class="chip">remote assistance off</span><span class="chip">+23 more</span></div>
   </a>
 
   <a href="Win-Policy-D-DisableInsecureProtocols.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🚫 Disable Insecure Protocols</div><div class="row-right"><span class="count">37 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Legacy and insecure protocols shut off across the board. SMBv1 belongs in a museum.</div>
+    <div class="row-desc">Turns off legacy authentication and file sharing protocols.</div>
     <div class="chips"><span class="chip">SMBv1 off</span><span class="chip">SMB signing required</span><span class="chip">insecure guest logons off</span><span class="chip">NTLMv2 min session security</span><span class="chip">LM hash storage off</span><span class="chip">WinRM basic auth off</span><span class="chip">WinRM unencrypted traffic off</span><span class="chip">CredSSP encryption oracle fix</span><span class="chip">multicast DNS off</span><span class="chip">+28 more</span></div>
   </a>
 
   <a href="Win-Policy-D-DisableEdgePasswordManager.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🔑 Disable Edge Password Manager</div><div class="row-right"><span class="count">1 setting</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Disables Edge Password Manager. Prevents users from storing more passwords but allows continued use of already stored credentials until manually deleted.</div>
+    <div class="row-desc">Stops new passwords saving in Edge. Existing ones stay until deleted.</div>
     <div class="chips"><span class="chip">password manager disabled</span></div>
   </a>
 
   <a href="Win-Policy-D-DisablePhoneLink.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">📵 Disable Phone Link</div><div class="row-right"><span class="count">1 setting</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Blocks Phone Link to help prevent data exfiltration to personal phones.</div>
+    <div class="row-desc">Blocks phone to PC linking.</div>
     <div class="chips"><span class="chip">phone-PC linking blocked</span></div>
   </a>
 
   <a href="Win-Policy-D-LockScreen.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🔒 Lock Screen</div><div class="row-right"><span class="count">11 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Locks down the lock screen: no camera, slideshow, notifications, or voice above lock; display off at 5/10 min, lock at 15 min idle; SSPR allowed from lock screen</div>
+    <div class="row-desc">Restricts what is reachable above the lock screen and sets idle timeouts.</div>
     <div class="chips"><span class="chip">camera blocked</span><span class="chip">slideshow blocked</span><span class="chip">no app notifications</span><span class="chip">no toasts above lock</span><span class="chip">no Cortana above lock</span><span class="chip">no voice apps above lock</span><span class="chip">display timeouts</span><span class="chip">password reveal off</span><span class="chip">password required</span><span class="chip">AAD password reset</span></div>
   </a>
 
@@ -68,7 +68,7 @@
 
   <a href="Win-Policy-D-AutoTimezone.json" download class="row" style="--accent:#3fb950">
     <div class="row-top"><div class="row-title">🌍 Auto Timezone</div><div class="row-right"><span class="count">3 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Syncs device time to time.windows.com via NTP; users can still change their timezone if needed.</div>
+    <div class="row-desc">Keeps device time synced over NTP while leaving timezone user changeable.</div>
     <div class="chips"><span class="chip">NTP client enabled</span><span class="chip">NTP client configured</span><span class="chip">users can change timezone</span></div>
   </a>
 
@@ -86,13 +86,13 @@
 
   <a href="Win-Policy-D-UserExperience.json" download class="row" style="--accent:#3fb950">
     <div class="row-top"><div class="row-title">✨ User Experience</div><div class="row-right"><span class="count">15 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Windows stops trying to sell you things. Now also strips default Store packages, kills the advertising ID, and turns off Game DVR.</div>
+    <div class="row-desc">Strips Microsoft promotional content, Store bloat, and suggestion features.</div>
     <div class="chips"><span class="chip">Spotlight off</span><span class="chip">chat icon off</span><span class="chip">cloud optimized content off</span><span class="chip">Bing web results off</span><span class="chip">cloud search off</span><span class="chip">news &amp; interests off</span><span class="chip">Store bloat removed</span><span class="chip">Game DVR off</span><span class="chip">advertising ID off</span><span class="chip">+6 more</span></div>
   </a>
 
   <a href="Win-Policy-D-DisableCopilot.json" download class="row" style="--accent:#3fb950">
     <div class="row-top"><div class="row-title">🤖 Disable Copilot</div><div class="row-right"><span class="count">2 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Disables Copilot system wide. Copilot in Edge is left untouched.</div>
+    <div class="row-desc">Disables Windows Copilot. Edge Copilot untouched.</div>
     <div class="chips"><span class="chip">Copilot app removed</span><span class="chip">Windows Copilot off</span></div>
   </a>
 
