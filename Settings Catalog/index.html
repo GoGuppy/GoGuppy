@@ -4,7 +4,234 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GoGuppy · Settings Catalog</title>
-<link rel="stylesheet" href="../assets/gl.css">
+<style>
+/* GoGuppy shared styles */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #0a0a0a;
+  --panel:  #0e0e10;
+  --row:    #151517;
+  --rule:   #1f2024;
+  --ink:    #cbccc6;
+  --dim:    #6e747c;
+  --cyan:   #5ccfe6;
+  --violet: #a37acc;
+  --faint:  #383c42;
+  --mono:   'Cascadia Mono', 'Consolas', ui-monospace, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 0 0 60px;
+}
+
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+
+/* top bar */
+.topbar {
+  border-bottom: 1px solid var(--rule);
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--dim);
+  font-size: 12px;
+}
+.topbar a { color: var(--dim); text-decoration: none; }
+.topbar a:hover { color: var(--violet); }
+
+/* home banner */
+.banner {
+  padding: 34px 0 8px;
+  white-space: pre;
+  color: var(--violet);
+  font-size: 12px;
+  line-height: 1.35;
+  overflow-x: auto;
+}
+.tagline { color: var(--dim); padding-bottom: 26px; font-size: 13px; }
+.tagline .hl { color: var(--ink); }
+
+/* section headings */
+.sec-label, .section-label {
+  color: var(--cyan);
+  padding: 30px 0 6px;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 8px;
+}
+.out { color: var(--dim); font-size: 12px; padding-bottom: 8px; }
+.sub {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 20px 0 2px;
+}
+.sub-desc { color: var(--dim); font-size: 12px; padding-bottom: 8px; }
+
+/* listing rows */
+.row {
+  display: grid;
+  grid-template-columns: 24px 260px 1fr;
+  gap: 14px;
+  align-items: baseline;
+  padding: 6px 8px 6px 0;
+  text-decoration: none;
+  color: inherit;
+  border-left: 2px solid transparent;
+}
+.row .icon {
+  font-size: 14px;
+  line-height: 1;
+  filter: grayscale(35%);
+}
+.row:hover .icon { filter: none; }
+.row:hover { background: var(--row); border-left-color: var(--violet); padding-left: 8px; }
+.row:hover .name { color: var(--violet); }
+.row .idx { display: none; }
+.row.empty {
+  color: var(--faint);
+  cursor: default;
+  pointer-events: none;
+}
+.row.empty .name, .row.empty .desc { color: var(--faint); }
+.row .name { color: var(--ink); }
+.row .desc { color: var(--dim); }
+
+/* detail pages */
+.breadcrumb { color: var(--dim); font-size: 12px; padding: 26px 0 18px; }
+.breadcrumb a { color: var(--dim); text-decoration: none; }
+.breadcrumb a:hover { color: var(--violet); }
+
+h1 {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.subtitle { color: var(--dim); font-size: 12px; padding-bottom: 20px; }
+
+.warning-box {
+  border-left: 2px solid var(--violet);
+  padding: 4px 0 4px 14px;
+  color: var(--dim);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.info-box {
+  border-left: 2px solid var(--cyan);
+  padding: 4px 0 4px 14px;
+  color: var(--dim);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+/* collapsible script cards */
+details.card {
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  margin-bottom: 10px;
+}
+details.card[open] { border-color: var(--faint); }
+summary.card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  list-style: none;
+}
+summary.card-top::-webkit-details-marker { display: none; }
+summary.card-top:hover .card-title { color: var(--violet); }
+.step {
+  border: 1px solid var(--faint);
+  color: var(--cyan);
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.card-info { flex: 1; }
+.card-title { color: var(--ink); font-size: 13px; }
+.card-desc { color: var(--dim); font-size: 12px; }
+.chevron { color: var(--faint); font-size: 15px; }
+details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
+.chevron { display: inline-block; transition: transform .15s, color .15s; }
+
+.tag {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  border: 1px solid var(--rule);
+  padding: 1px 6px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+.tag-yellow { color: var(--cyan); border-color: var(--faint); }
+.tag-red { color: var(--violet); border-color: var(--faint); }
+
+/* code */
+.code-wrap { position: relative; border-top: 1px solid var(--rule); }
+.code-block {
+  padding: 14px 60px 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 2px 9px;
+  cursor: pointer;
+}
+.copy-btn:hover { color: var(--violet); border-color: var(--faint); }
+.copy-btn.done { color: var(--cyan); }
+
+/* settings table */
+.settings-panel { border: 1px solid var(--rule); }
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.settings-row:last-child { border-bottom: 0; }
+.settings-key { color: var(--dim); font-size: 12px; }
+.badge { font-size: 11px; letter-spacing: .06em; }
+.badge-yes { color: var(--cyan); }
+.badge-no { color: var(--dim); }
+
+@media (max-width: 700px) {
+  .wrap { padding: 0 18px; }
+  .row { grid-template-columns: 1fr; gap: 0; }
+  .banner { font-size: 9px; }
+}
+</style>
 </head>
 <body>
 
@@ -17,57 +244,55 @@
 
   <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Settings Catalog</div>
 
-  <h1>Settings Catalog</h1>
-  <div class="subtitle">Settings Catalog policies as importable JSON. Click a row to download.</div>
-
-  <div class="sec-label">Settings Catalog</div>
-  <div class="out">total 15 | click to download policy json</div>
+  <h1>⚙️ Settings Catalog</h1>
+  <div class="subtitle">Policy JSON ready to import.</div>
+  <div class="out">total 15 | click a row to download</div>
 
   <div class="sub">Security Hardening</div>
   <div class="sub-desc">Encryption, credentials, protocols, and account controls.</div>
 
   <a class="row" href="Win-Policy-D-Bitlocker.json" download>
-    <span class="name">BitLocker</span>
+    <span class="icon">🔐</span><span class="name">BitLocker</span>
     <span class="desc">Encrypts OS and fixed drives silently and escrows the recovery key to Entra ID.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-LAPS.json" download>
-    <span class="name">LAPS</span>
+    <span class="icon">🗝️</span><span class="name">LAPS</span>
     <span class="desc">Rotates and escrows the built-in Administrator password to Entra ID.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-AdvancedPhishingProtection.json" download>
-    <span class="name">Advanced Phishing Protection</span>
+    <span class="icon">🎣</span><span class="name">Advanced Phishing Protection</span>
     <span class="desc">SmartScreen alerts when users type or store work credentials unsafely.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-DisableWinR.json" download>
-    <span class="name">Disable Win+R</span>
+    <span class="icon">⌨️</span><span class="name">Disable Win+R</span>
     <span class="desc">Blocks the Run dialog, killing ClickFix and paste and run attacks.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-ScriptFileAssociations.json" download>
-    <span class="name">Script File Associations</span>
+    <span class="icon">📜</span><span class="name">Script File Associations</span>
     <span class="desc">Script files open in Notepad instead of executing on double click.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-EndpointSecurity.json" download>
-    <span class="name">Endpoint Security Baseline</span>
+    <span class="icon">🛡️</span><span class="name">Endpoint Security Baseline</span>
     <span class="desc">Core account, UAC, and device protections. Enables the built-in Administrator on purpose so LAPS can manage it.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-DisableInsecureProtocols.json" download>
-    <span class="name">Disable Insecure Protocols</span>
+    <span class="icon">🚫</span><span class="name">Disable Insecure Protocols</span>
     <span class="desc">Turns off legacy authentication and file sharing protocols.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-DisableEdgePasswordManager.json" download>
-    <span class="name">Disable Edge Password Manager</span>
+    <span class="icon">🔑</span><span class="name">Disable Edge Password Manager</span>
     <span class="desc">Stops new passwords saving in Edge. Existing ones stay until deleted.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-LockScreen.json" download>
-    <span class="name">Lock Screen</span>
+    <span class="icon">🔒</span><span class="name">Lock Screen</span>
     <span class="desc">Restricts what is reachable above the lock screen and sets idle timeouts.</span>
   </a>
 
@@ -75,32 +300,32 @@
   <div class="sub-desc">Timezone, browser, sync, and interface behaviour.</div>
 
   <a class="row" href="Win-Policy-D-AutoTimezone.json" download>
-    <span class="name">Auto Timezone</span>
+    <span class="icon">🌍</span><span class="name">Auto Timezone</span>
     <span class="desc">Keeps device time synced over NTP while leaving timezone user changeable.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-EdgeAutoLogon.json" download>
-    <span class="name">Edge Auto Logon</span>
+    <span class="icon">🌐</span><span class="name">Edge Auto Logon</span>
     <span class="desc">Forces the work profile and controls what syncs.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-OneDriveSettings.json" download>
-    <span class="name">OneDrive Settings</span>
+    <span class="icon">☁️</span><span class="name">OneDrive Settings</span>
     <span class="desc">Auto start, silent sign-in, tenant locked, silent KFM with opt-out blocked, Files On-Demand. The tenant ID is a placeholder of all zeros in three places. Replace it or KFM and the tenant allow list will not work.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-UserExperience.json" download>
-    <span class="name">User Experience</span>
+    <span class="icon">✨</span><span class="name">User Experience</span>
     <span class="desc">Strips Microsoft promotional content, Store bloat, and suggestion features.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-DisableCopilot.json" download>
-    <span class="name">Disable Copilot</span>
+    <span class="icon">🤖</span><span class="name">Disable Copilot</span>
     <span class="desc">Disables Windows Copilot. Edge Copilot untouched.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-DisablePhoneLink.json" download>
-    <span class="name">Disable Phone Link</span>
+    <span class="icon">📵</span><span class="name">Disable Phone Link</span>
     <span class="desc">Blocks phone to PC linking.</span>
   </a>
 
