@@ -4,6 +4,12 @@
 <div class="main">
   <div class="subsection-label">Security Hardening</div>
 
+  <a href="Win-Policy-D-Bitlocker.json" download class="row" style="--accent:#f85149">
+    <div class="row-top"><div class="row-title">🔐 BitLocker</div><div class="row-right"><span class="count">7 settings</span><span class="dl">↓ JSON</span></div></div>
+    <div class="row-desc">Enables BitLocker on devices and escrows the recovery key in Entra ID. Silent enablement, XTS-AES 256 on fixed and OS drives, recovery password rotation on.</div>
+    <div class="chips"><span class="chip">require device encryption</span><span class="chip">warn on third-party encryption</span><span class="chip">recovery password rotation</span><span class="chip">encryption method by drive type</span><span class="chip">system drive encryption type</span><span class="chip">startup authentication</span><span class="chip">recovery options</span></div>
+  </a>
+
   <a href="Win-Policy-D-AdvancedPhishingProtection.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🎣 Advanced Phishing Protection</div><div class="row-right"><span class="count">4 settings</span><span class="dl">↓ JSON</span></div></div>
     <div class="row-desc">SmartScreen warns when a user types credentials into a phishing page or stores them somewhere dumb.</div>
@@ -23,12 +29,12 @@
   </a>
 
   <a href="Win-Policy-D-EndpointSecurity.json" download class="row" style="--accent:#f85149">
-    <div class="row-top"><div class="row-title">🛡️ Endpoint Security Baseline</div><div class="row-right"><span class="count">34 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Security baseline hardening: UAC enforced, Autoplay off, Guest and built-in Admin disabled, anonymous SAM enumeration blocked, Remote Assistance off, PowerShell script block logging, DMA and boot driver protections</div>
-    <div class="chips"><span class="chip">UAC hardening</span><span class="chip">autoplay/autorun off</span><span class="chip">admin + guest accounts disabled</span><span class="chip">anonymous SAM enumeration blocked</span><span class="chip">PS script block logging</span><span class="chip">DMA protection</span><span class="chip">remote assistance off</span><span class="chip">network bridge blocked</span><span class="chip">+26 more</span></div>
+    <div class="row-top"><div class="row-title">🛡️ Endpoint Security Baseline</div><div class="row-right"><span class="count">31 settings</span><span class="dl">↓ JSON</span></div></div>
+    <div class="row-desc">Security baseline hardening: UAC enforced, Autoplay off, Guest and built-in Admin disabled, anonymous SAM enumeration blocked, Remote Assistance off, Sudo blocked, Wi-Fi Sense off, DMA and boot driver protections</div>
+    <div class="chips"><span class="chip">UAC hardening</span><span class="chip">autoplay/autorun off</span><span class="chip">admin + guest accounts disabled</span><span class="chip">anonymous SAM enumeration blocked</span><span class="chip">sudo blocked</span><span class="chip">DMA protection</span><span class="chip">remote assistance off</span><span class="chip">network bridge blocked</span><span class="chip">+23 more</span></div>
   </a>
 
-  <a href="Win-Policy-DisableInsecureProtocols.json" download class="row" style="--accent:#f85149">
+  <a href="Win-Policy-D-DisableInsecureProtocols.json" download class="row" style="--accent:#f85149">
     <div class="row-top"><div class="row-title">🚫 Disable Insecure Protocols</div><div class="row-right"><span class="count">37 settings</span><span class="dl">↓ JSON</span></div></div>
     <div class="row-desc">Legacy and insecure protocols shut off across the board. SMBv1 belongs in a museum.</div>
     <div class="chips"><span class="chip">SMBv1 off</span><span class="chip">SMB signing required</span><span class="chip">insecure guest logons off</span><span class="chip">NTLMv2 min session security</span><span class="chip">LM hash storage off</span><span class="chip">WinRM basic auth off</span><span class="chip">WinRM unencrypted traffic off</span><span class="chip">CredSSP encryption oracle fix</span><span class="chip">multicast DNS off</span><span class="chip">+28 more</span></div>
@@ -73,9 +79,15 @@
   </a>
 
   <a href="Win-Policy-D-UserExperience.json" download class="row" style="--accent:#3fb950">
-    <div class="row-top"><div class="row-title">✨ User Experience</div><div class="row-right"><span class="count">10 settings</span><span class="dl">↓ JSON</span></div></div>
-    <div class="row-desc">Windows stops trying to sell you things.</div>
-    <div class="chips"><span class="chip">Spotlight off</span><span class="chip">Windows Tips off</span><span class="chip">chat icon off</span><span class="chip">cloud optimized content off</span><span class="chip">Bing web results off</span><span class="chip">cloud search off</span><span class="chip">news &amp; interests off</span><span class="chip">org messages</span></div>
+    <div class="row-top"><div class="row-title">✨ User Experience</div><div class="row-right"><span class="count">15 settings</span><span class="dl">↓ JSON</span></div></div>
+    <div class="row-desc">Windows stops trying to sell you things. Now also strips default Store packages, kills the advertising ID, and turns off Game DVR.</div>
+    <div class="chips"><span class="chip">Spotlight off</span><span class="chip">chat icon off</span><span class="chip">cloud optimized content off</span><span class="chip">Bing web results off</span><span class="chip">cloud search off</span><span class="chip">news &amp; interests off</span><span class="chip">Store bloat removed</span><span class="chip">Game DVR off</span><span class="chip">advertising ID off</span><span class="chip">+6 more</span></div>
+  </a>
+
+  <a href="Win-Policy-D-DisableCopilot.json" download class="row" style="--accent:#3fb950">
+    <div class="row-top"><div class="row-title">🤖 Disable Copilot</div><div class="row-right"><span class="count">2 settings</span><span class="dl">↓ JSON</span></div></div>
+    <div class="row-desc">Disables Copilot system wide. Copilot in Edge is left untouched.</div>
+    <div class="chips"><span class="chip">Copilot app removed</span><span class="chip">Windows Copilot off</span></div>
   </a>
 
 </div>
