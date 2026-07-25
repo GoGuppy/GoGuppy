@@ -48,6 +48,15 @@
   }
   .note { color: var(--dim); font-size: 12px; margin-top: 8px; }
   .footer { color: var(--dim); font-size: 12px; margin-top: 30px; }
+  .howto { margin-top: 34px; }
+  .howto ol { color: var(--dim); font-size: 12px; margin: 0 0 12px 18px; }
+  .howto li { padding: 2px 0; }
+  .howto code { color: var(--cyan); }
+  .howto pre {
+    background: #060606; border: 1px solid var(--rule); padding: 12px 14px;
+    font-family: var(--mono); font-size: 12px; line-height: 1.65;
+    color: var(--ink); overflow-x: auto;
+  }
 </style>
 </head>
 <body>
@@ -73,8 +82,27 @@
   <div class="output" id="output">
     <h3>Bundle downloaded</h3>
     <div>Manual import: settings catalog JSONs import at <b>Devices &gt; Configuration &gt; Create &gt; Import policy</b>. Everything else, build by hand from the JSON for now.</div>
-    <div class="note">Phase 2 deploy command (script coming later):</div>
+    <div class="note">Import the bundle with deploy-bundle.ps1:</div>
     <pre id="deployCmd"></pre>
+  </div>
+
+
+  <div class="howto">
+    <div class="sec-label">How to import</div>
+    <ol>
+      <li>Tick the policies you want, then click Generate Bundle.</li>
+      <li>Save the download as <code>C:\Source\bundle.json</code>.</li>
+      <li>First run only: <code>Install-Module Microsoft.Graph.Authentication -Scope CurrentUser</code></li>
+      <li>Run <code>deploy-bundle.ps1</code> from the <code>Intune GitHub</code> folder, or paste this:</li>
+    </ol>
+<pre># Creates Intune policies from a bundle file
+Connect-MgGraph -Scopes "DeviceManagementConfiguration.ReadWrite.All"
+$b = Get-Content C:\Source\bundle.json -Raw | ConvertFrom-Json
+foreach ($i in $b.items) {
+    $p = $i.content | Select-Object name, description, platforms, technologies, settings
+    Invoke-MgGraphRequest -Method POST -Uri "https://graph.microsoft.com/beta/deviceManagement/configurationPolicies" -Body ($p | ConvertTo-Json -Depth 100)
+}</pre>
+    <div class="note">Policies are created unassigned. Assign them in Devices, Configuration. Running twice creates duplicates.</div>
   </div>
 
   <div class="footer">JSONs are the source of truth. Edit them in the repo, then run <b>the Settings Catalog folder</b> to refresh this page.</div>
@@ -170,7 +198,7 @@ btnGen.onclick = () => {
   a.click();
   URL.revokeObjectURL(a.href);
   document.getElementById('deployCmd').textContent =
-    '.\\tools\\Deploy-Bundle.ps1 -BundlePath .\\' + fileName;
+    'Save ' + fileName + ' as C:\\Source\\bundle.json, then run .\\deploy-bundle.ps1';
 };
 
 render();
