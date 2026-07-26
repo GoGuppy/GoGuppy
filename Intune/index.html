@@ -296,11 +296,16 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   </a>
 
   <div class="sec-label">Detection Only</div>
-  <div class="out">total 1 | reports state, changes nothing, no remediation script</div>
+  <div class="out">total 2 | reports state, changes nothing, no remediation script</div>
 
   <a class="row" href="teams_version_detect.html">
     <span class="icon">💬</span><span class="name">Detect Teams Version Installed</span>
     <span class="desc">Reports New Teams, Classic Teams, and the machine wide installer. Classic uses far more memory.</span>
+  </a>
+
+  <a class="row" href="primary_user_mismatch.html">
+    <span class="icon">👤</span><span class="name">Detect Primary User Mismatch</span>
+    <span class="desc">Flags devices where the enrolled user is not the person actually using them. Wrong primary user breaks user targeted policy and app assignment.</span>
   </a>
 
 </div>
