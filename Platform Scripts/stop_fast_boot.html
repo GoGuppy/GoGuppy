@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoGuppy</title>
+<title>GoGuppy · Stop Fast Boot</title>
 <style>
 /* GoGuppy shared styles */
 
@@ -243,48 +243,76 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 <div class="wrap">
 
   <div class="topbar">
-    <span>goguppy.com</span>
-    <span>rev 2026.07</span>
+    <a href="../index.html">goguppy.com</a>
+    <a href="index.html">&larr; platform scripts</a>
   </div>
 
-<div class="banner">  ____        ____
- / ___| ___  / ___|_   _ _ __  _ __  _   _
-| |  _ / _ \| |  _| | | | '_ \| '_ \| | | |
-| |_| | (_) | |_| | |_| | |_) | |_) | |_| |
- \____|\___/ \____|\__,_| .__/| .__/ \__, |
-                        |_|   |_|    |___/</div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="index.html">Platform Scripts</a> &rsaquo; Stop Fast Boot</div>
+  <h1>⚡ Stop Fast Boot</h1>
+  <div class="subtitle">Intune Platform Script &middot; Disables fast startup so shutdown is a real shutdown</div>
 
-  <div class="tagline"><span class="hl">Platform scripts, Remediations, Settings Catalog policies and other Stuff</span></div>
-
-  <div class="sec-label">Sections</div>
-  <div class="out">5 sections | 5 remediations | 1 platform script | 17 policies</div>
-
-  <a class="row" href="Intune/index.html">
-    <span class="icon">🔄</span><span class="name">Remediations</span>
-    <span class="desc">Detection and remediation script pairs.</span>
-  </a>
-
-  <a class="row" href="Platform Scripts/index.html">
-    <span class="icon">📜</span><span class="name">Platform Scripts</span>
-    <span class="desc">Scripts that run once per device at enrollment.</span>
-  </a>
-
-  <div class="row empty">
-    <span class="icon">📦</span><span class="name">Win32 Apps</span>
-    <span class="desc">Nothing here yet.</span>
+  <div class="warning-box">
+    Cold boot gets a few seconds slower. Noticeable on spinning disks, barely measurable on NVMe.
+    Laptops using Modern Standby never used fast startup anyway, so this is a no op there.
   </div>
 
-  <a class="row" href="Settings Catalog/index.html">
-    <span class="icon">⚙️</span><span class="name">Settings Catalog</span>
-    <span class="desc">Policy JSON ready to import.</span>
-  </a>
+  <div class="info-box">
+    Fixes the Auto Reboot remediation. With fast startup on, a shutdown only hibernates the kernel and
+    LastBootUpTime is never updated, so someone who shuts down nightly still reports weeks of uptime and
+    gets rebooted anyway. Turn this off and uptime tells the truth.
+  </div>
 
-  <a class="row" href="Intune GitHub/builder/index.html">
-    <span class="icon">🧰</span><span class="name">Deployment Kit</span>
-    <span class="desc">Pick policies, generate one combined bundle JSON.</span>
-  </a>
+  <div class="section-label">Script</div>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="step">1</div>
+      <div class="card-info">
+        <div class="card-title">Set HiberbootEnabled to 0 <span class="tag tag-yellow">platform script</span></div>
+        <div class="card-desc">Idempotent, safe to rerun. Takes effect at the next shutdown. Does not disable
+        hibernate itself, hiberfil.sys stays. That would be powercfg /h off.</div>
+      </div>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="sscript"># Disables fast startup so shutdown is a real shutdown.
+Set-ItemProperty &quot;HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power&quot; HiberbootEnabled 0</div>
+      <button class="copy-btn" onclick="copyScript(this,'sscript')">copy</button>
+    </div>
+  </details>
+
+  <div class="section-label">Intune Platform Script Settings</div>
+
+  <div class="settings-panel">
+    <div class="settings-row">
+      <span class="settings-key">Run this script using the logged on credentials</span>
+      <span class="badge badge-no">No</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Enforce script signature check</span>
+      <span class="badge badge-no">No</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Run script in 64-bit PowerShell host</span>
+      <span class="badge badge-yes">Yes</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Runs</span>
+      <span class="badge badge-no">Once per device</span>
+    </div>
+  </div>
 
 </div>
 
+<script>
+function copyScript(btn, id) {
+  const code = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = '\u2713 copied';
+    btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('done'); }, 1600);
+  });
+}
+</script>
 </body>
 </html>
