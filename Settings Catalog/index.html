@@ -309,11 +309,6 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
     <span class="desc">Keeps device time synced over NTP while leaving timezone user changeable.</span>
   </a>
 
-  <a class="row" href="Win-Policy-D-EdgeAutoLogon.json" download>
-    <span class="icon">🌐</span><span class="name">Edge Auto Logon</span>
-    <span class="desc">Forces the work profile and controls what syncs.</span>
-  </a>
-
   <a class="row" href="Win-Policy-D-OneDriveSettings.json" download>
     <span class="icon">☁️</span><span class="name">OneDrive Settings</span>
     <span class="desc">Auto start, silent sign-in, tenant locked, silent KFM with opt-out blocked, Files On-Demand. The tenant ID is a placeholder of all zeros in three places. Replace it or KFM and the tenant allow list will not work.</span>
@@ -333,7 +328,13 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
     <span class="icon">📵</span><span class="name">Disable Phone Link</span>
     <span class="desc">Blocks phone to PC linking.</span>
   </a>
+  <div class="sub">Browser</div>
+  <div class="sub-desc">Edge and Chrome profile, sync, and memory behaviour.</div>
 
+  <a class="row" href="Win-Policy-D-EdgeAutoLogon.json" download>
+    <span class="icon">🌐</span><span class="name">Edge Auto Logon</span>
+    <span class="desc">Forces the work profile and controls what syncs.</span>
+  </a>
 
   <a class="row" href="Win-Policy-D-EdgeMemoryOptimization.json" download>
     <span class="icon">⚡</span><span class="name">Edge Memory Optimization</span>
