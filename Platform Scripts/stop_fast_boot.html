@@ -236,14 +236,21 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   }
   .row .desc { grid-column: 2; }
 }
+
+.topbar .home { display: inline-flex; align-items: center; gap: 9px; color: var(--dim); text-decoration: none; }
+.topbar .home:hover { color: var(--violet); }
+.topbar .mark { flex: 0 0 auto; display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
 </style>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="../assets/guppy-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
 </head>
 <body>
 
 <div class="wrap">
 
   <div class="topbar">
-    <a href="../index.html">goguppy.com</a>
+    <a class="home" href="../index.html"><img class="mark" src="../assets/guppy-icon@2x.png" alt=""><span>goguppy.com</span></a>
     <a href="index.html">&larr; platform scripts</a>
   </div>
 
