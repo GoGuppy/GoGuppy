@@ -265,42 +265,42 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 
   <a class="row" href="Win-Policy-D-Bitlocker.json" download>
     <span class="icon">🔐</span><span class="name">BitLocker</span>
-    <span class="desc">Encrypts OS and fixed drives silently and escrows the recovery key to Entra ID.</span>
+    <span class="desc">Encrypts OS and fixed drives silently and escrows the recovery key to Entra ID. System based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-LAPS.json" download>
     <span class="icon">🗝️</span><span class="name">LAPS</span>
-    <span class="desc">Rotates and escrows the built-in Administrator password to Entra ID.</span>
+    <span class="desc">Rotates and escrows the built-in Administrator password to Entra ID. System based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-AdvancedPhishingProtection.json" download>
     <span class="icon">🎣</span><span class="name">Advanced Phishing Protection</span>
-    <span class="desc">SmartScreen alerts when users type or store work credentials unsafely.</span>
+    <span class="desc">SmartScreen alerts when users type or store work credentials unsafely. System based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-DisableWinR.json" download>
     <span class="icon">⌨️</span><span class="name">Disable Win+R</span>
-    <span class="desc">Blocks the Run dialog, killing ClickFix and paste and run attacks.</span>
+    <span class="desc">Blocks the Run dialog, killing ClickFix and paste and run attacks. System based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-ScriptFileAssociations.json" download>
     <span class="icon">📜</span><span class="name">Script File Associations</span>
-    <span class="desc">Script files open in Notepad instead of executing on double click.</span>
+    <span class="desc">Script files open in Notepad instead of executing on double click. System based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-EndpointSecurity.json" download>
     <span class="icon">🛡️</span><span class="name">Endpoint Security Baseline</span>
-    <span class="desc">Core account, UAC, and device protections. Enables the built-in Administrator on purpose so LAPS can manage it.</span>
+    <span class="desc">Core account, UAC, and device protections. Enables the built-in Administrator on purpose so LAPS can manage it. System based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-DisableInsecureProtocols.json" download>
     <span class="icon">🚫</span><span class="name">Disable Insecure Protocols</span>
-    <span class="desc">Turns off legacy authentication and file sharing protocols.</span>
+    <span class="desc">Turns off legacy authentication and file sharing protocols. System based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-LockScreen.json" download>
     <span class="icon">🔒</span><span class="name">Lock Screen</span>
-    <span class="desc">Restricts what is reachable above the lock screen and sets idle timeouts.</span>
+    <span class="desc">Restricts what is reachable above the lock screen and sets idle timeouts. System based.</span>
   </a>
 
   <div class="sub">Device Experience</div>
@@ -308,49 +308,49 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 
   <a class="row" href="Win-Policy-D-AutoTimezone.json" download>
     <span class="icon">🌍</span><span class="name">Auto Timezone</span>
-    <span class="desc">Keeps device time synced over NTP while leaving timezone user changeable.</span>
+    <span class="desc">Keeps device time synced over NTP while leaving timezone user changeable. System based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-OneDriveSettings.json" download>
     <span class="icon">☁️</span><span class="name">OneDrive Settings</span>
-    <span class="desc">Auto start, silent sign-in, tenant locked, silent KFM with opt-out blocked, Files On-Demand. The tenant ID is a placeholder of all zeros in three places. Replace it or KFM and the tenant allow list will not work.</span>
+    <span class="desc">Auto start, silent sign-in, tenant locked, silent KFM with opt-out blocked, Files On-Demand. The tenant ID is a placeholder of all zeros in three places. Replace it or KFM and the tenant allow list will not work. System and user based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-UserExperience.json" download>
     <span class="icon">✨</span><span class="name">User Experience</span>
-    <span class="desc">Strips Microsoft promotional content, Store bloat, and suggestion features.</span>
+    <span class="desc">Strips Microsoft promotional content, Store bloat, and suggestion features. System and user based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-DisableCopilot.json" download>
     <span class="icon">🤖</span><span class="name">Disable Copilot</span>
-    <span class="desc">Disables Windows Copilot. Edge Copilot untouched.</span>
+    <span class="desc">Disables Windows Copilot. Edge Copilot untouched. System and user based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-DisablePhoneLink.json" download>
     <span class="icon">📵</span><span class="name">Disable Phone Link</span>
-    <span class="desc">Blocks phone to PC linking.</span>
+    <span class="desc">Blocks phone to PC linking. System based.</span>
   </a>
   <div class="sub">Browser</div>
   <div class="sub-desc">Edge and Chrome profile, sync, and memory behaviour.</div>
 
   <a class="row" href="Win-Policy-D-EdgeAutoLogon.json" download>
     <span class="icon">🌐</span><span class="name">Edge Auto Logon</span>
-    <span class="desc">Forces the work profile and controls what syncs.</span>
+    <span class="desc">Forces the work profile and controls what syncs. User based.</span>
   </a>
 
   <a class="row" href="Win-Policy-U-DisableEdgePasswordManager.json" download>
     <span class="icon">🔑</span><span class="name">Disable Edge Password Manager</span>
-    <span class="desc">Per user. Disables new passwords saving in Edge for users with 3rd party password managers. Existing stored credentials stay until deleted.</span>
+    <span class="desc">Disables new passwords saving in Edge for users with 3rd party password managers. Existing stored credentials stay until deleted. User based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-EdgeMemoryOptimization.json" download>
     <span class="icon">⚡</span><span class="name">Edge Memory Optimization</span>
-    <span class="desc">Disables startup boost and turns on sleeping tabs so idle tabs release memory.</span>
+    <span class="desc">Disables startup boost and turns on sleeping tabs so idle tabs release memory. System based.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-ChromeMemoryOptimization.json" download>
     <span class="icon">🧠</span><span class="name">Chrome Memory Optimization</span>
-    <span class="desc">Turns on memory saver so Chrome releases memory from idle tabs.</span>
+    <span class="desc">Turns on memory saver so Chrome releases memory from idle tabs. System based.</span>
   </a>
 
 </div>
