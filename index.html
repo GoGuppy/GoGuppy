@@ -237,9 +237,17 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   .row .desc { grid-column: 2; }
 }
 
-.topbar .home { display: inline-flex; align-items: center; gap: 9px; color: var(--dim); text-decoration: none; }
-.topbar .home:hover { color: var(--violet); }
-.topbar .mark { flex: 0 0 auto; display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+/* home hero */
+.hero { display: flex; align-items: center; gap: 26px; padding: 32px 0 16px; flex-wrap: wrap; }
+.hero .face { width: 128px; height: 128px; border-radius: 50%; flex: 0 0 auto; }
+.hero .wordmark { font-size: 52px; line-height: 1; letter-spacing: -.02em; }
+.hero .wordmark .go { color: var(--dim); }
+.hero .wordmark .gup { color: var(--violet); }
+@media (max-width: 620px) {
+  .hero { gap: 18px; }
+  .hero .face { width: 92px; height: 92px; }
+  .hero .wordmark { font-size: 36px; }
+}
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="128x128" href="assets/guppy-icon.png">
@@ -250,16 +258,14 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 <div class="wrap">
 
   <div class="topbar">
-    <a class="home" href="index.html"><img class="mark" src="assets/guppy-icon@2x.png" alt=""><span>goguppy.com</span></a>
+    <span>goguppy.com</span>
     <span>rev 2026.07</span>
   </div>
 
-<div class="banner">  ____        ____
- / ___| ___  / ___|_   _ _ __  _ __  _   _
-| |  _ / _ \| |  _| | | | '_ \| '_ \| | | |
-| |_| | (_) | |_| | |_| | |_) | |_) | |_| |
- \____|\___/ \____|\__,_| .__/| .__/ \__, |
-                        |_|   |_|    |___/</div>
+<div class="hero">
+    <img class="face" src="assets/guppy-icon@2x.png" alt="Guppy">
+    <div class="wordmark"><span class="go">Go</span><span class="gup">Guppy</span></div>
+  </div>
 
   <div class="tagline"><span class="hl">Platform scripts, Remediations, Settings Catalog policies and other Stuff</span></div>
 
