@@ -400,7 +400,7 @@
                                             "simpleSettingValue": {
                                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                                 "settingValueTemplateReference": null,
-                                                "value": "Gup"
+                                                "value": "ORG"
                                             }
                                         }
                                     ]
