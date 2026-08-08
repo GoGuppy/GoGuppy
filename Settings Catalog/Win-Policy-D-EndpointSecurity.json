@@ -2,7 +2,7 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-07-11T00:39:35.2174073Z",
     "creationSource": null,
-    "description": "",
+    "description": "Windows security options hardening. UAC, anonymous SAM access, autoplay, remote assistance, DMA, WiFi Sense.",
     "lastModifiedDateTime": "2026-07-21T02:53:37.0496035Z",
     "name": "Win-Policy-D-EndpointSecurity",
     "platforms": "windows10",
@@ -10,7 +10,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 31,
+    "settingCount": 33,
     "technologies": "mdm",
     "id": "e10ae64a-01ba-431d-8657-de064448bcbc",
     "templateReference": {
@@ -214,7 +214,7 @@
                             "auditRuleInformation": null,
                             "choiceSettingValue": {
                                 "settingValueTemplateReference": null,
-                                "value": "device_vendor_msft_policy_config_autoplay_turnoffautoplay_autorun_box_181",
+                                "value": "device_vendor_msft_policy_config_autoplay_turnoffautoplay_autorun_box_255",
                                 "children": []
                             }
                         }
@@ -498,6 +498,34 @@
                 "choiceSettingValue": {
                     "settingValueTemplateReference": null,
                     "value": "device_vendor_msft_policy_config_wifi_allowinternetsharing_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "31",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforadministrators",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforadministrators_2",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "32",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforstandardusers",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforstandardusers_0",
                     "children": []
                 }
             }
