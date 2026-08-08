@@ -1,1 +1,156 @@
-﻿{"@odata.context":"https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity","createdDateTime":"2026-07-06T00:55:44.6478451Z","creationSource":null,"description":"Automatically detects timezone via location services and updates device accordingly","lastModifiedDateTime":"2026-07-06T01:02:14.4012864Z","name":"Win-Policy-D-AutoTimezone","platforms":"windows10","priorityMetaData":null,"roleScopeTagIds":["0"],"settingCount":3,"technologies":"mdm","id":"34622646-90a1-494c-96a7-c9ad0c313b3b","templateReference":{"templateId":"","templateFamily":"none","templateDisplayName":null,"templateDisplayVersion":null},"settings":[{"id":"0","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_1","children":[{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_crosssitesyncflags","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingValue":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationIntegerSettingValue","settingValueTemplateReference":null,"value":2}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_ntpclienteventlogflags","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingValue":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationIntegerSettingValue","settingValueTemplateReference":null,"value":3}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_ntpserver","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingValue":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationStringSettingValue","settingValueTemplateReference":null,"value":"time.windows.com"}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_resolvepeerbackoffmaxtimes","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingValue":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationIntegerSettingValue","settingValueTemplateReference":null,"value":7}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_resolvepeerbackoffminutes","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingValue":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationIntegerSettingValue","settingValueTemplateReference":null,"value":15}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_specialpollinterval","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingValue":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationIntegerSettingValue","settingValueTemplateReference":null,"value":1024}},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_type","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_type_allsync","children":[]}}]}}},{"id":"1","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_enable_ntpclient","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_admx_w32time_w32time_policy_enable_ntpclient_1","children":[]}}},{"id":"2","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance","settingDefinitionId":"device_vendor_msft_policy_config_userrights_changetimezone","settingInstanceTemplateReference":null,"auditRuleInformation":null,"simpleSettingCollectionValue":[{"@odata.type":"#microsoft.graph.deviceManagementConfigurationStringSettingValue","settingValueTemplateReference":null,"value":"*S-1-5-19"},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationStringSettingValue","settingValueTemplateReference":null,"value":"*S-1-5-32-544"},{"@odata.type":"#microsoft.graph.deviceManagementConfigurationStringSettingValue","settingValueTemplateReference":null,"value":"*S-1-5-32-545"}]}}]}
+﻿{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
+    "createdDateTime": "2026-07-06T00:55:44.6478451Z",
+    "creationSource": null,
+    "description": "Automatically detects timezone via location services and updates device accordingly",
+    "lastModifiedDateTime": "2026-07-06T01:02:14.4012864Z",
+    "name": "Win-Policy-D-AutoTimezone",
+    "platforms": "windows10",
+    "priorityMetaData": null,
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 3,
+    "technologies": "mdm",
+    "id": "34622646-90a1-494c-96a7-c9ad0c313b3b",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_1",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_crosssitesyncflags",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "simpleSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": 2
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_ntpclienteventlogflags",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "simpleSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": 3
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_ntpserver",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "simpleSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": "time.windows.com"
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_resolvepeerbackoffmaxtimes",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "simpleSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": 7
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_resolvepeerbackoffminutes",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "simpleSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": 15
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_specialpollinterval",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "simpleSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": 1024
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_type",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_configure_ntpclient_w32time_type_allsync",
+                                "children": []
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_enable_ntpclient",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_enable_ntpclient_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "2",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_userrights_changetimezone",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "simpleSettingCollectionValue": [
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "*S-1-5-19"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "*S-1-5-32-544"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "*S-1-5-32-545"
+                    }
+                ]
+            }
+        }
+    ]
+}

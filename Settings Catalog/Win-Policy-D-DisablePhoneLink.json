@@ -1,1 +1,38 @@
-﻿{"@odata.context":"https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity","createdDateTime":"2026-07-10T17:39:21.4575391Z","creationSource":null,"description":"Helps prevent data exfiltration to personal phones by disabling phone link","lastModifiedDateTime":"2026-07-10T17:39:21.4575391Z","name":"Win-Policy-D-DisablePhoneLink","platforms":"windows10","priorityMetaData":null,"roleScopeTagIds":["0"],"settingCount":1,"technologies":"mdm","id":"068deb33-db0a-47fa-b09f-3f2d064fb31a","templateReference":{"templateId":"","templateFamily":"none","templateDisplayName":null,"templateDisplayVersion":null},"settings":[{"id":"0","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_connectivity_allowphonepclinking","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_connectivity_allowphonepclinking_0","children":[]}}}]}
+﻿{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
+    "createdDateTime": "2026-07-25T15:59:09.3699636Z",
+    "creationSource": null,
+    "description": "Helps prevent data exfiltration to personal phones by disabling phone link",
+    "lastModifiedDateTime": "2026-07-25T15:59:09.3699636Z",
+    "name": "Win-Policy-D-DisablePhoneLink",
+    "platforms": "windows10",
+    "priorityMetaData": null,
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 1,
+    "technologies": "mdm",
+    "id": "743f7bc5-cc31-40a3-bec7-3dc6e50f3d64",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_connectivity_allowphonepclinking",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_connectivity_allowphonepclinking_0",
+                    "children": []
+                }
+            }
+        }
+    ]
+}

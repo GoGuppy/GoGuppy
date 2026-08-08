@@ -1,1 +1,64 @@
-﻿{"@odata.context":"https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity","createdDateTime":"2026-07-26T02:45:37.8724701Z","creationSource":null,"description":"","lastModifiedDateTime":"2026-07-26T02:45:37.8724701Z","name":"Win-Policy-D-ChromeMemoryOptimization","platforms":"windows10","priorityMetaData":null,"roleScopeTagIds":["0"],"settingCount":2,"technologies":"mdm","id":"711a0fd9-e139-4892-a143-a01e6a5f16ec","templateReference":{"templateId":"","templateFamily":"none","templateDisplayName":null,"templateDisplayVersion":null},"settings":[{"id":"0","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_memorysavermodesavings","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_memorysavermodesavings_1","children":[{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_memorysavermodesavings_memorysavermodesavings","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_memorysavermodesavings_memorysavermodesavings_0","children":[]}}]}}},{"id":"1","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_highefficiencymodeenabled","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_highefficiencymodeenabled_1","children":[]}}}]}
+﻿{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
+    "createdDateTime": "2026-07-26T02:45:37.8724701Z",
+    "creationSource": null,
+    "description": "",
+    "lastModifiedDateTime": "2026-07-26T02:45:37.8724701Z",
+    "name": "Win-Policy-D-ChromeMemoryOptimization",
+    "platforms": "windows10",
+    "priorityMetaData": null,
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 2,
+    "technologies": "mdm",
+    "id": "711a0fd9-e139-4892-a143-a01e6a5f16ec",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_memorysavermodesavings",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_memorysavermodesavings_1",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_memorysavermodesavings_memorysavermodesavings",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "choiceSettingValue": {
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_memorysavermodesavings_memorysavermodesavings_0",
+                                "children": []
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_highefficiencymodeenabled",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_chromeintunev141~policy~googlechrome_highefficiencymodeenabled_1",
+                    "children": []
+                }
+            }
+        }
+    ]
+}

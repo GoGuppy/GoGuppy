@@ -1,1 +1,52 @@
-﻿{"@odata.context":"https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity","createdDateTime":"2026-07-24T23:15:32.0604264Z","creationSource":null,"description":"Disables Copilot system wide - Copilot in Edge left untouched","lastModifiedDateTime":"2026-07-24T23:15:32.0604264Z","name":"Win-Policy-D-DisableCopilot","platforms":"windows10","priorityMetaData":null,"roleScopeTagIds":["0"],"settingCount":2,"technologies":"mdm","id":"09f8a86d-7ad9-4f12-8c5b-0f0f5bdec13d","templateReference":{"templateId":"","templateFamily":"none","templateDisplayName":null,"templateDisplayVersion":null},"settings":[{"id":"0","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"device_vendor_msft_policy_config_windowsai_removemicrosoftcopilotapp","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"device_vendor_msft_policy_config_windowsai_removemicrosoftcopilotapp_1","children":[]}}},{"id":"1","settingInstance":{"@odata.type":"#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance","settingDefinitionId":"user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot","settingInstanceTemplateReference":null,"auditRuleInformation":null,"choiceSettingValue":{"settingValueTemplateReference":null,"value":"user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot_1","children":[]}}}]}
+﻿{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
+    "createdDateTime": "2026-07-24T23:15:32.0604264Z",
+    "creationSource": null,
+    "description": "Disables Copilot system wide - Copilot in Edge left untouched",
+    "lastModifiedDateTime": "2026-07-29T21:09:16.2924639Z",
+    "name": "Win-Policy-D-DisableCopilot",
+    "platforms": "windows10",
+    "priorityMetaData": null,
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 2,
+    "technologies": "mdm",
+    "id": "09f8a86d-7ad9-4f12-8c5b-0f0f5bdec13d",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_removemicrosoftcopilotapp",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_windowsai_removemicrosoftcopilotapp_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot_0",
+                    "children": []
+                }
+            }
+        }
+    ]
+}
