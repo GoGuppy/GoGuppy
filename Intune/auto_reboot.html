@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Auto Reboot &middot; Intune &middot; GoGuppy</title>
+<title>Reboot Reminder &middot; Intune &middot; GoGuppy</title>
 <style>
 /* GoGuppy shared styles */
 
@@ -254,12 +254,12 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
     <a href="index.html">&larr; scripts and remediations</a>
   </div>
 
-  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="index.html">Intune</a> &rsaquo; Auto Reboot</div>
-  <h1>🔄 Auto Reboot</h1>
-  <div class="subtitle">Intune Remediation &middot; Reboots devices with uptime over 10 days</div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="index.html">Intune</a> &rsaquo; Reboot Reminder</div>
+  <h1>🔄 Reboot Reminder</h1>
+  <div class="subtitle">Intune Remediation &middot; Prompts the user when uptime hits 7 days</div>
 
   <div class="warning-box">
-    Test in a pilot group before you point this at the fleet. Detection exits 1 to trigger remediation, 0 to stay put.
+    Nothing reboots on its own. The user gets a popup and reboots on their own schedule, so nobody loses work. Detection exits 1 to trigger remediation, 0 to stay put.
   </div>
 
   <div class="section-label">Detection Script</div>
@@ -268,22 +268,14 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
     <summary class="card-top">
       <div class="step">D</div>
       <div class="card-info">
-        <div class="card-title">Detect uptime over 10 days <span class="tag tag-yellow">detection</span></div>
+        <div class="card-title">Detect uptime of 7 days or more <span class="tag tag-yellow">detection</span></div>
         <div class="card-desc">Exits 1 (non-compliant) to trigger remediation. Exits 0 if clean.</div>
       </div>
       <span class="chevron">›</span>
     </summary>
     <div class="code-wrap">
-      <div class="code-block" id="sdetect"># Flags devices up for 10 days or more.
-$days = (New-TimeSpan -Start (Get-CimInstance Win32_OperatingSystem).LastBootUpTime).Days
-
-if ($days -ge 10) {
-    Write-Output &quot;Non-compliant: up $days days&quot;
-    exit 1
-}
-
-Write-Output &quot;Compliant: up $days days&quot;
-exit 0</div>
+      <div class="code-block" id="sdetect">$up = (Get-Date) - (Get-CimInstance Win32_OperatingSystem).LastBootUpTime
+if ($up.Days -ge 7) { exit 1 } else { exit 0 }</div>
       <button class="copy-btn" onclick="copyScript(this,'sdetect')">copy</button>
     </div>
   </details>
@@ -294,24 +286,28 @@ exit 0</div>
     <summary class="card-top">
       <div class="step">R</div>
       <div class="card-info">
-        <div class="card-title">Warn user, reboot in 15 minutes <span class="tag tag-red">remediation</span></div>
-        <div class="card-desc">Runs only when detection exits 1.</div>
+        <div class="card-title">Pop up a reboot reminder <span class="tag tag-red">remediation</span></div>
+        <div class="card-desc">Runs only when detection exits 1. Nothing is forced, the user reboots when ready.</div>
       </div>
       <span class="chevron">›</span>
     </summary>
     <div class="code-wrap">
-      <div class="code-block" id="sremediate"># Warns the user, then reboots in 15 minutes.
-shutdown.exe /r /t 900 /c 'Maintenance reboot in 15 minutes. Save your work.'</div>
+      <div class="code-block" id="sremediate">(New-Object -ComObject Wscript.Shell).Popup(&quot;Your device needs a reboot. Please make sure everything is saved and reboot at your earliest convenience.&quot;, 900, &quot;Reboot required&quot;, 0+48) &gt; $null
+exit 0</div>
       <button class="copy-btn" onclick="copyScript(this,'sremediate')">copy</button>
     </div>
   </details>
+
+  <div class="info-box">
+    The popup dismisses itself after 15 minutes if nobody clicks OK. Detection keeps flagging the device on every run until it actually reboots, so the reminder comes back daily.
+  </div>
 
   <div class="section-label">Intune Remediation Settings</div>
 
   <div class="settings-panel">
     <div class="settings-row">
       <span class="settings-key">Run this script using the logged on credentials</span>
-      <span class="badge badge-no">No</span>
+      <span class="badge badge-yes">Yes</span>
     </div>
     <div class="settings-row">
       <span class="settings-key">Enforce script signature check</span>
