@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26",
+  "generated": "2026-08-09",
   "sections": [
     {
       "id": "settings-catalog",
@@ -56,7 +56,7 @@
                   "auditRuleInformation": null,
                   "choiceSettingValue": {
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_webthreatdefense_notifypasswordreuse_1",
+                    "value": "device_vendor_msft_policy_config_webthreatdefense_notifypasswordreuse_0",
                     "children": []
                   }
                 }
@@ -586,7 +586,7 @@
             "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
             "createdDateTime": "2026-07-26T02:45:37.8724701Z",
             "creationSource": null,
-            "description": "",
+            "description": "Turns on memory saver so Chrome releases memory from idle tabs.",
             "lastModifiedDateTime": "2026-07-26T02:45:37.8724701Z",
             "name": "Win-Policy-D-ChromeMemoryOptimization",
             "platforms": "windows10",
@@ -658,7 +658,7 @@
             "createdDateTime": "2026-07-24T23:15:32.0604264Z",
             "creationSource": null,
             "description": "Disables Copilot system wide - Copilot in Edge left untouched",
-            "lastModifiedDateTime": "2026-07-24T23:15:32.0604264Z",
+            "lastModifiedDateTime": "2026-07-29T21:09:16.2924639Z",
             "name": "Win-Policy-D-DisableCopilot",
             "platforms": "windows10",
             "priorityMetaData": null,
@@ -698,7 +698,7 @@
                   "auditRuleInformation": null,
                   "choiceSettingValue": {
                     "settingValueTemplateReference": null,
-                    "value": "user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot_1",
+                    "value": "user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot_0",
                     "children": []
                   }
                 }
@@ -1356,10 +1356,10 @@
           "file": "../Settings Catalog/Win-Policy-D-DisablePhoneLink.json",
           "content": {
             "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
-            "createdDateTime": "2026-07-10T17:39:21.4575391Z",
+            "createdDateTime": "2026-07-25T15:59:09.3699636Z",
             "creationSource": null,
             "description": "Helps prevent data exfiltration to personal phones by disabling phone link",
-            "lastModifiedDateTime": "2026-07-10T17:39:21.4575391Z",
+            "lastModifiedDateTime": "2026-07-25T15:59:09.3699636Z",
             "name": "Win-Policy-D-DisablePhoneLink",
             "platforms": "windows10",
             "priorityMetaData": null,
@@ -1368,7 +1368,7 @@
             ],
             "settingCount": 1,
             "technologies": "mdm",
-            "id": "068deb33-db0a-47fa-b09f-3f2d064fb31a",
+            "id": "743f7bc5-cc31-40a3-bec7-3dc6e50f3d64",
             "templateReference": {
               "templateId": "",
               "templateFamily": "none",
@@ -1533,7 +1533,7 @@
             "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
             "createdDateTime": "2026-07-11T00:39:35.2174073Z",
             "creationSource": null,
-            "description": "",
+            "description": "Windows security options hardening. UAC, anonymous SAM access, autoplay, remote assistance, DMA, WiFi Sense.",
             "lastModifiedDateTime": "2026-07-21T02:53:37.0496035Z",
             "name": "Win-Policy-D-EndpointSecurity",
             "platforms": "windows10",
@@ -1541,7 +1541,7 @@
             "roleScopeTagIds": [
               "0"
             ],
-            "settingCount": 31,
+            "settingCount": 33,
             "technologies": "mdm",
             "id": "e10ae64a-01ba-431d-8657-de064448bcbc",
             "templateReference": {
@@ -1696,7 +1696,7 @@
                   "auditRuleInformation": null,
                   "choiceSettingValue": {
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_autoplay_disallowautoplayfornonvolumedevices_1",
+                    "value": "device_vendor_msft_policy_config_autoplay_disallowautoplayfornonvolumedevices_0",
                     "children": []
                   }
                 }
@@ -1745,7 +1745,7 @@
                         "auditRuleInformation": null,
                         "choiceSettingValue": {
                           "settingValueTemplateReference": null,
-                          "value": "device_vendor_msft_policy_config_autoplay_turnoffautoplay_autorun_box_181",
+                          "value": "device_vendor_msft_policy_config_autoplay_turnoffautoplay_autorun_box_255",
                           "children": []
                         }
                       }
@@ -2029,6 +2029,34 @@
                   "choiceSettingValue": {
                     "settingValueTemplateReference": null,
                     "value": "device_vendor_msft_policy_config_wifi_allowinternetsharing_0",
+                    "children": []
+                  }
+                }
+              },
+              {
+                "id": "31",
+                "settingInstance": {
+                  "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                  "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforadministrators",
+                  "settingInstanceTemplateReference": null,
+                  "auditRuleInformation": null,
+                  "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforadministrators_2",
+                    "children": []
+                  }
+                }
+              },
+              {
+                "id": "32",
+                "settingInstance": {
+                  "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                  "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforstandardusers",
+                  "settingInstanceTemplateReference": null,
+                  "auditRuleInformation": null,
+                  "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforstandardusers_0",
                     "children": []
                   }
                 }
@@ -2336,7 +2364,7 @@
                   "auditRuleInformation": null,
                   "choiceSettingValue": {
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal_1",
+                    "value": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal_0",
                     "children": []
                   }
                 }
@@ -2401,22 +2429,22 @@
         {
           "id": "sc-win-policy-d-onedrivesettings",
           "name": "Win-Policy-D-OneDriveSettings",
-          "description": "OneDrive auto launches at sign-in with KFM enforced, tenant restricted sync, and extension exclusions for suspicious, clutter or sync failure prone file types.",
+          "description": "Silent account configuration and auto start at sign-in with no user prompts, first run tutorial and new account detection suppressed. Known Folder Move redirects Desktop, Documents and Pictures with opt-out blocked, Files On-Demand enabled, sync restricted to the tenant, personal accounts blocked, mass delete detection forced, and extensions that are suspicious, clutter prone or likely to break sync are excluded. Sync root folder renamed to ORG to shorten file paths; new deployments only, remove this setting for existing clients since renaming the sync root changes every local path and can break shortcuts, mapped drives and linked files.",
           "type": "configurationPolicy",
           "file": "../Settings Catalog/Win-Policy-D-OneDriveSettings.json",
           "content": {
             "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
             "createdDateTime": "2026-07-09T22:56:00.2651622Z",
             "creationSource": null,
-            "description": "OneDrive auto launches at sign-in with KFM enforced, tenant restricted sync, and extension exclusions for suspicious, clutter or sync failure prone file types.",
-            "lastModifiedDateTime": "2026-07-12T22:08:11.8008868Z",
+            "description": "Silent account configuration and auto start at sign-in with no user prompts, first run tutorial and new account detection suppressed. Known Folder Move redirects Desktop, Documents and Pictures with opt-out blocked, Files On-Demand enabled, sync restricted to the tenant, personal accounts blocked, mass delete detection forced, and extensions that are suspicious, clutter prone or likely to break sync are excluded. Sync root folder renamed to ORG to shorten file paths; new deployments only, remove this setting for existing clients since renaming the sync root changes every local path and can break shortcuts, mapped drives and linked files.",
+            "lastModifiedDateTime": "2026-08-08T19:19:44.8540818Z",
             "name": "Win-Policy-D-OneDriveSettings",
             "platforms": "windows10",
             "priorityMetaData": null,
             "roleScopeTagIds": [
               "0"
             ],
-            "settingCount": 15,
+            "settingCount": 19,
             "technologies": "mdm",
             "id": "545ddf2e-af8d-45e0-a7cf-ef2624fb93fa",
             "templateReference": {
@@ -2486,6 +2514,34 @@
                 "id": "3",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                  "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablepauseonbatterysaver",
+                  "settingInstanceTemplateReference": null,
+                  "auditRuleInformation": null,
+                  "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablepauseonbatterysaver_1",
+                    "children": []
+                  }
+                }
+              },
+              {
+                "id": "4",
+                "settingInstance": {
+                  "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                  "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv7~policy~onedrivengsc_disablenewaccountdetection",
+                  "settingInstanceTemplateReference": null,
+                  "auditRuleInformation": null,
+                  "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_onedrivengscv7~policy~onedrivengsc_disablenewaccountdetection_1",
+                    "children": []
+                  }
+                }
+              },
+              {
+                "id": "5",
+                "settingInstance": {
+                  "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablefretutorial",
                   "settingInstanceTemplateReference": null,
                   "auditRuleInformation": null,
@@ -2497,7 +2553,7 @@
                 }
               },
               {
-                "id": "4",
+                "id": "6",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv3~policy~onedrivengsc_enableautomaticuploadbandwidthmanagement",
@@ -2511,7 +2567,7 @@
                 }
               },
               {
-                "id": "5",
+                "id": "7",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv6~policy~onedrivengsc_enablesyncadminreports",
@@ -2525,7 +2581,7 @@
                 }
               },
               {
-                "id": "6",
+                "id": "8",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv4~policy~onedrivengsc_enableodignorelistfromgpo",
@@ -2550,16 +2606,6 @@
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                             "settingValueTemplateReference": null,
                             "value": "*.appx"
-                          },
-                          {
-                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
-                            "settingValueTemplateReference": null,
-                            "value": "*.bat"
-                          },
-                          {
-                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
-                            "settingValueTemplateReference": null,
-                            "value": "*.cmd"
                           },
                           {
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
@@ -2658,7 +2704,7 @@
                 }
               },
               {
-                "id": "7",
+                "id": "9",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablecustomroot",
@@ -2708,7 +2754,7 @@
                 }
               },
               {
-                "id": "8",
+                "id": "10",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_kfmblockoptout",
@@ -2722,7 +2768,7 @@
                 }
               },
               {
-                "id": "9",
+                "id": "11",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablepersonalsync",
@@ -2736,7 +2782,71 @@
                 }
               },
               {
-                "id": "10",
+                "id": "12",
+                "settingInstance": {
+                  "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                  "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_forcedlocalmassdeletedetection",
+                  "settingInstanceTemplateReference": null,
+                  "auditRuleInformation": null,
+                  "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_forcedlocalmassdeletedetection_1",
+                    "children": []
+                  }
+                }
+              },
+              {
+                "id": "13",
+                "settingInstance": {
+                  "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                  "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername",
+                  "settingInstanceTemplateReference": null,
+                  "auditRuleInformation": null,
+                  "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_1",
+                    "children": [
+                      {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+                        "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_customsyncrootfoldernamelist",
+                        "settingInstanceTemplateReference": null,
+                        "auditRuleInformation": null,
+                        "groupSettingCollectionValue": [
+                          {
+                            "settingValueTemplateReference": null,
+                            "children": [
+                              {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_customsyncrootfoldernamelist_key",
+                                "settingInstanceTemplateReference": null,
+                                "auditRuleInformation": null,
+                                "simpleSettingValue": {
+                                  "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                  "settingValueTemplateReference": null,
+                                  "value": "00000000-0000-0000-0000-000000000000"
+                                }
+                              },
+                              {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_customsyncrootfoldernamelist_value",
+                                "settingInstanceTemplateReference": null,
+                                "auditRuleInformation": null,
+                                "simpleSettingValue": {
+                                  "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                  "settingValueTemplateReference": null,
+                                  "value": "ORG"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "id": "14",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_gposetupdatering",
@@ -2762,7 +2872,7 @@
                 }
               },
               {
-                "id": "11",
+                "id": "15",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard",
@@ -2832,7 +2942,7 @@
                 }
               },
               {
-                "id": "12",
+                "id": "16",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_silentaccountconfig",
@@ -2846,7 +2956,7 @@
                 }
               },
               {
-                "id": "13",
+                "id": "17",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv7~policy~onedrivengsc_enableautostart",
@@ -2860,7 +2970,7 @@
                 }
               },
               {
-                "id": "14",
+                "id": "18",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                   "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_filesondemandenabled",
@@ -2931,8 +3041,8 @@
             "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
             "createdDateTime": "2026-07-23T22:35:14.8801721Z",
             "creationSource": null,
-            "description": "",
-            "lastModifiedDateTime": "2026-07-25T00:19:36.2223379Z",
+            "description": "Spotlight, Cloud Optimized Content, Bing web results, cloud search and news feed off; default Store packages removed, advertising ID and Game DVR disabled",
+            "lastModifiedDateTime": "2026-07-26T04:54:50.8780435Z",
             "name": "Win-Policy-D-UserExperience",
             "platforms": "windows10",
             "priorityMetaData": null,
@@ -3110,7 +3220,7 @@
                         "auditRuleInformation": null,
                         "choiceSettingValue": {
                           "settingValueTemplateReference": null,
-                          "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_quickassist_0",
+                          "value": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_quickassist_1",
                           "children": []
                         }
                       },
@@ -3243,7 +3353,7 @@
                 "id": "1",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
-                  "settingDefinitionId": "device_vendor_msft_policy_config_experience_allowspotlightcollection",
+                  "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowspotlightcollection",
                   "settingInstanceTemplateReference": null,
                   "auditRuleInformation": null,
                   "simpleSettingValue": {
@@ -3257,32 +3367,32 @@
                 "id": "2",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                  "settingDefinitionId": "device_vendor_msft_policy_config_experience_allowwindowsspotlight",
+                  "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowwindowsspotlight",
                   "settingInstanceTemplateReference": null,
                   "auditRuleInformation": null,
                   "choiceSettingValue": {
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_experience_allowwindowsspotlight_1",
+                    "value": "user_vendor_msft_policy_config_experience_allowwindowsspotlight_1",
                     "children": [
                       {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                        "settingDefinitionId": "device_vendor_msft_policy_config_experience_allowtailoredexperienceswithdiagnosticdata",
+                        "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowtailoredexperienceswithdiagnosticdata",
                         "settingInstanceTemplateReference": null,
                         "auditRuleInformation": null,
                         "choiceSettingValue": {
                           "settingValueTemplateReference": null,
-                          "value": "device_vendor_msft_policy_config_experience_allowtailoredexperienceswithdiagnosticdata_0",
+                          "value": "user_vendor_msft_policy_config_experience_allowtailoredexperienceswithdiagnosticdata_0",
                           "children": []
                         }
                       },
                       {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                        "settingDefinitionId": "device_vendor_msft_policy_config_experience_allowthirdpartysuggestionsinwindowsspotlight",
+                        "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowthirdpartysuggestionsinwindowsspotlight",
                         "settingInstanceTemplateReference": null,
                         "auditRuleInformation": null,
                         "choiceSettingValue": {
                           "settingValueTemplateReference": null,
-                          "value": "device_vendor_msft_policy_config_experience_allowthirdpartysuggestionsinwindowsspotlight_0",
+                          "value": "user_vendor_msft_policy_config_experience_allowthirdpartysuggestionsinwindowsspotlight_0",
                           "children": []
                         }
                       },
@@ -3299,23 +3409,23 @@
                       },
                       {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                        "settingDefinitionId": "device_vendor_msft_policy_config_experience_allowwindowsspotlightonactioncenter",
+                        "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowwindowsspotlightonactioncenter",
                         "settingInstanceTemplateReference": null,
                         "auditRuleInformation": null,
                         "choiceSettingValue": {
                           "settingValueTemplateReference": null,
-                          "value": "device_vendor_msft_policy_config_experience_allowwindowsspotlightonactioncenter_0",
+                          "value": "user_vendor_msft_policy_config_experience_allowwindowsspotlightonactioncenter_0",
                           "children": []
                         }
                       },
                       {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                        "settingDefinitionId": "device_vendor_msft_policy_config_experience_allowwindowsspotlightwindowswelcomeexperience",
+                        "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowwindowsspotlightwindowswelcomeexperience",
                         "settingInstanceTemplateReference": null,
                         "auditRuleInformation": null,
                         "choiceSettingValue": {
                           "settingValueTemplateReference": null,
-                          "value": "device_vendor_msft_policy_config_experience_allowwindowsspotlightwindowswelcomeexperience_0",
+                          "value": "user_vendor_msft_policy_config_experience_allowwindowsspotlightwindowswelcomeexperience_0",
                           "children": []
                         }
                       },
@@ -3332,12 +3442,12 @@
                       },
                       {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                        "settingDefinitionId": "device_vendor_msft_policy_config_experience_configurewindowsspotlightonlockscreen",
+                        "settingDefinitionId": "user_vendor_msft_policy_config_experience_configurewindowsspotlightonlockscreen",
                         "settingInstanceTemplateReference": null,
                         "auditRuleInformation": null,
                         "choiceSettingValue": {
                           "settingValueTemplateReference": null,
-                          "value": "device_vendor_msft_policy_config_experience_configurewindowsspotlightonlockscreen_0",
+                          "value": "user_vendor_msft_policy_config_experience_configurewindowsspotlightonlockscreen_0",
                           "children": []
                         }
                       }
@@ -3349,12 +3459,12 @@
                 "id": "3",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                  "settingDefinitionId": "device_vendor_msft_policy_config_experience_allowwindowsspotlightonsettings",
+                  "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowwindowsspotlightonsettings",
                   "settingInstanceTemplateReference": null,
                   "auditRuleInformation": null,
                   "choiceSettingValue": {
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_experience_allowwindowsspotlightonsettings_0",
+                    "value": "user_vendor_msft_policy_config_experience_allowwindowsspotlightonsettings_0",
                     "children": []
                   }
                 }
@@ -3405,12 +3515,12 @@
                 "id": "7",
                 "settingInstance": {
                   "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                  "settingDefinitionId": "device_vendor_msft_policy_config_experience_enableorganizationalmessages",
+                  "settingDefinitionId": "user_vendor_msft_policy_config_experience_enableorganizationalmessages",
                   "settingInstanceTemplateReference": null,
                   "auditRuleInformation": null,
                   "choiceSettingValue": {
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_experience_enableorganizationalmessages_1",
+                    "value": "user_vendor_msft_policy_config_experience_enableorganizationalmessages_1",
                     "children": []
                   }
                 }
@@ -3466,7 +3576,7 @@
                   "auditRuleInformation": null,
                   "choiceSettingValue": {
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_search_allowcloudsearch_0",
+                    "value": "device_vendor_msft_policy_config_search_allowcloudsearch_1",
                     "children": []
                   }
                 }
@@ -3494,7 +3604,7 @@
                   "auditRuleInformation": null,
                   "choiceSettingValue": {
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_search_donotusewebresults_1",
+                    "value": "device_vendor_msft_policy_config_search_donotusewebresults_0",
                     "children": []
                   }
                 }

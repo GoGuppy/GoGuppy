@@ -2,7 +2,7 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-07-09T22:56:00.2651622Z",
     "creationSource": null,
-    "description": "OneDrive auto launches at sign-in with KFM enforced, tenant restricted sync, and extension exclusions for suspicious, clutter or sync failure prone file types.",
+    "description": "Silent account configuration and auto start at sign-in with no user prompts, first run tutorial and new account detection suppressed. Known Folder Move redirects Desktop, Documents and Pictures with opt-out blocked, Files On-Demand enabled, sync restricted to the tenant, personal accounts blocked, mass delete detection forced, and extensions that are suspicious, clutter prone or likely to break sync are excluded. Sync root folder renamed to ORG to shorten file paths; new deployments only, remove this setting for existing clients since renaming the sync root changes every local path and can break shortcuts, mapped drives and linked files.",
     "lastModifiedDateTime": "2026-08-08T19:19:44.8540818Z",
     "name": "Win-Policy-D-OneDriveSettings",
     "platforms": "windows10",

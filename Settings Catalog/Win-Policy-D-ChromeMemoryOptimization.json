@@ -2,7 +2,7 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-07-26T02:45:37.8724701Z",
     "creationSource": null,
-    "description": "",
+    "description": "Turns on memory saver so Chrome releases memory from idle tabs.",
     "lastModifiedDateTime": "2026-07-26T02:45:37.8724701Z",
     "name": "Win-Policy-D-ChromeMemoryOptimization",
     "platforms": "windows10",

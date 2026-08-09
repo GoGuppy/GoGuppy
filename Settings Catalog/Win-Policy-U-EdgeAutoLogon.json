@@ -4,7 +4,7 @@
     "creationSource": null,
     "description": "Forces work profile, controls sync scope",
     "lastModifiedDateTime": "2026-07-06T01:17:30.1689494Z",
-    "name": "Win-Policy-D-EdgeAutoLogon",
+    "name": "Win-Policy-U-EdgeAutoLogon",
     "platforms": "windows10",
     "priorityMetaData": null,
     "roleScopeTagIds": [

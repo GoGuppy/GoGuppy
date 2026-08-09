@@ -2,7 +2,7 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-07-23T22:35:14.8801721Z",
     "creationSource": null,
-    "description": "",
+    "description": "Spotlight, Cloud Optimized Content, Bing web results, cloud search and news feed off; default Store packages removed, advertising ID and Game DVR disabled",
     "lastModifiedDateTime": "2026-07-26T04:54:50.8780435Z",
     "name": "Win-Policy-D-UserExperience",
     "platforms": "windows10",
