@@ -3,14 +3,14 @@
     "createdDateTime": "2026-07-24T23:15:32.0604264Z",
     "creationSource": null,
     "description": "Disables Copilot system wide - Copilot in Edge left untouched",
-    "lastModifiedDateTime": "2026-07-29T21:09:16.2924639Z",
+    "lastModifiedDateTime": "2026-08-10T03:13:49.6157561Z",
     "name": "Win-Policy-D-DisableCopilot",
     "platforms": "windows10",
     "priorityMetaData": null,
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 2,
+    "settingCount": 1,
     "technologies": "mdm",
     "id": "09f8a86d-7ad9-4f12-8c5b-0f0f5bdec13d",
     "templateReference": {
@@ -30,20 +30,6 @@
                 "choiceSettingValue": {
                     "settingValueTemplateReference": null,
                     "value": "device_vendor_msft_policy_config_windowsai_removemicrosoftcopilotapp_1",
-                    "children": []
-                }
-            }
-        },
-        {
-            "id": "1",
-            "settingInstance": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot",
-                "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
-                "choiceSettingValue": {
-                    "settingValueTemplateReference": null,
-                    "value": "user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot_0",
                     "children": []
                 }
             }

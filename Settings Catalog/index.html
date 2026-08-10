@@ -258,7 +258,7 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 
   <h1>⚙️ Settings Catalog</h1>
   <div class="subtitle">Policy JSON ready to import.</div>
-  <div class="out">total 17 | click a row to download | most go to device groups, exceptions noted</div>
+  <div class="out">total 18 | click a row to download | most go to device groups, exceptions noted</div>
 
   <div class="sub">Security Hardening</div>
   <div class="sub-desc">Encryption, credentials, protocols, and account controls.</div>
@@ -271,6 +271,11 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   <a class="row" href="Win-Policy-D-LAPS.json" download>
     <span class="icon">🗝️</span><span class="name">LAPS</span>
     <span class="desc">Rotates and escrows the built-in Administrator password to Entra ID. System based, assign to device groups.</span>
+  </a>
+
+  <a class="row" href="Win-Policy-D-Antivirus.json" download>
+    <span class="icon">🦠</span><span class="name">Antivirus</span>
+    <span class="desc">Defender real time protection, cloud block level high, network protection, PUA blocking, and a daily scan. System based, assign to device groups.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-AdvancedPhishingProtection.json" download>
@@ -323,7 +328,7 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 
   <a class="row" href="Win-Policy-D-DisableCopilot.json" download>
     <span class="icon">🤖</span><span class="name">Disable Copilot</span>
-    <span class="desc">Disables Windows Copilot. Edge Copilot untouched. System and user based, assign to user groups so it follows the person.</span>
+    <span class="desc">Disables Windows Copilot. Edge Copilot untouched. System based, assign to device groups.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-DisablePhoneLink.json" download>
