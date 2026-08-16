@@ -2,7 +2,7 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-07-09T22:56:00.2651622Z",
     "creationSource": null,
-    "description": "OneDrive auto launches at sign-in with KFM enforced, tenant restricted sync, and extension exclusions for suspicious, clutter or sync failure prone file types.",
+    "description": "Baseline OneDrive settings configuration that auto launches at sign-in with KFM enforced, tenant restricted sync, and extension exclusions for suspicious, clutter or sync failure prone file types.",
     "lastModifiedDateTime": "2026-08-16T16:52:11.8631296Z",
     "name": "Win-Policy-D-OneDriveSettings",
     "platforms": "windows10",

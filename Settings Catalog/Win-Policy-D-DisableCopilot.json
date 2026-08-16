@@ -2,7 +2,7 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-07-24T23:15:32.0604264Z",
     "creationSource": null,
-    "description": "Disables Copilot system wide - Copilot in Edge left untouched",
+    "description": "Disables Copilot App. Copilot in Edge left untouched (Additional Copilot restrictions located in Platform Scripts)",
     "lastModifiedDateTime": "2026-08-10T03:13:49.6157561Z",
     "name": "Win-Policy-D-DisableCopilot",
     "platforms": "windows10",

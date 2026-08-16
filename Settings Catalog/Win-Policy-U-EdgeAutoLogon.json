@@ -2,7 +2,7 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-07-06T01:09:27.7534228Z",
     "creationSource": null,
-    "description": "Forces work profile, controls sync scope",
+    "description": "Forces work profile and controls sync scope",
     "lastModifiedDateTime": "2026-07-06T01:17:30.1689494Z",
     "name": "Win-Policy-U-EdgeAutoLogon",
     "platforms": "windows10",

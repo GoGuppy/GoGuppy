@@ -2,7 +2,7 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-07-10T18:00:38.7455681Z",
     "creationSource": null,
-    "description": "Disables the Run dialog (Win+R) to block ClickFix and paste-and-run social engineering attacks.",
+    "description": "Disables the Run dialog (Win+R) to block ClickFix and paste-and-run social engineering attacks. No end user has business here anyways.",
     "lastModifiedDateTime": "2026-07-10T18:01:09.5100212Z",
     "name": "Win-Policy-D-DisableWinR",
     "platforms": "windows10",

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoGuppy · Scripts and Remediations</title>
+<title>Detect Remote Access Tools &middot; Intune &middot; GoGuppy</title>
 <style>
 /* GoGuppy shared styles */
 
@@ -251,65 +251,86 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 
   <div class="topbar">
     <a class="home" href="../index.html"><img class="mark" src="../assets/guppy-icon@2x.png" alt=""><span>goguppy.com</span></a>
-    <span>rev 2026.08</span>
+    <a href="index.html">&larr; scripts and remediations</a>
   </div>
 
-  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Scripts and Remediations</div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="index.html">Intune</a> &rsaquo; Detect Remote Access Tools</div>
+  <h1>🖥️ Detect Remote Access Tools</h1>
+  <div class="subtitle">Intune Remediation &middot; Reports remote access software other than ScreenConnect</div>
 
-  <h1>💻 Scripts and Remediations</h1>
-  <div class="sec-label">Remediations</div>
-  <div class="out">total 7 | detection exits 1 to trigger, 0 to stay put</div>
+  <div class="warning-box">
+    Detection only. No remediation script attached, the output lands in the remediation report.
+  </div>
 
-  <a class="row" href="disable_dell_supportassist.html">
-    <span class="icon">🚫</span><span class="name">Disable Dell SupportAssist</span>
-    <span class="desc">Stops and disables SupportAssist services. Dell SupportAssist Remediations can be a storage nightmare. <em>Testing</em></span>
-  </a>
+  <div class="info-box">
+    ScreenConnect and ConnectWise are excluded on purpose so your own agent never reports itself. Add or remove vendors by editing the pattern.
+  </div>
 
-  <a class="row" href="bitlocker_key_escrow.html">
-    <span class="icon">🔐</span><span class="name">BitLocker Key Escrow</span>
-    <span class="desc">Fixes drives that encrypted but never escrowed a recovery key to Entra ID. <em>Testing</em></span>
-  </a>
+  <div class="section-label">Detection Script</div>
 
-  <a class="row" href="restart_screenconnect.html">
-    <span class="icon">🔌</span><span class="name">Restart ScreenConnect</span>
-    <span class="desc">Starts the ScreenConnect service if stopped. (Replace with whatever your RMM is)</span>
-  </a>
+  <details class="card">
+    <summary class="card-top">
+      <div class="step">D</div>
+      <div class="card-info">
+        <div class="card-title">Report installed remote access tools <span class="tag tag-yellow">detection</span></div>
+        <div class="card-desc">Exits 1 when it finds something, so flagged devices are filterable in the report.</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="sdetect"># Reports remote access tools other than ScreenConnect.
+$names = 'TeamViewer|AnyDesk|LogMeIn|GoToAssist|GoToMyPC|Splashtop|VNC|Atera|NinjaRMM|NinjaOne|Datto|CentraStage|Kaseya|N-able|Take Control|Syncro|Action1|Pulseway|BeyondTrust|Bomgar|Dameware|Remote Utilities|Ammyy|Supremo|RustDesk|Zoho Assist|ISL Light|Parsec|DWAgent|MeshAgent|NetSupport|Radmin|ToDesk|Sunlogin|Chrome Remote Desktop'
 
-  <a class="row" href="restart_spooler.html">
-    <span class="icon">🖨️</span><span class="name">Restart Spooler</span>
-    <span class="desc">Restarts the print spooler and clears jobs stuck over 20 minutes.</span>
-  </a>
+$keys = @(
+    'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*'
+    'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*'
+)
 
-  <a class="row" href="restart_onedrive.html">
-    <span class="icon">☁️</span><span class="name">Restart OneDrive</span>
-    <span class="desc">Starts OneDrive again when a user has quit the sync client.</span>
-  </a>
+$apps = Get-ItemProperty $keys -ErrorAction SilentlyContinue | Where-Object DisplayName -match $names | Select-Object -ExpandProperty DisplayName
+$svcs = Get-Service -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -match $names -or $_.Name -match $names } | Select-Object -ExpandProperty DisplayName
 
-  <a class="row" href="clear_wu_cache.html">
-    <span class="icon">🧹</span><span class="name">Clear Windows Update Cache</span>
-    <span class="desc">Purges SoftwareDistribution\Download when over 1 GB.</span>
-  </a>
+$found = @($apps) + @($svcs) | Sort-Object -Unique
 
-  <a class="row" href="auto_reboot.html">
-    <span class="icon">🔄</span><span class="name">Reboot Reminder</span>
-    <span class="desc">Prompts the user when uptime hits 7 days. No forced reboot.</span>
-  </a>
+if (-not $found) { Write-Output 'None found.'; exit 0 }
 
-  <div class="sec-label">Detection Only</div>
-  <div class="out">total 2 | reports state, changes nothing, no remediation script</div>
+Write-Output ($found -join ' | ')
+exit 1</div>
+      <button class="copy-btn" onclick="copyScript(this,'sdetect')">copy</button>
+    </div>
+  </details>
 
-  <a class="row" href="teams_version_detect.html">
-    <span class="icon">💬</span><span class="name">Detect Teams Version Installed</span>
-    <span class="desc">Reports New Teams, Classic Teams, and the machine wide installer. Classic uses far more memory.</span>
-  </a>
+  <div class="section-label">Intune Remediation Settings</div>
 
-  <a class="row" href="remote_tools_detect.html">
-    <span class="icon">🖥️</span><span class="name">Detect Remote Access Tools</span>
-    <span class="desc">Reports remote access software installed on the device (excludes ScreenConnect).</span>
-  </a>
-
+  <div class="settings-panel">
+    <div class="settings-row">
+      <span class="settings-key">Run this script using the logged on credentials</span>
+      <span class="badge badge-no">No</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Enforce script signature check</span>
+      <span class="badge badge-no">No</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Run script in 64-bit PowerShell host</span>
+      <span class="badge badge-yes">Yes</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Schedule (recommended)</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--dim);">Daily</span>
+    </div>
+  </div>
 
 </div>
 
+<script>
+function copyScript(btn, id) {
+  const code = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = '\u2713 copied';
+    btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('done'); }, 1600);
+  });
+}
+</script>
 </body>
 </html>

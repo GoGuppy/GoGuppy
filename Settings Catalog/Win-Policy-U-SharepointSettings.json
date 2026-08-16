@@ -2,7 +2,7 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-08-16T16:39:31.4733356Z",
     "creationSource": null,
-    "description": "Automatically mounts the below SharePoint sites if users have permissions to them",
+    "description": "Automatically mounts SharePoint sites if users have permissions to them",
     "lastModifiedDateTime": "2026-08-16T16:44:03.17017Z",
     "name": "Win-Policy-U-SharepointSettings",
     "platforms": "windows10",

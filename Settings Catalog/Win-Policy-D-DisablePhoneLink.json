@@ -2,7 +2,7 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-07-25T15:59:09.3699636Z",
     "creationSource": null,
-    "description": "Helps prevent data exfiltration to personal phones by disabling phone link",
+    "description": "Blocks phone to PC linking.",
     "lastModifiedDateTime": "2026-07-25T15:59:09.3699636Z",
     "name": "Win-Policy-D-DisablePhoneLink",
     "platforms": "windows10",
