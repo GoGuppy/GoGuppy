@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoGuppy · Endpoint Privilege Management</title>
+<style>
+/* GoGuppy shared styles */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #0a0a0a;
+  --panel:  #0e0e10;
+  --row:    #151517;
+  --rule:   #1f2024;
+  --ink:    #cbccc6;
+  --dim:    #6e747c;
+  --cyan:   #5ccfe6;
+  --violet: #a37acc;
+  --faint:  #383c42;
+  --mono:   'Cascadia Mono', 'Consolas', ui-monospace, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 0 0 60px;
+}
+
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+
+/* top bar */
+.topbar {
+  border-bottom: 1px solid var(--rule);
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--dim);
+  font-size: 12px;
+}
+.topbar a { color: var(--dim); text-decoration: none; }
+.topbar a:hover { color: var(--violet); }
+
+/* home banner */
+.banner {
+  padding: 34px 0 8px;
+  white-space: pre;
+  color: var(--violet);
+  font-size: 12px;
+  line-height: 1.35;
+  overflow-x: auto;
+}
+.tagline { color: var(--dim); padding-bottom: 26px; font-size: 13px; }
+.tagline .hl { color: var(--ink); }
+
+/* section headings */
+.sec-label, .section-label {
+  color: var(--cyan);
+  padding: 30px 0 6px;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 8px;
+}
+.out { color: var(--dim); font-size: 12px; padding-bottom: 8px; }
+.sub {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 20px 0 2px;
+}
+.sub-desc { color: var(--dim); font-size: 12px; padding-bottom: 8px; }
+
+/* listing rows */
+.row {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 260px) minmax(0, 1fr);
+  gap: 14px;
+  align-items: baseline;
+  padding: 6px 8px 6px 0;
+  text-decoration: none;
+  color: inherit;
+  border-left: 2px solid transparent;
+}
+.row .icon {
+  font-size: 14px;
+  line-height: 1;
+  filter: grayscale(35%);
+}
+.row:hover .icon { filter: none; }
+.row:hover { background: var(--row); border-left-color: var(--violet); padding-left: 8px; }
+.row:hover .name { color: var(--violet); }
+.row .idx { display: none; }
+.row.empty {
+  color: var(--faint);
+  cursor: default;
+  pointer-events: none;
+}
+.row.empty .name, .row.empty .desc { color: var(--faint); }
+.row .name { color: var(--ink); min-width: 0; overflow-wrap: break-word; }
+.row .desc { color: var(--dim); min-width: 0; overflow-wrap: break-word; }
+
+/* detail pages */
+.breadcrumb { color: var(--dim); font-size: 12px; padding: 26px 0 18px; }
+.breadcrumb a { color: var(--dim); text-decoration: none; }
+.breadcrumb a:hover { color: var(--violet); }
+
+h1 {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.subtitle { color: var(--dim); font-size: 12px; padding-bottom: 20px; }
+
+.warning-box {
+  border-left: 2px solid var(--violet);
+  padding: 4px 0 4px 14px;
+  color: var(--dim);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.info-box {
+  border-left: 2px solid var(--cyan);
+  padding: 4px 0 4px 14px;
+  color: var(--dim);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+/* collapsible script cards */
+details.card {
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  margin-bottom: 10px;
+}
+details.card[open] { border-color: var(--faint); }
+summary.card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  list-style: none;
+}
+summary.card-top::-webkit-details-marker { display: none; }
+summary.card-top:hover .card-title { color: var(--violet); }
+.step {
+  border: 1px solid var(--faint);
+  color: var(--cyan);
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.card-info { flex: 1; }
+.card-title { color: var(--ink); font-size: 13px; }
+.card-desc { color: var(--dim); font-size: 12px; }
+.chevron { color: var(--faint); font-size: 15px; }
+details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
+.chevron { display: inline-block; transition: transform .15s, color .15s; }
+
+.tag {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  border: 1px solid var(--rule);
+  padding: 1px 6px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+.tag-yellow { color: var(--cyan); border-color: var(--faint); }
+.tag-red { color: var(--violet); border-color: var(--faint); }
+
+/* code */
+.code-wrap { position: relative; border-top: 1px solid var(--rule); }
+.code-block {
+  padding: 14px 60px 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 2px 9px;
+  cursor: pointer;
+}
+.copy-btn:hover { color: var(--violet); border-color: var(--faint); }
+.copy-btn.done { color: var(--cyan); }
+
+/* settings table */
+.settings-panel { border: 1px solid var(--rule); }
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.settings-row:last-child { border-bottom: 0; }
+.settings-key { color: var(--dim); font-size: 12px; }
+.badge { font-size: 11px; letter-spacing: .06em; }
+.badge-yes { color: var(--cyan); }
+.badge-no { color: var(--dim); }
+
+@media (max-width: 720px) {
+  .wrap { padding: 0 18px; }
+  .banner { font-size: 9px; }
+  .row {
+    grid-template-columns: 24px minmax(0, 1fr);
+    row-gap: 2px;
+    padding-bottom: 10px;
+  }
+  .row .desc { grid-column: 2; }
+}
+
+.topbar .home { display: inline-flex; align-items: center; gap: 9px; color: var(--dim); text-decoration: none; }
+.topbar .home:hover { color: var(--violet); }
+.topbar .mark { flex: 0 0 auto; display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="../assets/guppy-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <a class="home" href="../index.html"><img class="mark" src="../assets/guppy-icon@2x.png" alt=""><span>goguppy.com</span></a>
+    <span>rev 2026.08</span>
+  </div>
+
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Endpoint Privilege Management</div>
+
+  <h1>🔑 Endpoint Privilege Management</h1>
+  <div class="subtitle">Elevation without local admin.</div>
+  <div class="out">total 2 | click a row to download | rules verified 2026-08</div>
+
+  <div class="warning-box">Needs an Intune Suite or EPM license. Without one these import but never apply.</div>
+  <div class="info-box">Rules match the publisher certificate, so they work in any tenant. Vendors re-key every few years and rules go quiet. Check the verified date.</div>
+
+  <div class="sub">Baseline</div>
+  <div class="sub-desc">Turn the client on before writing any rules.</div>
+
+  <a class="row" href="Win-EPM-D-ElevationSettings.json" download>
+    <span class="icon">⚙️</span><span class="name">Elevation Settings<span class="tag tag-yellow">Licensed</span></span>
+    <span class="desc">Enables the client, defaults elevation to user justification, sends data for reporting. Deploy alone and watch the report for a week. System based, assign to user groups so policy and licensing stay one list.</span>
+  </a>
+
+  <div class="sub">Elevation Rules</div>
+  <div class="sub-desc">Certificate plus file name, so one signature does not elevate a whole catalog.</div>
+
+  <a class="row" href="Win-EPM-D-ElevationRules-Starter.json" download>
+    <span class="icon">📝</span><span class="name">Starter Rules<span class="tag tag-red">Edit First</span></span>
+    <span class="desc">Four rules for OEM update utilities and printer drivers. User justification, not automatic. Delete what you do not use. Same target as the settings policy above, or rules land where the client is not.</span>
+  </a>
+
+  <a class="row empty" href="#">
+    <span class="icon">🧪</span><span class="name">Hash Pinned Example</span>
+    <span class="desc">Coming. One build pinned by SHA-256, to show why you usually should not.</span>
+  </a>
+
+  <div class="sub">Notes</div>
+
+  <div class="info-box">Certificate only elevates everything that vendor signs. Every rule here pairs it with a file name.</div>
+  <div class="info-box">Start on user justification. Promote to automatic once the report earns it.</div>
+  <div class="info-box">Pilot on a device group to control the ring, then move to user groups for steady state.</div>
+  <div class="warning-box">EPM is not LAPS. LAPS is break glass, EPM is daily elevation. Run both.</div>
+
+</div>
+
+</body>
+</html>
