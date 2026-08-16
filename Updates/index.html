@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoGuppy</title>
+<title>GoGuppy · Updates</title>
 <style>
 /* GoGuppy shared styles */
 
@@ -237,85 +237,82 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   .row .desc { grid-column: 2; }
 }
 
-/* home hero */
-.hero { display: flex; align-items: center; gap: 26px; padding: 32px 0 16px; flex-wrap: wrap; }
-.hero .face { width: 128px; height: 128px; border-radius: 50%; flex: 0 0 auto; }
-.hero .wordmark { font-size: 52px; line-height: 1; letter-spacing: -.02em; }
-.hero .wordmark .go { color: var(--dim); }
-.hero .wordmark .gup { color: var(--violet); }
-@media (max-width: 620px) {
-  .hero { gap: 18px; }
-  .hero .face { width: 92px; height: 92px; }
-  .hero .wordmark { font-size: 36px; }
-}
+.topbar .home { display: inline-flex; align-items: center; gap: 9px; color: var(--dim); text-decoration: none; }
+.topbar .home:hover { color: var(--violet); }
+.topbar .mark { flex: 0 0 auto; display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
 </style>
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="128x128" href="assets/guppy-icon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="../assets/guppy-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
 </head>
 <body>
 
 <div class="wrap">
 
   <div class="topbar">
-    <span>goguppy.com</span>
+    <a class="home" href="../index.html"><img class="mark" src="../assets/guppy-icon@2x.png" alt=""><span>goguppy.com</span></a>
     <span>rev 2026.08</span>
   </div>
 
-<div class="hero">
-    <img class="face" src="assets/guppy-icon@2x.png" alt="Guppy">
-    <div class="wordmark"><span class="go">Go</span><span class="gup">Guppy</span></div>
-  </div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Updates</div>
 
-  <div class="tagline"><span class="hl">Platform scripts, Remediations, Settings Catalog policies and other Stuff</span></div>
+  <h1>🔄 Updates</h1>
+  <div class="subtitle">Update rings for dummies, plus the Office half everyone forgets.</div>
+  <div class="out">total 3 | click a row to download | Office is portal only, no file</div>
 
-  <div class="sec-label">Sections</div>
-  <div class="out">9 sections | 7 remediations | 2 detections | 1 platform script | 19 policies</div>
+  <div class="info-box">A ring is just a group of devices plus how long they wait. Pilot takes updates early so you find the breakage. Broad waits, so most people never see it. That is the entire concept.</div>
 
-  <div class="row empty">
-    <span class="icon">🚀</span><span class="name">Autopilot</span>
-    <span class="desc">Box to desktop, no hands. Soon.</span>
-  </div>
+  <div class="sub">Windows</div>
+  <div class="sub-desc">Use Autopatch if you are licensed for it. These rings are for tenants that are not, and for understanding what Autopatch does on your behalf.</div>
 
-  <div class="row empty">
-    <span class="icon">🛡️</span><span class="name">Conditional Access</span>
-    <span class="desc">Four policies every tenant should have. Soon.</span>
-  </div>
-
-  <div class="row empty">
-    <span class="icon">🔄</span><span class="name">Updates</span>
-    <span class="desc">Update rings for dummies, plus Office. Soon.</span>
-  </div>
-
-  <a class="row" href="Intune/index.html">
-    <span class="icon">🔄</span><span class="name">Remediations</span>
-    <span class="desc">Detection and remediation script pairs.</span>
+  <a class="row" href="Win-Update-Pilot.json" download>
+    <span class="icon">🧪</span><span class="name">Pilot Ring</span>
+    <span class="desc">Quality updates at 0 days, feature updates at 0, deadline 2 days. Ten percent of the fleet and every one of them belongs to someone who will tell you it broke.</span>
   </a>
 
-  <a class="row" href="Platform Scripts/index.html">
-    <span class="icon">📜</span><span class="name">Platform Scripts</span>
-    <span class="desc">Scripts that run once per device at enrollment.</span>
+  <a class="row" href="Win-Update-Broad.json" download>
+    <span class="icon">🌍</span><span class="name">Broad Ring</span>
+    <span class="desc">Quality updates deferred 7 days, feature updates 30, deadline 7 with a 2 day grace period. Everyone else.</span>
   </a>
 
-  <div class="row empty">
-    <span class="icon">📦</span><span class="name">Win32 Apps</span>
-    <span class="desc">Nothing here yet.</span>
+  <a class="row" href="Win-Update-Feature.json" download>
+    <span class="icon">📅</span><span class="name">Feature Update Policy<span class="tag tag-red">Edit First</span></span>
+    <span class="desc">Pins the fleet to a named Windows version so a feature update never arrives by surprise. Change the version before you import.</span>
+  </a>
+
+  <div class="sub">Microsoft 365 Apps</div>
+  <div class="sub-desc">Managed at config.office.com, not in Intune. There is no JSON to import, so here is the configuration to match.</div>
+
+  <div class="settings-panel">
+    <div class="settings-row">
+      <span class="settings-key">Update channel</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--dim);">Monthly Enterprise</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Rollout waves</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--dim);">Pilot then broad</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Deadline</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--dim);">7 days</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Exclusions</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--dim);">Non-persistent VMs</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Rollback available</span>
+      <span class="badge badge-yes">Yes</span>
+    </div>
   </div>
 
-  <a class="row" href="Settings Catalog/index.html">
-    <span class="icon">⚙️</span><span class="name">Settings Catalog</span>
-    <span class="desc">Policy JSON ready to import.</span>
-  </a>
+  <div class="warning-box">Cloud update defers to policy. If Intune administrative templates ever set Office update settings, those registry values under Policies\Microsoft\office\16.0\common\officeupdate keep winning on every sync and your devices silently stay unmanaged. Set the whole ADMX policy to not configured, do not just change the values.</div>
+  <div class="info-box">Devices that are not assigned to a cloud update profile are not managed at all. Unassigned is not a default, it is nothing.</div>
 
-  <div class="row empty">
-    <span class="icon">🔑</span><span class="name">Endpoint Privilege Management</span>
-    <span class="desc">Elevation without local admin. Soon.</span>
-  </div>
+  <div class="sub">Notes</div>
 
-  <a class="row" href="Intune GitHub/builder/index.html">
-    <span class="icon">🧰</span><span class="name">Deployment Kit</span>
-    <span class="desc">Pick policies, generate one combined bundle JSON.</span>
-  </a>
+  <div class="info-box">Autopatch does not replace update rings, it manages them for you. Same mechanism, someone else's deferral maths.</div>
+  <div class="warning-box">Windows and Office update on completely separate tracks. Configuring one and assuming the other followed is the most common gap on this page.</div>
 
 </div>
 

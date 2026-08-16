@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoGuppy</title>
+<title>GoGuppy · Conditional Access</title>
 <style>
 /* GoGuppy shared styles */
 
@@ -237,85 +237,66 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   .row .desc { grid-column: 2; }
 }
 
-/* home hero */
-.hero { display: flex; align-items: center; gap: 26px; padding: 32px 0 16px; flex-wrap: wrap; }
-.hero .face { width: 128px; height: 128px; border-radius: 50%; flex: 0 0 auto; }
-.hero .wordmark { font-size: 52px; line-height: 1; letter-spacing: -.02em; }
-.hero .wordmark .go { color: var(--dim); }
-.hero .wordmark .gup { color: var(--violet); }
-@media (max-width: 620px) {
-  .hero { gap: 18px; }
-  .hero .face { width: 92px; height: 92px; }
-  .hero .wordmark { font-size: 36px; }
-}
+.topbar .home { display: inline-flex; align-items: center; gap: 9px; color: var(--dim); text-decoration: none; }
+.topbar .home:hover { color: var(--violet); }
+.topbar .mark { flex: 0 0 auto; display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
 </style>
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="128x128" href="assets/guppy-icon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="../assets/guppy-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
 </head>
 <body>
 
 <div class="wrap">
 
   <div class="topbar">
-    <span>goguppy.com</span>
+    <a class="home" href="../index.html"><img class="mark" src="../assets/guppy-icon@2x.png" alt=""><span>goguppy.com</span></a>
     <span>rev 2026.08</span>
   </div>
 
-<div class="hero">
-    <img class="face" src="assets/guppy-icon@2x.png" alt="Guppy">
-    <div class="wordmark"><span class="go">Go</span><span class="gup">Guppy</span></div>
-  </div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Conditional Access</div>
 
-  <div class="tagline"><span class="hl">Platform scripts, Remediations, Settings Catalog policies and other Stuff</span></div>
+  <h1>🛡️ Conditional Access</h1>
+  <div class="subtitle">The four policies every tenant should have on day one.</div>
+  <div class="out">total 4 | click a row to download | import in report only</div>
 
-  <div class="sec-label">Sections</div>
-  <div class="out">9 sections | 7 remediations | 2 detections | 1 platform script | 19 policies</div>
+  <div class="warning-box">Create your break glass accounts first and exclude them from every policy below. A tenant with no exclusion and a bad CA policy is a support call to Microsoft.</div>
+  <div class="warning-box">Every file ships with state set to report only. Watch the sign-in logs for a week, then flip to on. Do not skip this because the policy looks obvious.</div>
+  <div class="info-box">Needs Entra ID P1, included in Business Premium and M365 E3.</div>
 
-  <div class="row empty">
-    <span class="icon">🚀</span><span class="name">Autopilot</span>
-    <span class="desc">Box to desktop, no hands. Soon.</span>
-  </div>
+  <div class="sub">Baseline</div>
+  <div class="sub-desc">Apply in this order. Each one assumes the ones above it.</div>
 
-  <div class="row empty">
-    <span class="icon">🛡️</span><span class="name">Conditional Access</span>
-    <span class="desc">Four policies every tenant should have. Soon.</span>
-  </div>
-
-  <div class="row empty">
-    <span class="icon">🔄</span><span class="name">Updates</span>
-    <span class="desc">Update rings for dummies, plus Office. Soon.</span>
-  </div>
-
-  <a class="row" href="Intune/index.html">
-    <span class="icon">🔄</span><span class="name">Remediations</span>
-    <span class="desc">Detection and remediation script pairs.</span>
+  <a class="row" href="CA-001-BlockLegacyAuth.json" download>
+    <span class="icon">🚫</span><span class="name">Block Legacy Authentication</span>
+    <span class="desc">Kills IMAP, POP and basic auth sign-ins, the ones MFA cannot protect. Do this before anything else or the rest is theatre.</span>
   </a>
 
-  <a class="row" href="Platform Scripts/index.html">
-    <span class="icon">📜</span><span class="name">Platform Scripts</span>
-    <span class="desc">Scripts that run once per device at enrollment.</span>
+  <a class="row" href="CA-002-MfaAdmins.json" download>
+    <span class="icon">👑</span><span class="name">MFA for Admins</span>
+    <span class="desc">Targets the directory roles, not a group, so a new Global Admin is covered the moment the role is assigned.</span>
   </a>
 
-  <div class="row empty">
-    <span class="icon">📦</span><span class="name">Win32 Apps</span>
-    <span class="desc">Nothing here yet.</span>
-  </div>
+  <a class="row" href="CA-003-MfaAllUsers.json" download>
+    <span class="icon">🔐</span><span class="name">MFA for All Users</span>
+    <span class="desc">Everyone, all cloud apps. Break glass excluded. Expect noise in the first week from service accounts nobody documented.</span>
+  </a>
 
-  <a class="row" href="Settings Catalog/index.html">
-    <span class="icon">⚙️</span><span class="name">Settings Catalog</span>
-    <span class="desc">Policy JSON ready to import.</span>
+  <a class="row" href="CA-004-RequireCompliantDevice.json" download>
+    <span class="icon">✅</span><span class="name">Require Compliant Device<span class="tag tag-red">Edit First</span></span>
+    <span class="desc">Useless until you have compliance policies assigned. Deploy those, confirm devices report compliant, then turn this on.</span>
   </a>
 
   <div class="row empty">
-    <span class="icon">🔑</span><span class="name">Endpoint Privilege Management</span>
-    <span class="desc">Elevation without local admin. Soon.</span>
+    <span class="icon">💥</span><span class="name">Break Glass Setup</span>
+    <span class="desc">Coming. Two accounts, the exclusions, and the alert for when one signs in.</span>
   </div>
 
-  <a class="row" href="Intune GitHub/builder/index.html">
-    <span class="icon">🧰</span><span class="name">Deployment Kit</span>
-    <span class="desc">Pick policies, generate one combined bundle JSON.</span>
-  </a>
+  <div class="sub">Notes</div>
+
+  <div class="info-box">Exclusions are per policy, not global. Adding a break glass account to one policy protects you from that policy only.</div>
+  <div class="info-box">Report only still writes to the sign-in logs, so you get the full blast radius before anyone is blocked.</div>
+  <div class="warning-box">Require compliant device and MFA for all users at the same time on day one will lock out anyone mid enrollment. Stagger them.</div>
 
 </div>
 
