@@ -257,34 +257,56 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Conditional Access</div>
 
   <h1>🛡️ Conditional Access</h1>
-  <div class="subtitle">The four policies every tenant should have on day one.</div>
+  <div class="subtitle">The four Microsoft does not write for you.</div>
   <div class="out">total 4 | click a row to download | import in report only</div>
 
-  <div class="warning-box">Create your break glass accounts first and exclude them from every policy below. A tenant with no exclusion and a bad CA policy is a support call to Microsoft.</div>
-  <div class="warning-box">Every file ships with state set to report only. Watch the sign-in logs for a week, then flip to on. Do not skip this because the policy looks obvious.</div>
+  <div class="warning-box">Create your break glass accounts first and exclude them from every policy, including the Microsoft managed ones. A tenant with no exclusion and a bad CA policy is a support call to Microsoft.</div>
   <div class="info-box">Needs Entra ID P1, included in Business Premium and M365 E3.</div>
 
-  <div class="sub">Baseline</div>
+  <div class="sub">Already Handled</div>
+  <div class="sub-desc">Microsoft creates these itself in report only and enables them after 30 days. Check the portal before you write anything. You can toggle them and add exclusions, but not rename, delete or reconfigure them.</div>
+
+  <div class="row empty">
+    <span class="icon">🚫</span><span class="name">Block Legacy Authentication</span>
+    <span class="desc">Microsoft managed. Already there.</span>
+  </div>
+
+  <div class="row empty">
+    <span class="icon">📱</span><span class="name">Block Device Code Flow</span>
+    <span class="desc">Microsoft managed. Already there.</span>
+  </div>
+
+  <div class="row empty">
+    <span class="icon">🔐</span><span class="name">MFA for All Users</span>
+    <span class="desc">Microsoft managed. Already there.</span>
+  </div>
+
+  <div class="row empty">
+    <span class="icon">👑</span><span class="name">MFA for Admins on Admin Portals</span>
+    <span class="desc">Microsoft managed. Covers the portals only, which is why you still need the policy below.</span>
+  </div>
+
+  <div class="sub">The Gaps</div>
   <div class="sub-desc">Apply in this order. Each one assumes the ones above it.</div>
 
-  <a class="row" href="CA-001-BlockLegacyAuth.json" download>
-    <span class="icon">🚫</span><span class="name">Block Legacy Authentication</span>
-    <span class="desc">Kills IMAP, POP and basic auth sign-ins, the ones MFA cannot protect. Do this before anything else or the rest is theatre.</span>
-  </a>
-
-  <a class="row" href="CA-002-MfaAdmins.json" download>
-    <span class="icon">👑</span><span class="name">MFA for Admins</span>
-    <span class="desc">Targets the directory roles, not a group, so a new Global Admin is covered the moment the role is assigned.</span>
-  </a>
-
-  <a class="row" href="CA-003-MfaAllUsers.json" download>
-    <span class="icon">🔐</span><span class="name">MFA for All Users</span>
-    <span class="desc">Everyone, all cloud apps. Break glass excluded. Expect noise in the first week from service accounts nobody documented.</span>
-  </a>
-
-  <a class="row" href="CA-004-RequireCompliantDevice.json" download>
+  <a class="row" href="CA-001-RequireCompliantDevice.json" download>
     <span class="icon">✅</span><span class="name">Require Compliant Device<span class="tag tag-red">Edit First</span></span>
-    <span class="desc">Useless until you have compliance policies assigned. Deploy those, confirm devices report compliant, then turn this on.</span>
+    <span class="desc">The one that turns Intune from a config tool into an access gate. Useless until compliance policies are assigned and devices actually report compliant, so deploy those first.</span>
+  </a>
+
+  <a class="row" href="CA-002-AdminPhishResistant.json" download>
+    <span class="icon">🔑</span><span class="name">Phishing Resistant MFA for Admins</span>
+    <span class="desc">All cloud apps, not just admin portals. Targets directory roles, so a new Global Admin is covered the moment the role is assigned. Have the keys or passkeys enrolled before you turn it on.</span>
+  </a>
+
+  <a class="row" href="CA-003-SecureRegistration.json" download>
+    <span class="icon">📝</span><span class="name">Secure Security Info Registration</span>
+    <span class="desc">Requires MFA or a trusted location to register authentication methods. Without it a stolen password is enough to enroll an attacker's own MFA. The most skipped policy on every baseline list.</span>
+  </a>
+
+  <a class="row" href="CA-004-BlockUnknownPlatforms.json" download>
+    <span class="icon">👻</span><span class="name">Block Unknown Platforms</span>
+    <span class="desc">Anything that is not Windows, macOS, iOS, Android or Linux is a script or a problem. Cheap to run, cuts a lot of noise out of the sign-in logs.</span>
   </a>
 
   <div class="row empty">
@@ -294,9 +316,9 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 
   <div class="sub">Notes</div>
 
-  <div class="info-box">Exclusions are per policy, not global. Adding a break glass account to one policy protects you from that policy only.</div>
+  <div class="info-box">Exclusions are per policy, not global. Adding break glass to one policy protects you from that policy only.</div>
   <div class="info-box">Report only still writes to the sign-in logs, so you get the full blast radius before anyone is blocked.</div>
-  <div class="warning-box">Require compliant device and MFA for all users at the same time on day one will lock out anyone mid enrollment. Stagger them.</div>
+  <div class="warning-box">Do not enable require compliant device while people are mid enrollment. Stagger it behind the rest.</div>
 
 </div>
 
