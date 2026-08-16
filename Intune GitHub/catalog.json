@@ -1169,6 +1169,147 @@
      }
     },
     {
+     "id": "sc-win-policy-d-edgeprivacy",
+     "name": "Win-Policy-D-EdgePrivacy",
+     "description": "Edge privacy without removing features. Do Not Track on, ad and search personalization reporting off, site info sharing off, browser diagnostic data held at required, and the feedback, recommendation and shopping prompts turned off. Collections, sidebar, autofill and address bar suggestions left alone. System based, assign to device groups.",
+     "type": "configurationPolicy",
+     "file": "../Settings Catalog/Win-Policy-D-EdgePrivacy.json",
+     "content": {
+      "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
+      "createdDateTime": "2026-08-17T00:15:00.0000000Z",
+      "creationSource": null,
+      "description": "Edge privacy without removing features. Do Not Track on, ad and search personalization reporting off, site info sharing off, browser diagnostic data held at required, and the feedback, recommendation and shopping prompts turned off. Collections, sidebar, autofill and address bar suggestions left alone. System based, assign to device groups.",
+      "lastModifiedDateTime": "2026-08-17T00:15:00.0000000Z",
+      "name": "Win-Policy-D-EdgePrivacy",
+      "platforms": "windows10",
+      "priorityMetaData": null,
+      "roleScopeTagIds": [
+       "0"
+      ],
+      "settingCount": 7,
+      "technologies": "mdm",
+      "id": "32f12365-aef0-4acc-89b2-fe56edee53ac",
+      "templateReference": {
+       "templateId": "",
+       "templateFamily": "none",
+       "templateDisplayName": null,
+       "templateDisplayVersion": null
+      },
+      "settings": [
+       {
+        "id": "0",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_configuredonottrack",
+         "settingInstanceTemplateReference": null,
+         "auditRuleInformation": null,
+         "choiceSettingValue": {
+          "settingValueTemplateReference": null,
+          "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_configuredonottrack_1",
+          "children": []
+         }
+        }
+       },
+       {
+        "id": "1",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev80diff~policy~microsoft_edge_personalizationreportingenabled",
+         "settingInstanceTemplateReference": null,
+         "auditRuleInformation": null,
+         "choiceSettingValue": {
+          "settingValueTemplateReference": null,
+          "value": "device_vendor_msft_policy_config_microsoft_edgev80diff~policy~microsoft_edge_personalizationreportingenabled_0",
+          "children": []
+         }
+        }
+       },
+       {
+        "id": "2",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_sendsiteinfotoimproveservices",
+         "settingInstanceTemplateReference": null,
+         "auditRuleInformation": null,
+         "choiceSettingValue": {
+          "settingValueTemplateReference": null,
+          "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_sendsiteinfotoimproveservices_0",
+          "children": []
+         }
+        }
+       },
+       {
+        "id": "3",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev86.1~policy~microsoft_edge_diagnosticdata",
+         "settingInstanceTemplateReference": null,
+         "auditRuleInformation": null,
+         "choiceSettingValue": {
+          "settingValueTemplateReference": null,
+          "value": "device_vendor_msft_policy_config_microsoft_edgev86.1~policy~microsoft_edge_diagnosticdata_1",
+          "children": [
+           {
+            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev86.1~policy~microsoft_edge_diagnosticdata_diagnosticdata",
+            "settingInstanceTemplateReference": null,
+            "auditRuleInformation": null,
+            "choiceSettingValue": {
+             "settingValueTemplateReference": null,
+             "value": "device_vendor_msft_policy_config_microsoft_edgev86.1~policy~microsoft_edge_diagnosticdata_diagnosticdata_1",
+             "children": []
+            }
+           }
+          ]
+         }
+        }
+       },
+       {
+        "id": "4",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_userfeedbackallowed",
+         "settingInstanceTemplateReference": null,
+         "auditRuleInformation": null,
+         "choiceSettingValue": {
+          "settingValueTemplateReference": null,
+          "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_userfeedbackallowed_0",
+          "children": []
+         }
+        }
+       },
+       {
+        "id": "5",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev89~policy~microsoft_edge_showrecommendationsenabled",
+         "settingInstanceTemplateReference": null,
+         "auditRuleInformation": null,
+         "choiceSettingValue": {
+          "settingValueTemplateReference": null,
+          "value": "device_vendor_msft_policy_config_microsoft_edgev89~policy~microsoft_edge_showrecommendationsenabled_0",
+          "children": []
+         }
+        }
+       },
+       {
+        "id": "6",
+        "settingInstance": {
+         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+         "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev87~policy~microsoft_edge_edgeshoppingassistantenabled",
+         "settingInstanceTemplateReference": null,
+         "auditRuleInformation": null,
+         "choiceSettingValue": {
+          "settingValueTemplateReference": null,
+          "value": "device_vendor_msft_policy_config_microsoft_edgev87~policy~microsoft_edge_edgeshoppingassistantenabled_0",
+          "children": []
+         }
+        }
+       }
+      ]
+     }
+    },
+    {
      "id": "sc-win-policy-d-disablecopilot",
      "name": "Win-Policy-D-DisableCopilot",
      "description": "Disables Copilot App. Copilot in Edge left untouched (Additional Copilot restrictions located in Platform Scripts)",
@@ -4337,147 +4478,6 @@
          "choiceSettingValue": {
           "settingValueTemplateReference": null,
           "value": "user_vendor_msft_policy_config_microsoft_edgev92~policy~microsoft_edge_aadwebsitessousingthisprofileenabled_1",
-          "children": []
-         }
-        }
-       }
-      ]
-     }
-    },
-    {
-     "id": "sc-win-policy-u-edgeprivacy",
-     "name": "Win-Policy-U-EdgePrivacy",
-     "description": "Edge privacy without removing features. Do Not Track on, ad and search personalization reporting off, site info sharing off, browser diagnostic data held at required, and the feedback, recommendation and shopping prompts turned off. Collections, sidebar, autofill and address bar suggestions left alone. User based, assign to user groups.",
-     "type": "configurationPolicy",
-     "file": "../Settings Catalog/Win-Policy-U-EdgePrivacy.json",
-     "content": {
-      "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
-      "createdDateTime": "2026-08-16T23:30:00.0000000Z",
-      "creationSource": null,
-      "description": "Edge privacy without removing features. Do Not Track on, ad and search personalization reporting off, site info sharing off, browser diagnostic data held at required, and the feedback, recommendation and shopping prompts turned off. Collections, sidebar, autofill and address bar suggestions left alone. User based, assign to user groups.",
-      "lastModifiedDateTime": "2026-08-16T23:30:00.0000000Z",
-      "name": "Win-Policy-U-EdgePrivacy",
-      "platforms": "windows10",
-      "priorityMetaData": null,
-      "roleScopeTagIds": [
-       "0"
-      ],
-      "settingCount": 7,
-      "technologies": "mdm",
-      "id": "662cae16-9525-4f63-9d07-1039a61affc5",
-      "templateReference": {
-       "templateId": "",
-       "templateFamily": "none",
-       "templateDisplayName": null,
-       "templateDisplayVersion": null
-      },
-      "settings": [
-       {
-        "id": "0",
-        "settingInstance": {
-         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-         "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_configuredonottrack",
-         "settingInstanceTemplateReference": null,
-         "auditRuleInformation": null,
-         "choiceSettingValue": {
-          "settingValueTemplateReference": null,
-          "value": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_configuredonottrack_1",
-          "children": []
-         }
-        }
-       },
-       {
-        "id": "1",
-        "settingInstance": {
-         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-         "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev80diff~policy~microsoft_edge_personalizationreportingenabled",
-         "settingInstanceTemplateReference": null,
-         "auditRuleInformation": null,
-         "choiceSettingValue": {
-          "settingValueTemplateReference": null,
-          "value": "user_vendor_msft_policy_config_microsoft_edgev80diff~policy~microsoft_edge_personalizationreportingenabled_0",
-          "children": []
-         }
-        }
-       },
-       {
-        "id": "2",
-        "settingInstance": {
-         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-         "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_sendsiteinfotoimproveservices",
-         "settingInstanceTemplateReference": null,
-         "auditRuleInformation": null,
-         "choiceSettingValue": {
-          "settingValueTemplateReference": null,
-          "value": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_sendsiteinfotoimproveservices_0",
-          "children": []
-         }
-        }
-       },
-       {
-        "id": "3",
-        "settingInstance": {
-         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-         "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev86.1~policy~microsoft_edge_diagnosticdata",
-         "settingInstanceTemplateReference": null,
-         "auditRuleInformation": null,
-         "choiceSettingValue": {
-          "settingValueTemplateReference": null,
-          "value": "user_vendor_msft_policy_config_microsoft_edgev86.1~policy~microsoft_edge_diagnosticdata_1",
-          "children": [
-           {
-            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev86.1~policy~microsoft_edge_diagnosticdata_diagnosticdata",
-            "settingInstanceTemplateReference": null,
-            "auditRuleInformation": null,
-            "choiceSettingValue": {
-             "settingValueTemplateReference": null,
-             "value": "user_vendor_msft_policy_config_microsoft_edgev86.1~policy~microsoft_edge_diagnosticdata_diagnosticdata_1",
-             "children": []
-            }
-           }
-          ]
-         }
-        }
-       },
-       {
-        "id": "4",
-        "settingInstance": {
-         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-         "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_userfeedbackallowed",
-         "settingInstanceTemplateReference": null,
-         "auditRuleInformation": null,
-         "choiceSettingValue": {
-          "settingValueTemplateReference": null,
-          "value": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_userfeedbackallowed_0",
-          "children": []
-         }
-        }
-       },
-       {
-        "id": "5",
-        "settingInstance": {
-         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-         "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev89~policy~microsoft_edge_showrecommendationsenabled",
-         "settingInstanceTemplateReference": null,
-         "auditRuleInformation": null,
-         "choiceSettingValue": {
-          "settingValueTemplateReference": null,
-          "value": "user_vendor_msft_policy_config_microsoft_edgev89~policy~microsoft_edge_showrecommendationsenabled_0",
-          "children": []
-         }
-        }
-       },
-       {
-        "id": "6",
-        "settingInstance": {
-         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-         "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev87~policy~microsoft_edge_edgeshoppingassistantenabled",
-         "settingInstanceTemplateReference": null,
-         "auditRuleInformation": null,
-         "choiceSettingValue": {
-          "settingValueTemplateReference": null,
-          "value": "user_vendor_msft_policy_config_microsoft_edgev87~policy~microsoft_edge_edgeshoppingassistantenabled_0",
           "children": []
          }
         }
