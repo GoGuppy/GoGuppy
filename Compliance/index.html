@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoGuppy</title>
+<title>GoGuppy · Compliance</title>
 <style>
 /* GoGuppy shared styles */
 
@@ -237,89 +237,73 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   .row .desc { grid-column: 2; }
 }
 
-/* home hero */
-.hero { display: flex; align-items: center; gap: 26px; padding: 32px 0 16px; flex-wrap: wrap; }
-.hero .face { width: 128px; height: 128px; border-radius: 50%; flex: 0 0 auto; }
-.hero .wordmark { font-size: 52px; line-height: 1; letter-spacing: -.02em; }
-.hero .wordmark .go { color: var(--dim); }
-.hero .wordmark .gup { color: var(--violet); }
-@media (max-width: 620px) {
-  .hero { gap: 18px; }
-  .hero .face { width: 92px; height: 92px; }
-  .hero .wordmark { font-size: 36px; }
-}
+.topbar .home { display: inline-flex; align-items: center; gap: 9px; color: var(--dim); text-decoration: none; }
+.topbar .home:hover { color: var(--violet); }
+.topbar .mark { flex: 0 0 auto; display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
 </style>
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="128x128" href="assets/guppy-icon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="../assets/guppy-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
 </head>
 <body>
 
 <div class="wrap">
 
   <div class="topbar">
-    <span>goguppy.com</span>
+    <a class="home" href="../index.html"><img class="mark" src="../assets/guppy-icon@2x.png" alt=""><span>goguppy.com</span></a>
     <span>rev 2026.08</span>
   </div>
 
-<div class="hero">
-    <img class="face" src="assets/guppy-icon@2x.png" alt="Guppy">
-    <div class="wordmark"><span class="go">Go</span><span class="gup">Guppy</span></div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Compliance</div>
+
+  <h1>✅ Compliance</h1>
+  <div class="subtitle">The half of Conditional Access nobody configures.</div>
+  <div class="out">click a row to download | set the tenant settings first</div>
+
+  <div class="warning-box">Check the tenant setting below before you assign anything. If devices with no policy are already marked not compliant and you have a require compliant device rule live, assigning your first policy changes who gets in.</div>
+  <div class="info-box">Included with Intune, no extra licence. Conditional Access needs P1, this does not.</div>
+
+  <div class="sub">Tenant Settings</div>
+  <div class="sub-desc">One page, applies everywhere, easy to miss. Intune, Devices, Compliance, Compliance policy settings.</div>
+
+  <div class="settings-panel">
+    <div class="settings-row">
+      <span class="settings-key">Mark devices with no compliance policy assigned as</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--dim);">Not compliant</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Compliance status validity period (days)</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--dim);">30</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Enhanced jailbreak detection</span>
+      <span class="badge badge-no">No</span>
+    </div>
   </div>
 
-  <div class="tagline"><span class="hl">Platform scripts, Remediations, Settings Catalog policies and other Stuff</span></div>
+  <div class="sub">Policies</div>
+  <div class="sub-desc">Start here, then tighten. Every setting you add is a way to lock someone out.</div>
 
-  <div class="sec-label">Sections</div>
-
-  <div class="row empty">
-    <span class="icon">🚀</span><span class="name">Autopilot</span>
-    <span class="desc">Box to desktop, no hands. Soon.</span>
-  </div>
-
-  <div class="row empty">
-    <span class="icon">🛡️</span><span class="name">Conditional Access</span>
-    <span class="desc">Awesome CA policies that Microsoft doesn't write for you. Soon.</span>
-  </div>
-
-  <div class="row empty">
-    <span class="icon">✅</span><span class="name">Compliance</span>
-    <span class="desc">The half of Conditional Access nobody configures. Soon.</span>
-  </div>
-
-  <div class="row empty">
-    <span class="icon">🔄</span><span class="name">Updates</span>
-    <span class="desc">Update rings/autopatch/etc for those with 1 bajillion conflicts. Soon.</span>
-  </div>
-
-  <a class="row" href="Intune/index.html">
-    <span class="icon">🔄</span><span class="name">Remediations</span>
-    <span class="desc">Detection and remediation script pairs.</span>
+  <a class="row" href="Win-Compliance-D-Baseline.json" download>
+    <span class="icon">🛡️</span><span class="name">Windows Baseline</span>
+    <span class="desc">BitLocker, Secure Boot, code integrity, firewall, Defender real time protection, TPM. The things a healthy device has anyway, so almost nothing fails on day one.</span>
   </a>
 
-  <a class="row" href="Platform Scripts/index.html">
-    <span class="icon">📜</span><span class="name">Platform Scripts</span>
-    <span class="desc">Scripts that run once per device at enrollment.</span>
-  </a>
-
-  <div class="row empty">
-    <span class="icon">📦</span><span class="name">Win32 Apps</span>
-    <span class="desc">Don't have fancy licensing for remediations? Win32 workarounds coming soon</span>
-  </div>
-
-  <a class="row" href="Settings Catalog/index.html">
-    <span class="icon">⚙️</span><span class="name">Settings Catalog</span>
-    <span class="desc">Policy JSON ready to import.</span>
+  <a class="row" href="Win-Compliance-D-MinimumOS.json" download>
+    <span class="icon">📅</span><span class="name">Minimum OS Version<span class="tag tag-red">Edit First</span></span>
+    <span class="desc">Blocks devices stuck on old builds. Set the version to something your fleet already meets, then raise it every servicing cycle. Import it as shipped and you will lock out whoever is behind.</span>
   </a>
 
   <div class="row empty">
-    <span class="icon">🔑</span><span class="name">Endpoint Privilege Management</span>
-    <span class="desc">Elevation without local admin. Soon.</span>
+    <span class="icon">📧</span><span class="name">Notification Template</span>
+    <span class="desc">Coming. The email a user gets before their device is marked non compliant.</span>
   </div>
 
-  <a class="row" href="Intune GitHub/builder/index.html">
-    <span class="icon">🧰</span><span class="name">Deployment Kit</span>
-    <span class="desc">Pick policies, generate one combined bundle JSON.</span>
-  </a>
+  <div class="sub">Notes</div>
+
+  <div class="info-box">Always set a grace period on the noncompliance action. Without one the device flips to not compliant the instant it fails and Conditional Access blocks the person mid task, with no warning and no way to self serve.</div>
+  <div class="info-box">Compliance is evaluated on the device and reported up. A device that is off, asleep or offline past the validity period goes not compliant on its own.</div>
+  <div class="warning-box">Do not put a password or PIN rule in here if you already set one in the Settings Catalog. Two sources of truth for the same setting is how you get a fleet that is permanently non compliant for no visible reason.</div>
 
 </div>
 
