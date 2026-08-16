@@ -2,7 +2,7 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-07-07T02:25:43.5456329Z",
     "creationSource": null,
-    "description": "Blanket Defender buildout. Real time and behavior monitoring, cloud protection at high block level, network protection, script and email and removable drive scanning, and PUA blocking all on. Threats quarantine by default, samples submit automatically, signatures check every 24 hours, and a full scan runs daily at 02:00. Platform, engine and intelligence updates follow the staged channel.",
+    "description": "Blanket Defender buildout. Real time and behavior monitoring, cloud protection at high block level, network protection, script and email and removable drive scanning, and PUA blocking all on. Threats quarantine by default, samples submit automatically, signatures check every 24 hours, and a full scan runs daily at 02:00. Platform, engine and intelligence updates follow the staged channel. Do not assign this if you run third party antivirus. Defender drops to passive mode and these settings will fight it.",
     "lastModifiedDateTime": "2026-08-10T03:08:34.6770872Z",
     "name": "Win-Policy-D-Antivirus",
     "platforms": "windows10",
