@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoGuppy</title>
+<title>GoGuppy · Autopilot</title>
 <style>
 /* GoGuppy shared styles */
 
@@ -237,75 +237,70 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   .row .desc { grid-column: 2; }
 }
 
-/* home hero */
-.hero { display: flex; align-items: center; gap: 26px; padding: 32px 0 16px; flex-wrap: wrap; }
-.hero .face { width: 128px; height: 128px; border-radius: 50%; flex: 0 0 auto; }
-.hero .wordmark { font-size: 52px; line-height: 1; letter-spacing: -.02em; }
-.hero .wordmark .go { color: var(--dim); }
-.hero .wordmark .gup { color: var(--violet); }
-@media (max-width: 620px) {
-  .hero { gap: 18px; }
-  .hero .face { width: 92px; height: 92px; }
-  .hero .wordmark { font-size: 36px; }
-}
+.topbar .home { display: inline-flex; align-items: center; gap: 9px; color: var(--dim); text-decoration: none; }
+.topbar .home:hover { color: var(--violet); }
+.topbar .mark { flex: 0 0 auto; display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
 </style>
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="128x128" href="assets/guppy-icon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="../assets/guppy-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
 </head>
 <body>
 
 <div class="wrap">
 
   <div class="topbar">
-    <span>goguppy.com</span>
+    <a class="home" href="../index.html"><img class="mark" src="../assets/guppy-icon@2x.png" alt=""><span>goguppy.com</span></a>
     <span>rev 2026.08</span>
   </div>
 
-<div class="hero">
-    <img class="face" src="assets/guppy-icon@2x.png" alt="Guppy">
-    <div class="wordmark"><span class="go">Go</span><span class="gup">Guppy</span></div>
-  </div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Autopilot</div>
 
-  <div class="tagline"><span class="hl">Platform scripts, Remediations, Settings Catalog policies and other Stuff</span></div>
+  <h1>🚀 Autopilot</h1>
+  <div class="subtitle">Box to desktop, no hands.</div>
+  <div class="out">total 4 | click a row to download | new tenants start here</div>
 
-  <div class="sec-label">Sections</div>
-  <div class="out">7 sections | 7 remediations | 2 detections | 1 platform script | 19 policies</div>
+  <div class="info-box">Device Preparation is the default for new Entra joined Windows 11. Classic Autopilot is not deprecated and is still required for hybrid join, pre-provisioning, kiosks and Windows 10.</div>
+
+  <div class="sub">Device Preparation</div>
+  <div class="sub-desc">The current path. No device registration, assigns to user groups.</div>
+
+  <a class="row" href="Win-AP-DevicePrep.json" download>
+    <span class="icon">📦</span><span class="name">Device Preparation Policy</span>
+    <span class="desc">Standard user, 60 minute timeout, device stays locked on failure. App and script lists are tenant specific, replace them. Assign to user groups.</span>
+  </a>
+
+  <div class="sub">Classic Autopilot</div>
+  <div class="sub-desc">Still needed for hybrid, pre-provisioning, kiosk and Windows 10.</div>
+
+  <a class="row" href="Win-AP-DeploymentProfile.json" download>
+    <span class="icon">✈️</span><span class="name">Deployment Profile</span>
+    <span class="desc">User driven Entra join, EULA and privacy screens hidden, standard user, name template GUP-%SERIAL%. Edit the prefix before you import.</span>
+  </a>
+
+  <a class="row" href="Win-AP-ESP.json" download>
+    <span class="icon">⏳</span><span class="name">Enrollment Status Page<span class="tag tag-red">Edit First</span></span>
+    <span class="desc">Blocks the desktop until the build finishes, 60 minute timeout, reset offered on failure. The blocking app list is app IDs from my tenant and will not resolve in yours.</span>
+  </a>
+
+  <div class="sub">Enrollment</div>
+  <div class="sub-desc">Stop the wrong things enrolling in the first place.</div>
+
+  <a class="row" href="Win-AP-EnrollmentRestrictions.json" download>
+    <span class="icon">🚫</span><span class="name">Enrollment Restrictions</span>
+    <span class="desc">Blocks personal Windows devices, allows corporate only. Applies tenant wide, check it against your BYOD stance first.</span>
+  </a>
 
   <div class="row empty">
-    <span class="icon">🚀</span><span class="name">Autopilot</span>
-    <span class="desc">Box to desktop, no hands. Soon.</span>
+    <span class="icon">🏷️</span><span class="name">Group Tag Rules</span>
+    <span class="desc">Coming. Dynamic group syntax for splitting builds by order ID.</span>
   </div>
 
-  <a class="row" href="Intune/index.html">
-    <span class="icon">🔄</span><span class="name">Remediations</span>
-    <span class="desc">Detection and remediation script pairs.</span>
-  </a>
+  <div class="sub">Notes</div>
 
-  <a class="row" href="Platform Scripts/index.html">
-    <span class="icon">📜</span><span class="name">Platform Scripts</span>
-    <span class="desc">Scripts that run once per device at enrollment.</span>
-  </a>
-
-  <div class="row empty">
-    <span class="icon">📦</span><span class="name">Win32 Apps</span>
-    <span class="desc">Nothing here yet.</span>
-  </div>
-
-  <a class="row" href="Settings Catalog/index.html">
-    <span class="icon">⚙️</span><span class="name">Settings Catalog</span>
-    <span class="desc">Policy JSON ready to import.</span>
-  </a>
-
-  <div class="row empty">
-    <span class="icon">🔑</span><span class="name">Endpoint Privilege Management</span>
-    <span class="desc">Elevation without local admin. Soon.</span>
-  </div>
-
-  <a class="row" href="Intune GitHub/builder/index.html">
-    <span class="icon">🧰</span><span class="name">Deployment Kit</span>
-    <span class="desc">Pick policies, generate one combined bundle JSON.</span>
-  </a>
+  <div class="info-box">Set the ESP timeout longer than your slowest app. Everything else about ESP pain is really this.</div>
+  <div class="info-box">Standard user, not administrator. Reversing that later means touching every device you already built.</div>
+  <div class="warning-box">Enrollment restrictions are tenant wide, not assigned. Importing this changes behaviour for everyone immediately.</div>
 
 </div>
 
