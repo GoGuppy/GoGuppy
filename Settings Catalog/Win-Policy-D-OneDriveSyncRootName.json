@@ -1,0 +1,74 @@
+﻿{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
+    "createdDateTime": "2026-08-16T16:57:06.1031924Z",
+    "creationSource": null,
+    "description": "Allows customization of the OneDrive local sync root folder from \"OneDrive - SuperLongName\" to something more space efficient. Warning:  ONLY USE FOR NEW DEPLOYMENTS OR YOU WILL HAVE BIG PROBLEMOS!\n",
+    "lastModifiedDateTime": "2026-08-16T17:06:54.3200382Z",
+    "name": "Win-Policy-D-OneDriveSyncRootName",
+    "platforms": "windows10",
+    "priorityMetaData": null,
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 1,
+    "technologies": "mdm",
+    "id": "0950cb3d-446f-48c5-9afb-761177740c57",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_1",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+                            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_customsyncrootfoldernamelist",
+                            "settingInstanceTemplateReference": null,
+                            "auditRuleInformation": null,
+                            "groupSettingCollectionValue": [
+                                {
+                                    "settingValueTemplateReference": null,
+                                    "children": [
+                                        {
+                                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_customsyncrootfoldernamelist_key",
+                                            "settingInstanceTemplateReference": null,
+                                            "auditRuleInformation": null,
+                                            "simpleSettingValue": {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                                "settingValueTemplateReference": null,
+                                                "value": "00000000-0000-0000-0000-000000000000"
+                                            }
+                                        },
+                                        {
+                                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_customsyncrootfoldernamelist_value",
+                                            "settingInstanceTemplateReference": null,
+                                            "auditRuleInformation": null,
+                                            "simpleSettingValue": {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                                "settingValueTemplateReference": null,
+                                                "value": "ORG"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

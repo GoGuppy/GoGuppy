@@ -2,15 +2,15 @@
     "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
     "createdDateTime": "2026-07-09T22:56:00.2651622Z",
     "creationSource": null,
-    "description": "Silent account configuration and auto start at sign-in with no user prompts, first run tutorial and new account detection suppressed. Known Folder Move redirects Desktop, Documents and Pictures with opt-out blocked, Files On-Demand enabled, sync restricted to the tenant, personal accounts blocked, mass delete detection forced, and extensions that are suspicious, clutter prone or likely to break sync are excluded. Sync root folder renamed to ORG to shorten file paths; new deployments only, remove this setting for existing clients since renaming the sync root changes every local path and can break shortcuts, mapped drives and linked files.",
-    "lastModifiedDateTime": "2026-08-08T19:19:44.8540818Z",
+    "description": "OneDrive auto launches at sign-in with KFM enforced, tenant restricted sync, and extension exclusions for suspicious, clutter or sync failure prone file types.",
+    "lastModifiedDateTime": "2026-08-16T16:52:11.8631296Z",
     "name": "Win-Policy-D-OneDriveSettings",
     "platforms": "windows10",
     "priorityMetaData": null,
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 19,
+    "settingCount": 18,
     "technologies": "mdm",
     "id": "545ddf2e-af8d-45e0-a7cf-ef2624fb93fa",
     "templateReference": {
@@ -186,27 +186,12 @@
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": "*.iso"
-                                },
-                                {
-                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
-                                    "settingValueTemplateReference": null,
                                     "value": "*.jar"
                                 },
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
                                     "value": "*.mdb"
-                                },
-                                {
-                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
-                                    "settingValueTemplateReference": null,
-                                    "value": "*.msi"
-                                },
-                                {
-                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
-                                    "settingValueTemplateReference": null,
-                                    "value": "*.pst"
                                 },
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
@@ -236,32 +221,27 @@
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": ".url"
+                                    "value": "*.url"
                                 },
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": ".ost"
+                                    "value": "*.tmp"
                                 },
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": ".tmp"
+                                    "value": "*.laccdb"
                                 },
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": ".laccdb"
+                                    "value": "*.ldb"
                                 },
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": ".ldb"
-                                },
-                                {
-                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
-                                    "settingValueTemplateReference": null,
-                                    "value": ".lnk"
+                                    "value": "*.lnk"
                                 }
                             ]
                         }
@@ -365,56 +345,6 @@
             "id": "13",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername",
-                "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
-                "choiceSettingValue": {
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_1",
-                    "children": [
-                        {
-                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
-                            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_customsyncrootfoldernamelist",
-                            "settingInstanceTemplateReference": null,
-                            "auditRuleInformation": null,
-                            "groupSettingCollectionValue": [
-                                {
-                                    "settingValueTemplateReference": null,
-                                    "children": [
-                                        {
-                                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
-                                            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_customsyncrootfoldernamelist_key",
-                                            "settingInstanceTemplateReference": null,
-                                            "auditRuleInformation": null,
-                                            "simpleSettingValue": {
-                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
-                                                "settingValueTemplateReference": null,
-                                                "value": "00000000-0000-0000-0000-000000000000"
-                                            }
-                                        },
-                                        {
-                                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
-                                            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengsc~policy~onedrivengsc_customsyncrootfoldername_customsyncrootfoldernamelist_value",
-                                            "settingInstanceTemplateReference": null,
-                                            "auditRuleInformation": null,
-                                            "simpleSettingValue": {
-                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
-                                                "settingValueTemplateReference": null,
-                                                "value": "ORG"
-                                            }
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-        },
-        {
-            "id": "14",
-            "settingInstance": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_gposetupdatering",
                 "settingInstanceTemplateReference": null,
                 "auditRuleInformation": null,
@@ -438,7 +368,7 @@
             }
         },
         {
-            "id": "15",
+            "id": "14",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard",
@@ -508,7 +438,7 @@
             }
         },
         {
-            "id": "16",
+            "id": "15",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_silentaccountconfig",
@@ -522,7 +452,7 @@
             }
         },
         {
-            "id": "17",
+            "id": "16",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv7~policy~onedrivengsc_enableautostart",
@@ -536,7 +466,7 @@
             }
         },
         {
-            "id": "18",
+            "id": "17",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_filesondemandenabled",

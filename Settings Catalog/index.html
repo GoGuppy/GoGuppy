@@ -258,7 +258,7 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 
   <h1>⚙️ Settings Catalog</h1>
   <div class="subtitle">Policy JSON ready to import.</div>
-  <div class="out">total 18 | click a row to download | most go to device groups, exceptions noted</div>
+  <div class="out">total 20 | click a row to download | most go to device groups, exceptions noted</div>
 
   <div class="sub">Security Hardening</div>
   <div class="sub-desc">Encryption, credentials, protocols, and account controls.</div>
@@ -318,7 +318,17 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 
   <a class="row" href="Win-Policy-D-OneDriveSettings.json" download>
     <span class="icon">☁️</span><span class="name">OneDrive Settings</span>
-    <span class="desc">Auto start, silent sign-in, tenant locked, silent KFM with opt-out blocked, Files On-Demand. Sync root renamed to ORG to shorten file paths. Remove that setting for existing clients, since renaming the sync root rewrites every local path and breaks shortcuts, mapped drives and linked files. The tenant ID is a placeholder of all zeros in three places. Replace it or KFM and the tenant allow list will not work. System and user based, assign to device groups.</span>
+    <span class="desc">Auto start, silent sign-in, tenant locked, silent KFM with opt-out blocked, Files On-Demand, and extension exclusions for files that clutter or break sync. The tenant ID is a placeholder of all zeros in three places. Replace it or KFM and the tenant allow list will not work. System and user based, assign to device groups.</span>
+  </a>
+
+  <a class="row" href="Win-Policy-D-OneDriveSyncRootName.json" download>
+    <span class="icon">📁</span><span class="name">OneDrive Sync Root Name</span>
+    <span class="desc">Renames the local sync root to ORG to shorten file paths. New deployments only, since renaming the sync root rewrites every local path and breaks shortcuts, mapped drives and linked files. Tenant ID is a placeholder of all zeros. User based, assign to device groups.</span>
+  </a>
+
+  <a class="row" href="Win-Policy-U-SharepointSettings.json" download>
+    <span class="icon">🗂️</span><span class="name">SharePoint Auto Mount</span>
+    <span class="desc">Auto mounts SharePoint libraries for users who have permission to them. The tenant, site, web and list IDs and the site URL are all placeholders. Replace them with your own or nothing mounts. User based, assign to user groups.</span>
   </a>
 
   <a class="row" href="Win-Policy-D-UserExperience.json" download>
