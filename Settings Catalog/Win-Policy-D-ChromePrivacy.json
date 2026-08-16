@@ -1,0 +1,108 @@
+﻿{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/configurationPolicies/$entity",
+    "createdDateTime": "2026-08-16T23:45:00.0000000Z",
+    "creationSource": null,
+    "description": "Chrome privacy without removing features. Usage and crash reporting to Google off, URL keyed anonymized data collection off, the spell check web service off so typed text stays local, user feedback off, full tab promotional content off, and the browser experiments icon hidden. Search suggestions, autofill, sync and Safe Browsing left alone. System based, assign to device groups.",
+    "lastModifiedDateTime": "2026-08-16T23:45:00.0000000Z",
+    "name": "Win-Policy-D-ChromePrivacy",
+    "platforms": "windows10",
+    "priorityMetaData": null,
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 6,
+    "technologies": "mdm",
+    "id": "b5fd5218-42e1-4429-9056-f285251d3b1a",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_metricsreportingenabled",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_metricsreportingenabled_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_urlkeyedanonymizeddatacollectionenabled",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_urlkeyedanonymizeddatacollectionenabled_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "2",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_spellcheckserviceenabled",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_spellcheckserviceenabled_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "3",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_userfeedbackallowed",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_userfeedbackallowed_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "4",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_promotionaltabsenabled",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_promotionaltabsenabled_0",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "5",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_browserlabsenabled",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_chromeintunev1~policy~googlechrome_browserlabsenabled_0",
+                    "children": []
+                }
+            }
+        }
+    ]
+}
