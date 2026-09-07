@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoGuppy · Graph</title>
+<style>
+/* GoGuppy shared styles */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #0a0a0a;
+  --panel:  #0e0e10;
+  --row:    #151517;
+  --rule:   #1f2024;
+  --ink:    #cbccc6;
+  --dim:    #6e747c;
+  --cyan:   #5ccfe6;
+  --violet: #a37acc;
+  --faint:  #383c42;
+  --mono:   'Cascadia Mono', 'Consolas', ui-monospace, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 0 0 60px;
+}
+
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+
+/* top bar */
+.topbar {
+  border-bottom: 1px solid var(--rule);
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--dim);
+  font-size: 12px;
+}
+.topbar a { color: var(--dim); text-decoration: none; }
+.topbar a:hover { color: var(--violet); }
+
+/* home banner */
+.banner {
+  padding: 34px 0 8px;
+  white-space: pre;
+  color: var(--violet);
+  font-size: 12px;
+  line-height: 1.35;
+  overflow-x: auto;
+}
+.tagline { color: var(--dim); padding-bottom: 26px; font-size: 13px; }
+.tagline .hl { color: var(--ink); }
+
+/* section headings */
+.sec-label, .section-label {
+  color: var(--cyan);
+  padding: 30px 0 6px;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 8px;
+}
+.out { color: var(--dim); font-size: 12px; padding-bottom: 8px; }
+.sub {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 20px 0 2px;
+}
+.sub-desc { color: var(--dim); font-size: 12px; padding-bottom: 8px; }
+
+/* listing rows */
+.row {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 260px) minmax(0, 1fr);
+  gap: 14px;
+  align-items: baseline;
+  padding: 6px 8px 6px 0;
+  text-decoration: none;
+  color: inherit;
+  border-left: 2px solid transparent;
+}
+.row .icon {
+  font-size: 14px;
+  line-height: 1;
+  filter: grayscale(35%);
+}
+.row:hover .icon { filter: none; }
+.row:hover { background: var(--row); border-left-color: var(--violet); padding-left: 8px; }
+.row:hover .name { color: var(--violet); }
+.row .idx { display: none; }
+.row.empty {
+  color: var(--faint);
+  cursor: default;
+  pointer-events: none;
+}
+.row.empty .name, .row.empty .desc { color: var(--faint); }
+.row .name { color: var(--ink); min-width: 0; overflow-wrap: break-word; }
+.row .desc { color: var(--dim); min-width: 0; overflow-wrap: break-word; }
+
+/* detail pages */
+.breadcrumb { color: var(--dim); font-size: 12px; padding: 26px 0 18px; }
+.breadcrumb a { color: var(--dim); text-decoration: none; }
+.breadcrumb a:hover { color: var(--violet); }
+
+h1 {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.subtitle { color: var(--dim); font-size: 12px; padding-bottom: 20px; }
+
+.warning-box {
+  border-left: 2px solid var(--violet);
+  padding: 4px 0 4px 14px;
+  color: var(--dim);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.info-box {
+  border-left: 2px solid var(--cyan);
+  padding: 4px 0 4px 14px;
+  color: var(--dim);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+/* collapsible script cards */
+details.card {
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  margin-bottom: 10px;
+}
+details.card[open] { border-color: var(--faint); }
+summary.card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  list-style: none;
+}
+summary.card-top::-webkit-details-marker { display: none; }
+summary.card-top:hover .card-title { color: var(--violet); }
+.step {
+  border: 1px solid var(--faint);
+  color: var(--cyan);
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.card-info { flex: 1; }
+.card-title { color: var(--ink); font-size: 13px; }
+.card-desc { color: var(--dim); font-size: 12px; }
+.chevron { color: var(--faint); font-size: 15px; }
+details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
+.chevron { display: inline-block; transition: transform .15s, color .15s; }
+
+.tag {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  border: 1px solid var(--rule);
+  padding: 1px 6px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+.tag-yellow { color: var(--cyan); border-color: var(--faint); }
+.tag-red { color: var(--violet); border-color: var(--faint); }
+
+/* code */
+.code-wrap { position: relative; border-top: 1px solid var(--rule); }
+.code-block {
+  padding: 14px 60px 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 2px 9px;
+  cursor: pointer;
+}
+.copy-btn:hover { color: var(--violet); border-color: var(--faint); }
+.copy-btn.done { color: var(--cyan); }
+
+/* settings table */
+.settings-panel { border: 1px solid var(--rule); }
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.settings-row:last-child { border-bottom: 0; }
+.settings-key { color: var(--dim); font-size: 12px; }
+.badge { font-size: 11px; letter-spacing: .06em; }
+.badge-yes { color: var(--cyan); }
+.badge-no { color: var(--dim); }
+
+@media (max-width: 720px) {
+  .wrap { padding: 0 18px; }
+  .banner { font-size: 9px; }
+  .row {
+    grid-template-columns: 24px minmax(0, 1fr);
+    row-gap: 2px;
+    padding-bottom: 10px;
+  }
+  .row .desc { grid-column: 2; }
+}
+
+
+.topbar .home { display: inline-flex; align-items: center; gap: 9px; color: var(--dim); text-decoration: none; }
+.topbar .home:hover { color: var(--violet); }
+.topbar .mark { flex: 0 0 auto; display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+
+/* group builder */
+.toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 4px 0 6px; }
+.toolbar .lab { color: var(--faint); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; width: 104px; }
+.ghost {
+  background: var(--bg); border: 1px solid var(--rule); color: var(--dim);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 4px 12px; cursor: pointer;
+}
+.ghost:hover { color: var(--ink); border-color: var(--faint); }
+.ghost.on { color: var(--violet); border-color: var(--violet); }
+.spacer { flex: 1; }
+.count { color: var(--dim); font-size: 11px; }
+.pick-row { display: grid; grid-template-columns: 18px minmax(0, 320px) minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 4px 8px 4px 0; }
+.pick-row:hover { background: var(--row); }
+.pick-row label { color: var(--ink); cursor: pointer; min-width: 0; overflow-wrap: break-word; }
+.pick-row .desc { color: var(--dim); font-size: 12px; min-width: 0; overflow-wrap: break-word; }
+.pick-row.kid label { padding-left: 16px; color: var(--dim); }
+.pick-row.kid .tn { color: var(--cyan); }
+input[type=checkbox] { accent-color: #a37acc; width: 13px; height: 13px; cursor: pointer; }
+.section-head { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--rule); margin: 24px 0 8px; padding-bottom: 6px; }
+.section-head .t { color: var(--cyan); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+.section-head .pill { color: var(--faint); font-size: 11px; }
+.stat { display: flex; gap: 26px; flex-wrap: wrap; border-left: 2px solid var(--faint); padding: 6px 0 6px 14px; margin: 14px 0 4px; }
+.stat div { color: var(--dim); font-size: 12px; }
+.stat b { color: var(--ink); font-weight: 400; }
+
+@media (max-width: 720px) {
+  .pick-row { grid-template-columns: 18px minmax(0, 1fr); row-gap: 2px; padding-bottom: 8px; }
+  .pick-row .desc { grid-column: 2; }
+  .toolbar .lab { width: 100%; }
+}
+
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="../assets/guppy-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <a class="home" href="../index.html"><img class="mark" src="../assets/guppy-icon@2x.png" alt=""><span>goguppy.com</span></a>
+    <span>rev 2026.09</span>
+  </div>
+
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Graph</div>
+
+  <h1>🕸️ Graph</h1>
+  <div class="subtitle">Assignment group builder.</div>
+  <div class="out">check what you need | the script below updates as you pick</div>
+
+  <div class="toolbar">
+    <span class="lab">Group model</span>
+    <button class="ghost on" id="mPolicy">Per policy</button>
+    <button class="ghost" id="mTier">Per tier</button>
+  </div>
+  <div class="toolbar">
+    <span class="lab">Script does</span>
+    <button class="ghost on" id="aCreate">Create</button>
+    <button class="ghost" id="aAssign">Create + assign</button>
+    <button class="ghost" id="aRemove">Remove</button>
+  </div>
+  <div class="toolbar">
+    <span class="lab"></span>
+    <button class="ghost" id="btnAll">Select all</button>
+    <button class="ghost" id="btnNone">Clear</button>
+    <span class="spacer"></span>
+    <span class="count" id="count">0 selected</span>
+  </div>
+
+  <div class="stat" id="stat"></div>
+
+  <div id="list"></div>
+
+  <div class="section-label">Script</div>
+  <div class="code-wrap">
+    <button class="copy-btn" id="copy">copy</button>
+    <div class="code-block" id="out"></div>
+  </div>
+  <div class="info-box" id="hint"></div>
+
+</div>
+
+<script>
+const D = {
+  "tiers": [
+    "Baseline",
+    "Enhanced",
+    "Hardened"
+  ],
+  "sections": [
+    {
+      "title": "Settings Catalog policies",
+      "kind": "configurationPolicies",
+      "tierable": true,
+      "items": [
+        { "name": "Win-Policy-D-AdvancedPhishingProtection", "desc": "SmartScreen alerts for unsafe work credential use" },
+        { "name": "Win-Policy-D-Antivirus", "desc": "Defender real time protection, network protection, PUA blocking" },
+        { "name": "Win-Policy-D-Bitlocker", "desc": "Silent drive encryption with key escrow to Entra ID" },
+        { "name": "Win-Policy-D-ChromeMemoryOptimization", "desc": "Chrome memory saver for idle tabs" },
+        { "name": "Win-Policy-D-ChromePrivacy", "desc": "Chrome telemetry and data collection controls" },
+        { "name": "Win-Policy-D-DisableCopilot", "desc": "Disables the Windows Copilot app" },
+        { "name": "Win-Policy-D-DisableInsecureProtocols", "desc": "Turns off legacy authentication and file sharing protocols" },
+        { "name": "Win-Policy-D-DisablePhoneLink", "desc": "Blocks phone to PC linking" },
+        { "name": "Win-Policy-D-DisableWinR", "desc": "Blocks the Run dialog" },
+        { "name": "Win-Policy-D-EdgeMemoryOptimization", "desc": "Edge sleeping tabs, startup boost off" },
+        { "name": "Win-Policy-D-EdgePrivacy", "desc": "Edge telemetry and prompt controls" },
+        { "name": "Win-Policy-D-EndpointSecurity", "desc": "Core account, UAC, and device protections" },
+        { "name": "Win-Policy-D-LAPS", "desc": "Rotates and escrows the local Administrator password" },
+        { "name": "Win-Policy-D-LockScreen", "desc": "Lock screen restrictions and idle timeouts" },
+        { "name": "Win-Policy-D-OneDriveSettings", "desc": "OneDrive silent sign-in, KFM, Files On-Demand" },
+        { "name": "Win-Policy-D-OneDriveSyncRootName", "desc": "Renames the local sync root, new deployments only" },
+        { "name": "Win-Policy-D-ScriptFileAssociations", "desc": "Script files open in Notepad instead of executing" },
+        { "name": "Win-Policy-D-UserExperience", "desc": "Strips promotional content, Store bloat, suggestions" },
+        { "name": "Win-Policy-U-DisableEdgePasswordManager", "desc": "Disables saving new passwords in Edge" },
+        { "name": "Win-Policy-U-EdgeAutoLogon", "desc": "Forces the Edge work profile and controls sync" },
+        { "name": "Win-Policy-U-SharepointSettings", "desc": "Auto mounts permitted SharePoint libraries" }
+      ]
+    },
+    {
+      "title": "Remediations",
+      "kind": "deviceHealthScripts",
+      "tierable": false,
+      "items": [
+        { "name": "Win-Rem-D-AutoReboot", "desc": "Reboots devices past an uptime threshold" },
+        { "name": "Win-Rem-D-BitlockerKeyEscrow", "desc": "Re-escrows missing BitLocker recovery keys" },
+        { "name": "Win-Rem-D-ClearWUCache", "desc": "Clears the Windows Update cache" },
+        { "name": "Win-Rem-D-DisableDellSupportAssist", "desc": "Disables Dell SupportAssist" },
+        { "name": "Win-Rem-D-RestartOneDrive", "desc": "Restarts a stalled OneDrive client" },
+        { "name": "Win-Rem-D-RestartScreenConnect", "desc": "Restarts the ScreenConnect service" },
+        { "name": "Win-Rem-D-RestartSpooler", "desc": "Restarts a stopped print spooler" }
+      ]
+    },
+    {
+      "title": "Detect only",
+      "kind": "deviceHealthScripts",
+      "tierable": false,
+      "items": [
+        { "name": "Win-Detect-D-RemoteTools", "desc": "Reports unauthorised remote access tools" },
+        { "name": "Win-Detect-D-TeamsVersion", "desc": "Reports the installed Teams version" }
+      ]
+    },
+    {
+      "title": "Platform scripts",
+      "kind": "deviceManagementScripts",
+      "tierable": false,
+      "items": [
+        { "name": "Win-Script-D-StopFastBoot", "desc": "Disables fast startup at enrollment" }
+      ]
+    }
+  ]
+};
+let model = 'policy', act = 'create';
+const list = document.getElementById('list');
+
+function rowsFor(sec) {
+  const out = [];
+  sec.items.forEach(it => {
+    if (model === 'tier' && sec.tierable) {
+      D.tiers.forEach(t => out.push({ name: it.name + '-' + t, desc: it.desc, kind: sec.kind, base: it.name, tier: t, kid: true }));
+    } else {
+      out.push({ name: it.name, desc: it.desc, kind: sec.kind });
+    }
+  });
+  return out;
+}
+
+function build() {
+  list.innerHTML = '';
+  D.sections.forEach((sec, si) => {
+    const items = rowsFor(sec);
+    const head = document.createElement('div');
+    head.className = 'section-head';
+    head.innerHTML = '<input type="checkbox" class="secAll" data-sec="' + si + '"><span class="t"></span><span class="pill"></span>';
+    head.querySelector('.t').textContent = sec.title;
+    head.querySelector('.pill').textContent = items.length + (items.length === 1 ? ' group' : ' groups');
+    list.appendChild(head);
+
+    items.forEach((it, ii) => {
+      const row = document.createElement('div');
+      row.className = 'pick-row' + (it.kid ? ' kid' : '');
+      const id = 'cb-' + si + '-' + ii;
+      row.innerHTML = '<input type="checkbox" class="pick" data-sec="' + si + '" id="' + id + '"><label for="' + id + '"></label><span class="desc"></span>';
+      const lab = row.querySelector('label');
+      if (it.tier) {
+        lab.innerHTML = '<span></span><span class="tn"></span>';
+        lab.children[0].textContent = it.base + '-';
+        lab.children[1].textContent = it.tier;
+      } else {
+        lab.textContent = it.name;
+      }
+      row.querySelector('.desc').textContent = it.desc;
+      row.__item = it;
+      row.__sec = si;
+      list.appendChild(row);
+    });
+  });
+  render();
+}
+
+const rows = () => Array.from(list.querySelectorAll('.pick-row'));
+const selected = () => rows().filter(r => r.querySelector('.pick').checked).map(r => r.__item);
+
+function ps(sel) {
+  if (!sel.length) return '# nothing selected';
+
+  if (act === 'remove') {
+    let s = 'Connect-MgGraph -Scopes Group.ReadWrite.All\n\n$groups = @(\n';
+    sel.forEach(x => { s += "    '" + x.name + "'\n"; });
+    s += ')\n\nforeach ($n in $groups) {\n';
+    s += '    $g = Get-MgGroup -Filter "displayName eq \'$n\'"\n';
+    s += '    if ($g) { Remove-MgGroup -GroupId $g.Id }\n}';
+    return s;
+  }
+
+  if (act === 'create') {
+    let s = 'Connect-MgGraph -Scopes Group.ReadWrite.All\n\n$groups = @(\n';
+    const w = Math.max(...sel.map(x => x.name.length));
+    sel.forEach(x => {
+      s += "    @{ Name='" + x.name + "';" + ' '.repeat(w - x.name.length) + " Desc='" + x.desc.replace(/'/g, "''") + "' }\n";
+    });
+    s += ')\n\nforeach ($g in $groups) {\n';
+    s += '    New-MgGroup -DisplayName $g.Name -Description $g.Desc -MailEnabled:$false -SecurityEnabled:$true -MailNickname ($g.Name -replace \'[^A-Za-z0-9._-]\', \'\')\n';
+    s += '}';
+    return s;
+  }
+
+  let s = 'Connect-MgGraph -Scopes Group.ReadWrite.All,DeviceManagementConfiguration.ReadWrite.All\n\n$map = @(\n';
+  const w = Math.max(...sel.map(x => x.name.length));
+  const k = Math.max(...sel.map(x => x.kind.length));
+  sel.forEach(x => {
+    s += "    @{ Name='" + x.name + "';" + ' '.repeat(w - x.name.length)
+       + " Kind='" + x.kind + "'" + ' '.repeat(k - x.kind.length) + " }\n";
+  });
+  s += ')\n\nforeach ($m in $map) {\n';
+  s += '    $g = New-MgGroup -DisplayName $m.Name -MailEnabled:$false -SecurityEnabled:$true -MailNickname ($m.Name -replace \'[^A-Za-z0-9._-]\', \'\')\n';
+  s += '    $prop = if ($m.Kind -eq \'configurationPolicies\') { \'name\' } else { \'displayName\' }\n';
+  s += '    $t = (Invoke-MgGraphRequest GET "beta/deviceManagement/$($m.Kind)?`$filter=$prop eq \'$($m.Name)\'").value[0]\n';
+  s += '    if (-not $t) { continue }\n';
+  s += '    $body = @{ assignments = @(@{ target = @{ \'@odata.type\' = \'#microsoft.graph.groupAssignmentTarget\'; groupId = $g.Id } }) }\n';
+  s += '    Invoke-MgGraphRequest POST "beta/deviceManagement/$($m.Kind)/$($t.id)/assign" -Body ($body | ConvertTo-Json -Depth 6)\n';
+  s += '}';
+  return s;
+}
+
+const HINTS = {
+  create: 'Groups are created unassigned. Assign them in Intune afterwards. Running twice creates duplicates.',
+  assign: 'The artifact must already exist in the tenant under the exact same name. /assign REPLACES existing assignments on that artifact, it does not append.',
+  remove: 'Deletes the groups by display name. Any assignment using them is lost.'
+};
+
+function render() {
+  const sel = selected();
+  document.getElementById('count').textContent = sel.length + ' selected';
+  document.getElementById('out').textContent = ps(sel);
+  document.getElementById('hint').textContent = HINTS[act];
+
+  document.querySelectorAll('.secAll').forEach(sa => {
+    const kids = rows().filter(r => String(r.__sec) === sa.dataset.sec);
+    const on = kids.filter(k => k.querySelector('.pick').checked).length;
+    sa.checked = on === kids.length && on > 0;
+    sa.indeterminate = on > 0 && on < kids.length;
+  });
+
+  const pol = D.sections[0].items.length;
+  const rest = D.sections.slice(1).reduce((a, s) => a + s.items.length, 0);
+  document.getElementById('stat').innerHTML =
+    '<div>full repo: <b>' + (model === 'tier' ? pol * D.tiers.length : pol) + '</b> policy groups</div>' +
+    '<div>plus <b>' + rest + '</b> script groups</div>' +
+    '<div>tier in the group name: <b>' + (model === 'tier' ? 'yes' : 'no') + '</b></div>';
+}
+
+list.addEventListener('change', e => {
+  if (e.target.classList.contains('secAll')) {
+    rows().filter(r => String(r.__sec) === e.target.dataset.sec).forEach(r => r.querySelector('.pick').checked = e.target.checked);
+  }
+  render();
+});
+
+function setModel(m) {
+  model = m;
+  document.getElementById('mPolicy').classList.toggle('on', m === 'policy');
+  document.getElementById('mTier').classList.toggle('on', m === 'tier');
+  build();
+}
+function setAct(a) {
+  act = a;
+  ['create', 'assign', 'remove'].forEach(x => document.getElementById('a' + x[0].toUpperCase() + x.slice(1)).classList.toggle('on', x === a));
+  render();
+}
+
+document.getElementById('mPolicy').onclick = () => setModel('policy');
+document.getElementById('mTier').onclick = () => setModel('tier');
+document.getElementById('aCreate').onclick = () => setAct('create');
+document.getElementById('aAssign').onclick = () => setAct('assign');
+document.getElementById('aRemove').onclick = () => setAct('remove');
+document.getElementById('btnAll').onclick = () => { list.querySelectorAll('.pick').forEach(p => p.checked = true); render(); };
+document.getElementById('btnNone').onclick = () => { list.querySelectorAll('.pick').forEach(p => p.checked = false); render(); };
+document.getElementById('copy').onclick = () => {
+  navigator.clipboard.writeText(document.getElementById('out').textContent).then(() => {
+    const b = document.getElementById('copy');
+    b.textContent = 'copied'; b.classList.add('done');
+    setTimeout(() => { b.textContent = 'copy'; b.classList.remove('done'); }, 1200);
+  });
+};
+
+build();
+</script>
+
+</body>
+</html>
