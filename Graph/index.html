@@ -242,36 +242,32 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 .topbar .home:hover { color: var(--violet); }
 .topbar .mark { flex: 0 0 auto; display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
 
-/* group builder */
-.toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 4px 0 6px; }
-.toolbar .lab { color: var(--faint); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; width: 104px; }
+.toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 4px 0 14px; }
 .ghost {
   background: var(--bg); border: 1px solid var(--rule); color: var(--dim);
   font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
-  padding: 4px 12px; cursor: pointer;
+  padding: 5px 14px; cursor: pointer;
 }
 .ghost:hover { color: var(--ink); border-color: var(--faint); }
-.ghost.on { color: var(--violet); border-color: var(--violet); }
+.ghost.go { color: var(--violet); border-color: var(--violet); }
+.ghost:disabled { color: var(--faint); border-color: var(--rule); cursor: default; }
 .spacer { flex: 1; }
 .count { color: var(--dim); font-size: 11px; }
+.status { color: var(--dim); font-size: 12px; padding: 2px 0 10px; }
+.status.err { color: var(--violet); }
+
 .pick-row { display: grid; grid-template-columns: 18px minmax(0, 320px) minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 4px 8px 4px 0; }
 .pick-row:hover { background: var(--row); }
 .pick-row label { color: var(--ink); cursor: pointer; min-width: 0; overflow-wrap: break-word; }
 .pick-row .desc { color: var(--dim); font-size: 12px; min-width: 0; overflow-wrap: break-word; }
-.pick-row.kid label { padding-left: 16px; color: var(--dim); }
-.pick-row.kid .tn { color: var(--cyan); }
 input[type=checkbox] { accent-color: #a37acc; width: 13px; height: 13px; cursor: pointer; }
 .section-head { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--rule); margin: 24px 0 8px; padding-bottom: 6px; }
 .section-head .t { color: var(--cyan); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
 .section-head .pill { color: var(--faint); font-size: 11px; }
-.stat { display: flex; gap: 26px; flex-wrap: wrap; border-left: 2px solid var(--faint); padding: 6px 0 6px 14px; margin: 14px 0 4px; }
-.stat div { color: var(--dim); font-size: 12px; }
-.stat b { color: var(--ink); font-weight: 400; }
 
 @media (max-width: 720px) {
   .pick-row { grid-template-columns: 18px minmax(0, 1fr); row-gap: 2px; padding-bottom: 8px; }
   .pick-row .desc { grid-column: 2; }
-  .toolbar .lab { width: 100%; }
 }
 
 </style>
@@ -291,79 +287,128 @@ input[type=checkbox] { accent-color: #a37acc; width: 13px; height: 13px; cursor:
   <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Graph</div>
 
   <h1>🕸️ Graph</h1>
-  <div class="subtitle">Assignment group builder.</div>
-  <div class="out">check what you need | the script below updates as you pick</div>
+  <div class="subtitle">Deployment builder.</div>
+  <div class="out">check what you want | build the bundle | run the script beside it</div>
 
   <div class="toolbar">
-    <span class="lab">Group model</span>
-    <button class="ghost on" id="mPolicy">Per policy</button>
-    <button class="ghost" id="mTier">Per tier</button>
-  </div>
-  <div class="toolbar">
-    <span class="lab">Script does</span>
-    <button class="ghost on" id="aCreate">Create</button>
-    <button class="ghost" id="aAssign">Assign existing</button>
-    <button class="ghost" id="aDeploy">Deploy</button>
-    <button class="ghost" id="aRemove">Remove</button>
-  </div>
-  <div class="toolbar">
-    <span class="lab"></span>
     <button class="ghost" id="btnAll">Select all</button>
     <button class="ghost" id="btnNone">Clear</button>
     <span class="spacer"></span>
     <span class="count" id="count">0 selected</span>
   </div>
 
-  <div class="stat" id="stat"></div>
-
   <div id="list"></div>
+
+  <div class="section-label">Bundle</div>
+  <div class="toolbar" style="padding-top:8px">
+    <button class="ghost go" id="btnBuild">Build bundle.json</button>
+    <button class="ghost" id="btnDl" disabled>Download</button>
+  </div>
+  <div class="status" id="status">Nothing built yet.</div>
 
   <div class="section-label">Script</div>
   <div class="code-wrap">
     <button class="copy-btn" id="copy">copy</button>
     <div class="code-block" id="out"></div>
   </div>
-  <div class="info-box" id="hint"></div>
+  <div class="info-box">Put bundle.json beside the script and run it. Every item gets its own group, named the same as the policy. Running twice creates duplicates.</div>
 
 </div>
 
 <script>
 const D = {
-  "tiers": [
-    "Baseline",
-    "Enhanced",
-    "Hardened"
-  ],
   "sections": [
     {
       "title": "Settings Catalog policies",
       "kind": "configurationPolicies",
       "tierable": true,
       "items": [
-        { "name": "Win-Policy-D-AdvancedPhishingProtection", "desc": "SmartScreen alerts for unsafe work credential use" },
-        { "name": "Win-Policy-D-Antivirus", "desc": "Defender real time protection, network protection, PUA blocking" },
-        { "name": "Win-Policy-D-Bitlocker", "desc": "Silent drive encryption with key escrow to Entra ID" },
-        { "name": "Win-Policy-D-ChromeMemoryOptimization", "desc": "Chrome memory saver for idle tabs" },
-        { "name": "Win-Policy-D-ChromePrivacy", "desc": "Chrome telemetry and data collection controls" },
-        { "name": "Win-Policy-D-DisableCopilot", "desc": "Disables the Windows Copilot app" },
-        { "name": "Win-Policy-D-DisableInsecureProtocols", "desc": "Turns off legacy authentication and file sharing protocols" },
-        { "name": "Win-Policy-D-DisablePhoneLink", "desc": "Blocks phone to PC linking" },
-        { "name": "Win-Policy-D-DisableWinR", "desc": "Blocks the Run dialog" },
-        { "name": "Win-Policy-D-EdgeMemoryOptimization", "desc": "Edge sleeping tabs, startup boost off" },
-        { "name": "Win-Policy-D-EdgePrivacy", "desc": "Edge telemetry and prompt controls" },
-        { "name": "Win-Policy-D-EndpointSecurity", "desc": "Core account, UAC, and device protections" },
-        { "name": "Win-Policy-D-LAPS", "desc": "Rotates and escrows the local Administrator password" },
-        { "name": "Win-Policy-D-LockScreen", "desc": "Lock screen restrictions and idle timeouts" },
-        { "name": "Win-Policy-D-OneDriveSettings", "desc": "OneDrive silent sign-in, KFM, Files On-Demand" },
-        { "name": "Win-Policy-D-OneDriveSyncRootName", "desc": "Renames the local sync root, new deployments only" },
-        { "name": "Win-Policy-D-ScriptFileAssociations", "desc": "Script files open in Notepad instead of executing" },
-        { "name": "Win-Policy-D-UserExperience", "desc": "Strips promotional content, Store bloat, suggestions" },
-        { "name": "Win-Policy-U-DisableEdgePasswordManager", "desc": "Disables saving new passwords in Edge" },
-        { "name": "Win-Policy-U-EdgeAutoLogon", "desc": "Forces the Edge work profile and controls sync" },
-        { "name": "Win-Policy-U-SharepointSettings", "desc": "Auto mounts permitted SharePoint libraries" }
+        {
+          "name": "Win-Policy-D-AdvancedPhishingProtection",
+          "desc": "SmartScreen alerts for unsafe work credential use"
+        },
+        {
+          "name": "Win-Policy-D-Antivirus",
+          "desc": "Defender real time protection, network protection, PUA blocking"
+        },
+        {
+          "name": "Win-Policy-D-Bitlocker",
+          "desc": "Silent drive encryption with key escrow to Entra ID"
+        },
+        {
+          "name": "Win-Policy-D-ChromeMemoryOptimization",
+          "desc": "Chrome memory saver for idle tabs"
+        },
+        {
+          "name": "Win-Policy-D-ChromePrivacy",
+          "desc": "Chrome telemetry and data collection controls"
+        },
+        {
+          "name": "Win-Policy-D-DisableCopilot",
+          "desc": "Disables the Windows Copilot app"
+        },
+        {
+          "name": "Win-Policy-D-DisableInsecureProtocols",
+          "desc": "Turns off legacy authentication and file sharing protocols"
+        },
+        {
+          "name": "Win-Policy-D-DisablePhoneLink",
+          "desc": "Blocks phone to PC linking"
+        },
+        {
+          "name": "Win-Policy-D-DisableWinR",
+          "desc": "Blocks the Run dialog"
+        },
+        {
+          "name": "Win-Policy-D-EdgeMemoryOptimization",
+          "desc": "Edge sleeping tabs, startup boost off"
+        },
+        {
+          "name": "Win-Policy-D-EdgePrivacy",
+          "desc": "Edge telemetry and prompt controls"
+        },
+        {
+          "name": "Win-Policy-D-EndpointSecurity",
+          "desc": "Core account, UAC, and device protections"
+        },
+        {
+          "name": "Win-Policy-D-LAPS",
+          "desc": "Rotates and escrows the local Administrator password"
+        },
+        {
+          "name": "Win-Policy-D-LockScreen",
+          "desc": "Lock screen restrictions and idle timeouts"
+        },
+        {
+          "name": "Win-Policy-D-OneDriveSettings",
+          "desc": "OneDrive silent sign-in, KFM, Files On-Demand"
+        },
+        {
+          "name": "Win-Policy-D-OneDriveSyncRootName",
+          "desc": "Renames the local sync root, new deployments only"
+        },
+        {
+          "name": "Win-Policy-D-ScriptFileAssociations",
+          "desc": "Script files open in Notepad instead of executing"
+        },
+        {
+          "name": "Win-Policy-D-UserExperience",
+          "desc": "Strips promotional content, Store bloat, suggestions"
+        },
+        {
+          "name": "Win-Policy-U-DisableEdgePasswordManager",
+          "desc": "Disables saving new passwords in Edge"
+        },
+        {
+          "name": "Win-Policy-U-EdgeAutoLogon",
+          "desc": "Forces the Edge work profile and controls sync"
+        },
+        {
+          "name": "Win-Policy-U-SharepointSettings",
+          "desc": "Auto mounts permitted SharePoint libraries"
+        }
       ],
       "path": "Settings Catalog/",
-      "deployable": true,
       "type": "policy"
     },
     {
@@ -371,15 +416,32 @@ const D = {
       "kind": "deviceHealthScripts",
       "tierable": false,
       "items": [
-        { "name": "Win-Rem-D-AutoReboot", "desc": "Reboots devices past an uptime threshold" },
-        { "name": "Win-Rem-D-BitlockerKeyEscrow", "desc": "Re-escrows missing BitLocker recovery keys" },
-        { "name": "Win-Rem-D-ClearWUCache", "desc": "Clears the Windows Update cache" },
-        { "name": "Win-Rem-D-DisableDellSupportAssist", "desc": "Disables Dell SupportAssist" },
-        { "name": "Win-Rem-D-RestartOneDrive", "desc": "Restarts a stalled OneDrive client" },
-        { "name": "Win-Rem-D-RestartScreenConnect", "desc": "Restarts the ScreenConnect service" }
+        {
+          "name": "Win-Rem-D-AutoReboot",
+          "desc": "Reboots devices past an uptime threshold"
+        },
+        {
+          "name": "Win-Rem-D-BitlockerKeyEscrow",
+          "desc": "Re-escrows missing BitLocker recovery keys"
+        },
+        {
+          "name": "Win-Rem-D-ClearWUCache",
+          "desc": "Clears the Windows Update cache"
+        },
+        {
+          "name": "Win-Rem-D-DisableDellSupportAssist",
+          "desc": "Disables Dell SupportAssist"
+        },
+        {
+          "name": "Win-Rem-D-RestartOneDrive",
+          "desc": "Restarts a stalled OneDrive client"
+        },
+        {
+          "name": "Win-Rem-D-RestartScreenConnect",
+          "desc": "Restarts the ScreenConnect service"
+        }
       ],
       "path": "Intune/",
-      "deployable": true,
       "type": "rem"
     },
     {
@@ -387,10 +449,12 @@ const D = {
       "kind": "deviceHealthScripts",
       "tierable": false,
       "items": [
-        { "name": "Win-Detect-D-RemoteTools", "desc": "Reports unauthorised remote access tools" }
+        {
+          "name": "Win-Detect-D-RemoteTools",
+          "desc": "Reports unauthorised remote access tools"
+        }
       ],
       "path": "Intune/",
-      "deployable": true,
       "type": "detect"
     },
     {
@@ -398,177 +462,61 @@ const D = {
       "kind": "deviceManagementScripts",
       "tierable": false,
       "items": [
-        { "name": "Win-Script-D-StopFastBoot", "desc": "Disables fast startup at enrollment" }
+        {
+          "name": "Win-Script-D-StopFastBoot",
+          "desc": "Disables fast startup at enrollment"
+        }
       ],
       "path": "Platform Scripts/",
-      "deployable": true,
       "type": "script"
     }
-  ],
-  "base": "https://goguppy.com/"
+  ]
 };
-let model = 'policy', act = 'create';
+const PS1 = "# Creates policies and scripts from a bundle, with groups and assignments.\nConnect-MgGraph -Scopes Group.ReadWrite.All,DeviceManagementConfiguration.ReadWrite.All\n\n$b = Get-Content .\\bundle.json -Raw | ConvertFrom-Json\n\nforeach ($i in $b.items) {\n    $g = New-MgGroup -DisplayName $i.name -MailEnabled:$false -SecurityEnabled:$true -MailNickname ($i.name -replace '[^A-Za-z0-9._-]', '')\n    $tgt = @{ '@odata.type' = '#microsoft.graph.groupAssignmentTarget'; groupId = $g.Id }\n\n    switch ($i.kind) {\n        'policy' {\n            $body = $i.content\n            $path = 'configurationPolicies'\n            $asg  = @{ assignments = @(@{ target = $tgt }) }\n        }\n        'script' {\n            $body = @{ displayName = $i.name; fileName = \"$($i.name).ps1\"; runAsAccount = 'system'; scriptContent = $i.script }\n            $path = 'deviceManagementScripts'\n            $asg  = @{ deviceManagementScriptGroupAssignments = @(@{ '@odata.type' = '#microsoft.graph.deviceManagementScriptGroupAssignment'; targetGroupId = $g.Id }) }\n        }\n        default {\n            $body = @{ displayName = $i.name; publisher = 'goguppy'; runAsAccount = 'system'; detectionScriptContent = $i.detect; remediationScriptContent = $i.remediate }\n            $path = 'deviceHealthScripts'\n            $asg  = @{ deviceHealthScriptAssignments = @(@{ target = $tgt; runRemediationScript = $i.hasRemediation }) }\n        }\n    }\n\n    $new = Invoke-MgGraphRequest POST \"beta/deviceManagement/$path\" -Body ($body | ConvertTo-Json -Depth 100)\n    Invoke-MgGraphRequest POST \"beta/deviceManagement/$path/$($new.id)/assign\" -Body ($asg | ConvertTo-Json -Depth 10)\n}";
+
 const list = document.getElementById('list');
+const statusEl = document.getElementById('status');
+let bundle = null;
 
-function rowsFor(sec) {
-  const out = [];
-  sec.items.forEach(it => {
-    if (model === 'tier' && sec.tierable) {
-      D.tiers.forEach(t => out.push({ name: it.name + '-' + t, desc: it.desc, kind: sec.kind, sec: sec, base: it.name, tier: t, kid: true }));
-    } else {
-      out.push({ name: it.name, desc: it.desc, kind: sec.kind, sec: sec });
-    }
+D.sections.forEach((sec, si) => {
+  const head = document.createElement('div');
+  head.className = 'section-head';
+  head.innerHTML = '<input type="checkbox" class="secAll" data-sec="' + si + '"><span class="t"></span><span class="pill"></span>';
+  head.querySelector('.t').textContent = sec.title;
+  head.querySelector('.pill').textContent = sec.items.length + (sec.items.length === 1 ? ' item' : ' items');
+  list.appendChild(head);
+
+  sec.items.forEach((it, ii) => {
+    const row = document.createElement('div');
+    row.className = 'pick-row';
+    const id = 'cb-' + si + '-' + ii;
+    row.innerHTML = '<input type="checkbox" class="pick" data-sec="' + si + '" id="' + id + '"><label for="' + id + '"></label><span class="desc"></span>';
+    row.querySelector('label').textContent = it.name;
+    row.querySelector('.desc').textContent = it.desc;
+    row.__item = { name: it.name, type: sec.type, path: sec.path };
+    row.__sec = si;
+    list.appendChild(row);
   });
-  return out;
-}
-
-function build() {
-  list.innerHTML = '';
-  D.sections.forEach((sec, si) => {
-    const items = rowsFor(sec);
-    const head = document.createElement('div');
-    head.className = 'section-head';
-    head.innerHTML = '<input type="checkbox" class="secAll" data-sec="' + si + '"><span class="t"></span><span class="pill"></span>';
-    head.querySelector('.t').textContent = sec.title;
-    head.querySelector('.pill').textContent = items.length + (items.length === 1 ? ' group' : ' groups');
-    list.appendChild(head);
-
-    items.forEach((it, ii) => {
-      const row = document.createElement('div');
-      row.className = 'pick-row' + (it.kid ? ' kid' : '');
-      const id = 'cb-' + si + '-' + ii;
-      row.innerHTML = '<input type="checkbox" class="pick" data-sec="' + si + '" id="' + id + '"><label for="' + id + '"></label><span class="desc"></span>';
-      const lab = row.querySelector('label');
-      if (it.tier) {
-        lab.innerHTML = '<span></span><span class="tn"></span>';
-        lab.children[0].textContent = it.base + '-';
-        lab.children[1].textContent = it.tier;
-      } else {
-        lab.textContent = it.name;
-      }
-      row.querySelector('.desc').textContent = it.desc;
-      row.__item = it;
-      row.__sec = si;
-      list.appendChild(row);
-    });
-  });
-  render();
-}
+});
 
 const rows = () => Array.from(list.querySelectorAll('.pick-row'));
 const selected = () => rows().filter(r => r.querySelector('.pick').checked).map(r => r.__item);
 
-function ps(sel) {
-  if (!sel.length) return '# nothing selected';
-
-  if (act === 'remove') {
-    let s = 'Connect-MgGraph -Scopes Group.ReadWrite.All\n\n$groups = @(\n';
-    sel.forEach(x => { s += "    '" + x.name + "'\n"; });
-    s += ')\n\nforeach ($n in $groups) {\n';
-    s += '    $g = Get-MgGroup -Filter "displayName eq \'$n\'"\n';
-    s += '    if ($g) { Remove-MgGroup -GroupId $g.Id }\n}';
-    return s;
-  }
-
-  if (act === 'create') {
-    let s = 'Connect-MgGraph -Scopes Group.ReadWrite.All\n\n$groups = @(\n';
-    const w = Math.max(...sel.map(x => x.name.length));
-    sel.forEach(x => {
-      s += "    @{ Name='" + x.name + "';" + ' '.repeat(w - x.name.length) + " Desc='" + x.desc.replace(/'/g, "''") + "' }\n";
-    });
-    s += ')\n\nforeach ($g in $groups) {\n';
-    s += '    New-MgGroup -DisplayName $g.Name -Description $g.Desc -MailEnabled:$false -SecurityEnabled:$true -MailNickname ($g.Name -replace \'[^A-Za-z0-9._-]\', \'\')\n';
-    s += '}';
-    return s;
-  }
-
-  if (act === 'deploy') {
-    let s = 'Connect-MgGraph -Scopes Group.ReadWrite.All,DeviceManagementConfiguration.ReadWrite.All\n\n';
-    s += "$base = '" + D.base + "'\n\n$map = @(\n";
-    const w = Math.max(...sel.map(x => x.name.length));
-    sel.forEach(x => {
-      const t = x.sec.type;
-      let f = x.sec.path + x.name + (t === 'policy' ? '.json' : t === 'rem' ? '-Detect.ps1' : '.ps1');
-      let line = "    @{ Name='" + x.name + "';" + ' '.repeat(w - x.name.length)
-               + " Kind='" + t + "';" + ' '.repeat(6 - t.length)
-               + " File='" + f + "'";
-      if (t === 'rem') line += "; File2='" + x.sec.path + x.name + "-Remediate.ps1'";
-      s += line + ' }\n';
-    });
-    s += ')\n\n';
-    s += 'function Get-Raw($p) { (Invoke-WebRequest ($base + [uri]::EscapeUriString($p))).Content.TrimStart([char]0xFEFF) }\n';
-    s += 'function B64($t) { [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($t)) }\n\n';
-    s += 'foreach ($m in $map) {\n';
-    s += '    $g = New-MgGroup -DisplayName $m.Name -MailEnabled:$false -SecurityEnabled:$true -MailNickname ($m.Name -replace \'[^A-Za-z0-9._-]\', \'\')\n';
-    s += '    $tgt = @{ \'@odata.type\' = \'#microsoft.graph.groupAssignmentTarget\'; groupId = $g.Id }\n\n';
-    s += '    switch ($m.Kind) {\n';
-    s += "        'policy' {\n";
-    s += '            $body = Get-Raw $m.File | ConvertFrom-Json | Select-Object name, description, platforms, technologies, settings\n';
-    s += "            $path = 'configurationPolicies'\n";
-    s += '            $asg  = @{ assignments = @(@{ target = $tgt }) }\n';
-    s += '        }\n';
-    s += "        'script' {\n";
-    s += '            $body = @{ displayName = $m.Name; fileName = "$($m.Name).ps1"; runAsAccount = \'system\'; scriptContent = (B64 (Get-Raw $m.File)) }\n';
-    s += "            $path = 'deviceManagementScripts'\n";
-    s += '            $asg  = @{ deviceManagementScriptGroupAssignments = @(@{ \'@odata.type\' = \'#microsoft.graph.deviceManagementScriptGroupAssignment\'; targetGroupId = $g.Id }) }\n';
-    s += '        }\n';
-    s += '        default {\n';
-    s += "            $rem  = if ($m.File2) { Get-Raw $m.File2 } else { 'exit 0' }\n";
-    s += '            $body = @{ displayName = $m.Name; publisher = \'goguppy\'; runAsAccount = \'system\'; detectionScriptContent = (B64 (Get-Raw $m.File)); remediationScriptContent = (B64 $rem) }\n';
-    s += "            $path = 'deviceHealthScripts'\n";
-    s += '            $asg  = @{ deviceHealthScriptAssignments = @(@{ target = $tgt; runRemediationScript = [bool]$m.File2 }) }\n';
-    s += '        }\n';
-    s += '    }\n\n';
-    s += '    $new = Invoke-MgGraphRequest POST "beta/deviceManagement/$path" -Body ($body | ConvertTo-Json -Depth 100)\n';
-    s += '    Invoke-MgGraphRequest POST "beta/deviceManagement/$path/$($new.id)/assign" -Body ($asg | ConvertTo-Json -Depth 10)\n';
-    s += '}';
-    return s;
-  }
-
-  let s = 'Connect-MgGraph -Scopes Group.ReadWrite.All,DeviceManagementConfiguration.ReadWrite.All\n\n$map = @(\n';
-  const w = Math.max(...sel.map(x => x.name.length));
-  const k = Math.max(...sel.map(x => x.kind.length));
-  sel.forEach(x => {
-    s += "    @{ Name='" + x.name + "';" + ' '.repeat(w - x.name.length)
-       + " Kind='" + x.kind + "'" + ' '.repeat(k - x.kind.length) + " }\n";
-  });
-  s += ')\n\nforeach ($m in $map) {\n';
-  s += '    $g = New-MgGroup -DisplayName $m.Name -MailEnabled:$false -SecurityEnabled:$true -MailNickname ($m.Name -replace \'[^A-Za-z0-9._-]\', \'\')\n';
-  s += '    $prop = if ($m.Kind -eq \'configurationPolicies\') { \'name\' } else { \'displayName\' }\n';
-  s += '    $t = (Invoke-MgGraphRequest GET "beta/deviceManagement/$($m.Kind)?`$filter=$prop eq \'$($m.Name)\'").value[0]\n';
-  s += '    if (-not $t) { continue }\n';
-  s += '    $body = @{ assignments = @(@{ target = @{ \'@odata.type\' = \'#microsoft.graph.groupAssignmentTarget\'; groupId = $g.Id } }) }\n';
-  s += '    Invoke-MgGraphRequest POST "beta/deviceManagement/$($m.Kind)/$($t.id)/assign" -Body ($body | ConvertTo-Json -Depth 6)\n';
-  s += '}';
-  return s;
-}
-
-const HINTS = {
-  create: 'Groups are created unassigned. Assign them in Intune afterwards. Running twice creates duplicates.',
-  assign: 'The artifact must already exist in the tenant under the exact same name. /assign REPLACES existing assignments on that artifact, it does not append.',
-  deploy: 'One pass per item: pulls the file from goguppy.com, creates the policy or script, creates the group, assigns it. Detect-only gets a stub remediation of exit 0. Needs internet on the machine running it.',
-  remove: 'Deletes the groups by display name. Any assignment using them is lost.'
-};
-
 function render() {
-  const sel = selected();
-  document.getElementById('count').textContent = sel.length + ' selected';
-  document.getElementById('out').textContent = ps(sel);
-  document.getElementById('hint').textContent = HINTS[act];
-
+  const n = selected().length;
+  document.getElementById('count').textContent = n + ' selected';
   document.querySelectorAll('.secAll').forEach(sa => {
     const kids = rows().filter(r => String(r.__sec) === sa.dataset.sec);
     const on = kids.filter(k => k.querySelector('.pick').checked).length;
     sa.checked = on === kids.length && on > 0;
     sa.indeterminate = on > 0 && on < kids.length;
   });
-
-  const pol = D.sections[0].items.length;
-  const rest = D.sections.slice(1).reduce((a, s) => a + s.items.length, 0);
-  document.getElementById('stat').innerHTML =
-    '<div>full repo: <b>' + (model === 'tier' ? pol * D.tiers.length : pol) + '</b> policy groups</div>' +
-    '<div>plus <b>' + rest + '</b> script groups</div>' +
-    '<div>tier in the group name: <b>' + (model === 'tier' ? 'yes' : 'no') + '</b></div>';
+  if (bundle) {
+    bundle = null;
+    document.getElementById('btnDl').disabled = true;
+    statusEl.className = 'status';
+    statusEl.textContent = 'Selection changed. Build again.';
+  }
 }
 
 list.addEventListener('change', e => {
@@ -577,36 +525,77 @@ list.addEventListener('change', e => {
   }
   render();
 });
-
-function setModel(m) {
-  model = m;
-  document.getElementById('mPolicy').classList.toggle('on', m === 'policy');
-  document.getElementById('mTier').classList.toggle('on', m === 'tier');
-  build();
-}
-function setAct(a) {
-  act = a;
-  ['create', 'assign', 'deploy', 'remove'].forEach(x => document.getElementById('a' + x[0].toUpperCase() + x.slice(1)).classList.toggle('on', x === a));
-  render();
-}
-
-document.getElementById('mPolicy').onclick = () => setModel('policy');
-document.getElementById('mTier').onclick = () => setModel('tier');
-document.getElementById('aCreate').onclick = () => setAct('create');
-document.getElementById('aAssign').onclick = () => setAct('assign');
-document.getElementById('aDeploy').onclick = () => setAct('deploy');
-document.getElementById('aRemove').onclick = () => setAct('remove');
 document.getElementById('btnAll').onclick = () => { list.querySelectorAll('.pick').forEach(p => p.checked = true); render(); };
 document.getElementById('btnNone').onclick = () => { list.querySelectorAll('.pick').forEach(p => p.checked = false); render(); };
+
+function b64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let s = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(s);
+}
+
+async function grab(p) {
+  const r = await fetch('../' + p);
+  if (!r.ok) throw new Error(p + ' (' + r.status + ')');
+  return (await r.text()).replace(/^\uFEFF/, '');
+}
+
+document.getElementById('btnBuild').onclick = async () => {
+  const sel = selected();
+  if (!sel.length) { statusEl.className = 'status'; statusEl.textContent = 'Nothing selected.'; return; }
+  statusEl.className = 'status';
+  statusEl.textContent = 'Building ' + sel.length + '...';
+  const items = [];
+  try {
+    for (const x of sel) {
+      if (x.type === 'policy') {
+        const j = JSON.parse(await grab(x.path + x.name + '.json'));
+        items.push({ name: x.name, kind: 'policy', content: {
+          name: j.name, description: j.description, platforms: j.platforms,
+          technologies: j.technologies, settings: j.settings } });
+      } else if (x.type === 'script') {
+        items.push({ name: x.name, kind: 'script', script: b64(await grab(x.path + x.name + '.ps1')) });
+      } else if (x.type === 'rem') {
+        items.push({ name: x.name, kind: 'rem', hasRemediation: true,
+                     detect: b64(await grab(x.path + x.name + '-Detect.ps1')),
+                     remediate: b64(await grab(x.path + x.name + '-Remediate.ps1')) });
+      } else {
+        items.push({ name: x.name, kind: 'detect', hasRemediation: false,
+                     detect: b64(await grab(x.path + x.name + '.ps1')),
+                     remediate: b64('exit 0') });
+      }
+    }
+  } catch (e) {
+    statusEl.className = 'status err';
+    statusEl.textContent = 'Failed on ' + e.message;
+    return;
+  }
+  bundle = { generated: new Date().toISOString().slice(0, 10), items: items };
+  document.getElementById('btnDl').disabled = false;
+  const kb = Math.round(JSON.stringify(bundle).length / 1024);
+  statusEl.textContent = items.length + ' items, ' + kb + ' KB. Ready to download.';
+};
+
+document.getElementById('btnDl').onclick = () => {
+  if (!bundle) return;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/json' }));
+  a.download = 'bundle.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+document.getElementById('out').textContent = PS1;
 document.getElementById('copy').onclick = () => {
-  navigator.clipboard.writeText(document.getElementById('out').textContent).then(() => {
+  navigator.clipboard.writeText(PS1).then(() => {
     const b = document.getElementById('copy');
     b.textContent = 'copied'; b.classList.add('done');
     setTimeout(() => { b.textContent = 'copy'; b.classList.remove('done'); }, 1200);
   });
 };
 
-build();
+render();
 </script>
 
 </body>
