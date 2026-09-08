@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoGuppy · Graph</title>
+<title>GoGuppy · Deployment Kit</title>
 <style>
 /* GoGuppy shared styles */
 
@@ -287,11 +287,11 @@ input[type=checkbox] { accent-color: #a37acc; width: 13px; height: 13px; cursor:
     <span>rev 2026.09</span>
   </div>
 
-  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Graph</div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Deployment Kit</div>
 
-  <h1>🕸️ Graph</h1>
-  <div class="subtitle">Deployment builder.</div>
-  <div class="out">check what you want | build the bundle | run the script beside it</div>
+  <h1>🧰 Deployment Kit</h1>
+  <div class="subtitle">Pick policies and scripts, get a bundle and the script that deploys it.</div>
+  <div class="out">check what you want | build the bundle | run the script | groups are created and assigned for you</div>
 
   <div class="toolbar">
     <button class="ghost" id="btnAll">Select all</button>
@@ -324,7 +324,7 @@ input[type=checkbox] { accent-color: #a37acc; width: 13px; height: 13px; cursor:
     <div class="code-block" id="run"></div>
   </div>
 
-  <div class="info-box">Put bundle.json beside the script and run it. Every item gets its own group, named the same as the policy.</div>
+  <div class="info-box">Put bundle.json beside the script and run it. It creates each policy or script, then creates an Entra security group named the same as it, then assigns that group to it. Nothing to wire up by hand.</div>
   <div class="warning-box">Duplicates are labelled "(NEW)" and stay unassigned. If the name already exists in the tenant the new copy is created as "name (NEW)" and no group is attached to it, so the live one keeps its assignment. Compare the two, then assign or delete the copy yourself.</div>
 
 </div>
