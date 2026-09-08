@@ -314,7 +314,15 @@ input[type=checkbox] { accent-color: #a37acc; width: 13px; height: 13px; cursor:
   <div class="toolbar" style="padding-top:10px">
     <button class="ghost" id="btnPs1">Download deploy.ps1</button>
   </div>
-  <div class="info-box">Put bundle.json beside the script and run it. Every item gets its own group, named the same as the policy. If the name already exists in the tenant the new copy is created as "name (NEW)" and left unassigned, so the live one keeps the group.</div>
+  <div class="section-label">Run it</div>
+  <div class="out">download both files above, then from the folder they landed in</div>
+  <div class="code-wrap">
+    <button class="copy-btn" id="copyRun">copy</button>
+    <div class="code-block" id="run"></div>
+  </div>
+
+  <div class="info-box">Put bundle.json beside the script and run it. Every item gets its own group, named the same as the policy.</div>
+  <div class="warning-box">Duplicates are labelled "(NEW)" and stay unassigned. If the name already exists in the tenant the new copy is created as "name (NEW)" and no group is attached to it, so the live one keeps its assignment. Compare the two, then assign or delete the copy yourself.</div>
 
 </div>
 
@@ -587,6 +595,22 @@ document.getElementById('btnDl').onclick = () => {
   a.download = 'bundle.json';
   a.click();
   URL.revokeObjectURL(a.href);
+};
+
+const RUN = [
+  'cd $HOME\\Downloads',
+  'Set-ExecutionPolicy Bypass -Scope Process',
+  'Unblock-File .\\deploy.ps1',
+  '.\\deploy.ps1'
+].join('\n');
+
+document.getElementById('run').textContent = RUN;
+document.getElementById('copyRun').onclick = () => {
+  navigator.clipboard.writeText(RUN).then(() => {
+    const b = document.getElementById('copyRun');
+    b.textContent = 'copied'; b.classList.add('done');
+    setTimeout(() => { b.textContent = 'copy'; b.classList.remove('done'); }, 1200);
+  });
 };
 
 document.getElementById('out').textContent = PS1;
