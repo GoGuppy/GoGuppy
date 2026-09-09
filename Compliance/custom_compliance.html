@@ -208,7 +208,7 @@ h1 { font-size: 22px; font-weight: 500; letter-spacing: .01em; color: var(--ink)
   <div class="warning-box">The script runs as System in 64 bit PowerShell and must return one compressed line of JSON. Anything written to the pipeline that is not that line breaks the evaluation and the device reports an error, not a failure.</div>
 
   <div class="sub">Policies</div>
-  <div class="sub-desc">Start with antivirus. It is the one every client asks about and the one built in compliance does worst.</div>
+  <div class="sub-desc">Each one is a discovery script and a JSON rules file. Take both.</div>
 
   <a class="row" href="custom_av.html">
     <span class="icon">🛡️</span><span class="name">Antivirus<span class="tag tag-yellow">Pick Vendor</span></span>
@@ -216,30 +216,9 @@ h1 { font-size: 22px; font-weight: 500; letter-spacing: .01em; color: var(--ink)
   </a>
 
   <div class="row empty">
-    <span class="icon">🔑</span><span class="name">BitLocker Key Escrow</span>
-    <span class="desc">Coming. Encrypted is not the same as recoverable. Confirms the recovery key actually reached Entra.</span>
+    <span class="icon">⋯</span><span class="name">More coming</span>
+    <span class="desc"></span>
   </div>
-
-  <div class="row empty">
-    <span class="icon">🔁</span><span class="name">Reboot Age</span>
-    <span class="desc">Coming. Flags devices that have not restarted in 14 days, the ones that silently stop patching.</span>
-  </div>
-
-  <div class="row empty">
-    <span class="icon">👤</span><span class="name">Local Administrators</span>
-    <span class="desc">Coming. Fails if anything outside your approved SIDs sits in the local Administrators group.</span>
-  </div>
-
-  <div class="row empty">
-    <span class="icon">💽</span><span class="name">Free Disk Space</span>
-    <span class="desc">Coming. Under 15 percent free and updates quietly stop installing.</span>
-  </div>
-
-  <div class="row empty">
-    <span class="icon">🧯</span><span class="name">Tamper Protection</span>
-    <span class="desc">Coming. Defender setting with no built in compliance equivalent, and the first thing malware turns off.</span>
-  </div>
-
 
 </div>
 </body>

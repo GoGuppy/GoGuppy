@@ -257,11 +257,8 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Compliance</div>
 
   <h1>✅ Compliance</h1>
-  <div class="subtitle">The half of Conditional Access nobody configures.</div>
+  <div class="subtitle">Policies that decide whether a device is trusted.</div>
   <div class="out">click a row to download | set the tenant settings first</div>
-
-  <div class="warning-box">Check the tenant setting below before you assign anything. If devices with no policy are already marked not compliant and you have a require compliant device rule live, assigning your first policy changes who gets in.</div>
-  <div class="info-box">Included with Intune, no extra licence. Conditional Access needs P1, this does not.</div>
 
   <div class="sub">Tenant Settings</div>
   <div class="sub-desc">One page, applies everywhere, easy to miss. Intune, Devices, Compliance, Compliance policy settings.</div>
@@ -282,7 +279,7 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   </div>
 
   <div class="sub">Policies</div>
-  <div class="sub-desc">Start here, then tighten. Every setting you add is a way to lock someone out.</div>
+  <div class="sub-desc">Import the JSON with Graph, or through the Deployment Kit script.</div>
 
   <a class="row" href="Win-Compliance-D-Baseline.json" download>
     <span class="icon">🛡️</span><span class="name">Windows Baseline</span>
@@ -300,13 +297,12 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
   </a>
 
   <div class="row empty">
-    <span class="icon">📧</span><span class="name">Notification Template</span>
-    <span class="desc">Coming. The email a user gets before their device is marked non compliant.</span>
+    <span class="icon">⋯</span><span class="name">More coming</span>
+    <span class="desc"></span>
   </div>
 
   <div class="sub">Notes</div>
 
-  <div class="info-box">Always set a grace period on the noncompliance action. Without one the device flips to not compliant the instant it fails and Conditional Access blocks the person mid task, with no warning and no way to self serve.</div>
   <div class="info-box">Compliance is evaluated on the device and reported up. A device that is off, asleep or offline past the validity period goes not compliant on its own.</div>
   <div class="warning-box">Do not put a password or PIN rule in here if you already set one in the Settings Catalog. Two sources of truth for the same setting is how you get a fleet that is permanently non compliant for no visible reason.</div>
 

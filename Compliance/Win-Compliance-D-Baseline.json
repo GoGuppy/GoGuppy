@@ -1,0 +1,58 @@
+{
+  "description": null,
+  "codeIntegrityEnabled": true,
+  "passwordRequiredToUnlockFromIdle": false,
+  "passwordBlockSimple": false,
+  "deviceCompliancePolicyScript": null,
+  "defenderVersion": null,
+  "activeFirewallRequired": true,
+  "wslDistributions": [],
+  "bitLockerEnabled": true,
+  "storageRequireEncryption": true,
+  "requireHealthyDeviceReport": false,
+  "passwordExpirationDays": null,
+  "@odata.type": "#microsoft.graph.windows10CompliancePolicy",
+  "rtpEnabled": false,
+  "osMaximumVersion": null,
+  "validOperatingSystemBuildRanges": [],
+  "memoryIntegrityEnabled": false,
+  "defenderEnabled": false,
+  "passwordPreviousPasswordBlockCount": null,
+  "deviceThreatProtectionRequiredSecurityLevel": "unavailable",
+  "tpmRequired": true,
+  "scheduledActionsForRule": [
+    {
+      "scheduledActionConfigurations": [
+        {
+          "actionType": "block",
+          "notificationMessageCCList": [],
+          "gracePeriodHours": 0,
+          "notificationTemplateId": "00000000-0000-0000-0000-000000000000"
+        }
+      ],
+      "ruleName": "PasswordRequired"
+    }
+  ],
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "kernelDmaProtectionEnabled": false,
+  "antiSpywareRequired": false,
+  "passwordRequired": false,
+  "passwordMinutesOfInactivityBeforeLock": null,
+  "passwordMinimumLength": null,
+  "configurationManagerComplianceRequired": false,
+  "osMinimumVersion": null,
+  "earlyLaunchAntiMalwareDriverEnabled": false,
+  "passwordRequiredType": "deviceDefault",
+  "mobileOsMinimumVersion": null,
+  "displayName": "Baseline",
+  "mobileOsMaximumVersion": null,
+  "deviceThreatProtectionEnabled": false,
+  "signatureOutOfDate": false,
+  "antivirusRequired": true,
+  "passwordMinimumCharacterSetCount": null,
+  "firmwareProtectionEnabled": false,
+  "virtualizationBasedSecurityEnabled": false,
+  "secureBootEnabled": true
+}
