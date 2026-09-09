@@ -181,17 +181,24 @@ h1 { font-size: 22px; font-weight: 500; letter-spacing: .01em; color: var(--ink)
   .row { grid-template-columns: 24px minmax(0, 1fr); row-gap: 2px; padding-bottom: 10px; }
   .row .desc { grid-column: 2; }
 }
+
+.topbar .home { display: inline-flex; align-items: center; gap: 9px; color: var(--dim); text-decoration: none; }
+.topbar .home:hover { color: var(--violet); }
+.topbar .mark { flex: 0 0 auto; display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
 </style>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="../assets/guppy-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
 </head>
 <body>
 <div class="wrap">
 
   <div class="topbar">
-    <a class="home" href="#"><span>goguppy.com</span></a>
+    <a class="home" href="../index.html"><img class="mark" src="../assets/guppy-icon@2x.png" alt=""><span>goguppy.com</span></a>
     <span>rev 2026.09</span>
   </div>
 
-  <div class="breadcrumb"><a href="#">Home</a> &rsaquo; <a href="#">Compliance</a> &rsaquo; Custom Compliance</div>
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="index.html">Compliance</a> &rsaquo; Custom Compliance</div>
 
   <h1>🔍 Custom Compliance</h1>
   <div class="subtitle">For the checks Intune has no setting for.</div>
