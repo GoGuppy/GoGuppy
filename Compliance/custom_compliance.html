@@ -208,10 +208,15 @@ h1 { font-size: 22px; font-weight: 500; letter-spacing: .01em; color: var(--ink)
   <div class="warning-box">The script runs as System in 64 bit PowerShell and must return one compressed line of JSON. Anything written to the pipeline that is not that line breaks the evaluation and the device reports an error, not a failure.</div>
 
   <div class="sub">Policies</div>
-  <div class="sub-desc">Each one is a discovery script and a JSON rules file. Take both.</div>
+  <div class="sub-desc">Baseline is a policy JSON. The rest are a discovery script plus a rules file, take both.</div>
+
+  <a class="row" href="Win-Compliance-D-Baseline.json" download>
+    <span class="icon">🛡️</span><span class="name">Baseline</span>
+    <span class="desc">BitLocker, Secure Boot, code integrity, storage encryption, firewall, TPM and antivirus. The things a healthy device passes already. Import it with Graph, it lands unassigned.</span>
+  </a>
 
   <a class="row" href="custom_av.html">
-    <span class="icon">🛡️</span><span class="name">Antivirus<span class="tag tag-yellow">Pick Vendor</span></span>
+    <span class="icon">🧬</span><span class="name">Antivirus<span class="tag tag-yellow">Pick Vendor</span></span>
     <span class="desc">Confirms the tenant's antivirus product is registered with Windows Security Center and actively running. Six vendors, one toggle.</span>
   </a>
 

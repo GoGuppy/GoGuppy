@@ -46,7 +46,7 @@
   "earlyLaunchAntiMalwareDriverEnabled": false,
   "passwordRequiredType": "deviceDefault",
   "mobileOsMinimumVersion": null,
-  "displayName": "Baseline",
+  "displayName": "Win-Compliance-D-Baseline",
   "mobileOsMaximumVersion": null,
   "deviceThreatProtectionEnabled": false,
   "signatureOutOfDate": false,
