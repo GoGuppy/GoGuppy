@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoGuppy · Compliance · Custom Compliance preview</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #0a0a0a;
+  --panel:  #0e0e10;
+  --row:    #151517;
+  --rule:   #1f2024;
+  --ink:    #cbccc6;
+  --dim:    #6e747c;
+  --cyan:   #5ccfe6;
+  --violet: #a37acc;
+  --faint:  #383c42;
+  --mono:   'Cascadia Mono', 'Consolas', ui-monospace, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 0 0 60px;
+}
+
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+
+.topbar {
+  border-bottom: 1px solid var(--rule);
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--dim);
+  font-size: 12px;
+}
+.topbar a { color: var(--dim); text-decoration: none; }
+.topbar a:hover { color: var(--violet); }
+
+.sub {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 20px 0 2px;
+}
+.sub-desc { color: var(--dim); font-size: 12px; padding-bottom: 8px; }
+.out { color: var(--dim); font-size: 12px; padding-bottom: 8px; }
+
+.breadcrumb { color: var(--dim); font-size: 12px; padding: 26px 0 18px; }
+.breadcrumb a { color: var(--dim); text-decoration: none; }
+.breadcrumb a:hover { color: var(--violet); }
+
+h1 { font-size: 22px; font-weight: 500; letter-spacing: .01em; color: var(--ink); margin-bottom: 6px; }
+.subtitle { color: var(--dim); font-size: 12px; padding-bottom: 20px; }
+
+.warning-box {
+  border-left: 2px solid var(--violet);
+  padding: 4px 0 4px 14px;
+  color: var(--dim);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.info-box {
+  border-left: 2px solid var(--cyan);
+  padding: 4px 0 4px 14px;
+  color: var(--dim);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.code-wrap { position: relative; border-top: 1px solid var(--rule); }
+.code-block {
+  padding: 14px 60px 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 2px 9px;
+  cursor: pointer;
+}
+.copy-btn:hover { color: var(--violet); border-color: var(--faint); }
+.copy-btn.done { color: var(--cyan); }
+
+/* vendor toggle */
+.av-pick { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0 12px; }
+.av {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  padding: 4px 11px;
+  cursor: pointer;
+}
+.av:hover { color: var(--violet); border-color: var(--faint); }
+.av.on { color: var(--cyan); border-color: var(--faint); background: var(--row); }
+
+.dl-row { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 0 0; }
+.dl {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+.dl:hover { color: var(--violet); border-color: var(--faint); }
+
+/* listing rows */
+.row {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 260px) minmax(0, 1fr);
+  gap: 14px;
+  align-items: baseline;
+  padding: 6px 8px 6px 0;
+  text-decoration: none;
+  color: inherit;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+}
+.row .icon { font-size: 14px; line-height: 1; filter: grayscale(35%); }
+.row:hover .icon { filter: none; }
+.row:hover { background: var(--row); border-left-color: var(--violet); padding-left: 8px; }
+.row:hover .name { color: var(--violet); }
+.row .name { color: var(--ink); min-width: 0; overflow-wrap: break-word; }
+.row .desc { color: var(--dim); min-width: 0; overflow-wrap: break-word; }
+.row.sel { background: var(--row); border-left-color: var(--cyan); padding-left: 8px; }
+.row.sel .name { color: var(--cyan); }
+.row.sel .icon { filter: none; }
+.row.empty { color: var(--faint); cursor: default; pointer-events: none; }
+.row.empty .name, .row.empty .desc { color: var(--faint); }
+
+.tag {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  border: 1px solid var(--rule);
+  padding: 1px 6px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+.tag-yellow { color: var(--cyan); border-color: var(--faint); }
+
+.settings-panel { border: 1px solid var(--rule); }
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.settings-row:last-child { border-bottom: 0; }
+.settings-key { color: var(--dim); font-size: 12px; }
+.badge { font-size: 11px; letter-spacing: .06em; }
+.badge-yes { color: var(--cyan); }
+
+@media (max-width: 720px) { .wrap { padding: 0 18px; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <span>goguppy.com</span>
+    <span>rev 2026.09</span>
+  </div>
+
+  <div class="breadcrumb"><a href="#">Home</a> &rsaquo; Compliance</div>
+
+  <h1>✅ Compliance</h1>
+  <div class="subtitle">The half of Conditional Access nobody configures.</div>
+  <div class="out">preview only | this is the Custom Compliance block, dropped where the placeholder row sits now</div>
+
+  <div class="sub">Custom Compliance</div>
+  <div class="sub-desc">Discovery script plus a JSON rules file, for checking what Intune has no setting for. Pick a policy.</div>
+
+  <div class="row sel" data-pol="av">
+    <span class="icon">🛡️</span><span class="name">Antivirus</span>
+    <span class="desc">Checks the tenant's antivirus product is registered and running. Pick the vendor below.</span>
+  </div>
+
+  <div class="row empty">
+    <span class="icon">🔑</span><span class="name">BitLocker Key Escrow</span>
+    <span class="desc">Coming. Encrypted is not the same as recoverable. Confirms the key made it to Entra.</span>
+  </div>
+
+  <div class="row empty">
+    <span class="icon">🔁</span><span class="name">Reboot Age</span>
+    <span class="desc">Coming. Flags devices that have not restarted in 14 days, the ones that silently stop patching.</span>
+  </div>
+
+  <div class="row empty">
+    <span class="icon">👤</span><span class="name">Local Administrators</span>
+    <span class="desc">Coming. Fails if anything outside your approved SIDs sits in the local Administrators group.</span>
+  </div>
+
+  <div class="row empty">
+    <span class="icon">💽</span><span class="name">Free Disk Space</span>
+    <span class="desc">Coming. Under 15 percent free and updates quietly stop installing.</span>
+  </div>
+
+  <div class="sub" style="padding-top:26px">Antivirus Compliance Policy<span class="tag tag-yellow">Edit First</span></div>
+  <div class="sub-desc">Pick the product this tenant runs. Both files below update.</div>
+
+  <div class="av-pick">
+    <button class="av on" data-av="Sophos">Sophos</button>
+    <button class="av" data-av="Bitdefender">Bitdefender</button>
+    <button class="av" data-av="Windows Defender">Windows Defender</button>
+    <button class="av" data-av="Sentinel">SentinelOne</button>
+    <button class="av" data-av="CrowdStrike">CrowdStrike</button>
+    <button class="av" data-av="ESET">ESET</button>
+  </div>
+
+  <div class="settings-panel">
+    <div class="settings-row">
+      <span class="settings-key">Discovery script</span>
+      <span class="badge badge-yes" id="psName">Win-Compliance-AV-Sophos.ps1</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Rules file</span>
+      <span class="badge badge-yes" id="jsName">Win-Compliance-AV-Sophos.json</span>
+    </div>
+    <div class="settings-row">
+      <span class="settings-key">Run as</span>
+      <span class="settings-key" style="color:var(--dim)">System, 64 bit, no signature check</span>
+    </div>
+  </div>
+
+  <div class="sub">Script</div>
+  <div class="code-wrap">
+    <button class="copy-btn" id="copyPs">copy</button>
+    <div class="code-block" id="avps"></div>
+  </div>
+
+  <div class="sub">Rules</div>
+  <div class="code-wrap">
+    <button class="copy-btn" id="copyJs">copy</button>
+    <div class="code-block" id="avjson"></div>
+  </div>
+
+  <div class="dl-row">
+    <button class="dl" id="dlPs">Download .ps1</button>
+    <button class="dl" id="dlJs">Download .json</button>
+  </div>
+
+  <div class="sub">Notes</div>
+  <div class="info-box">Upload the script under Devices, Compliance, Scripts, then create a compliance policy of type Custom and attach the JSON. The script must run in 64 bit PowerShell.</div>
+  <div class="warning-box">SentinelOne registers under more than one display name depending on build, which is why the match is Sentinel and not SentinelOne. Confirm the display name on a real device with Get-CimInstance before you assign this broadly.</div>
+  <div class="warning-box">Set a grace period. A device that misses one evaluation goes non compliant instantly otherwise, and Conditional Access blocks the person with no warning.</div>
+
+</div>
+
+<script>
+const PS = n => `# Checks whether the named antivirus is registered and on.
+$name = '${n}'
+$av = Get-CimInstance -Namespace root\\SecurityCenter2 -ClassName AntiVirusProduct |
+      Where-Object { $_.displayName -like "*$name*" -and ('{0:x6}' -f $_.productState).Substring(2,2) -eq '10' }
+@{ AVOk = [bool]$av } | ConvertTo-Json -Compress`;
+
+const JS = n => JSON.stringify({
+  Rules: [{
+    SettingName: "AVOk",
+    Operator: "IsEquals",
+    DataType: "Boolean",
+    Operand: true,
+    MoreInfoUrl: "https://goguppy.com",
+    RemediationStrings: [{
+      Language: "en_US",
+      Title: "Antivirus not running",
+      Description: n + " is not the active antivirus on this device."
+    }]
+  }]
+}, null, 2);
+
+const slug = n => n.replace(/ /g, '');
+let AV = 'Sophos';
+
+const draw = () => {
+  document.getElementById('avps').textContent = PS(AV);
+  document.getElementById('avjson').textContent = JS(AV);
+  document.getElementById('psName').textContent = 'Win-Compliance-AV-' + slug(AV) + '.ps1';
+  document.getElementById('jsName').textContent = 'Win-Compliance-AV-' + slug(AV) + '.json';
+};
+
+document.querySelectorAll('.av').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.av').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  AV = b.dataset.av;
+  draw();
+});
+
+const copy = (btn, get) => document.getElementById(btn).onclick = () => {
+  navigator.clipboard.writeText(get()).then(() => {
+    const b = document.getElementById(btn);
+    b.textContent = 'copied'; b.classList.add('done');
+    setTimeout(() => { b.textContent = 'copy'; b.classList.remove('done'); }, 1200);
+  });
+};
+copy('copyPs', () => PS(AV));
+copy('copyJs', () => JS(AV));
+
+const save = (btn, get, ext) => document.getElementById(btn).onclick = () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([get()], { type: 'text/plain' }));
+  a.download = 'Win-Compliance-AV-' + slug(AV) + ext;
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+save('dlPs', () => PS(AV), '.ps1');
+save('dlJs', () => JS(AV), '.json');
+
+draw();
+</script>
+
+</body>
+</html>
