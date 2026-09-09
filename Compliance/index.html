@@ -258,53 +258,24 @@ details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
 
   <h1>✅ Compliance</h1>
   <div class="subtitle">Policies that decide whether a device is trusted.</div>
-  <div class="out">click a row to download | set the tenant settings first</div>
-
-  <div class="sub">Tenant Settings</div>
-  <div class="sub-desc">One page, applies everywhere, easy to miss. Intune, Devices, Compliance, Compliance policy settings.</div>
-
-  <div class="settings-panel">
-    <div class="settings-row">
-      <span class="settings-key">Mark devices with no compliance policy assigned as</span>
-      <span style="font-family:var(--mono);font-size:11px;color:var(--dim);">Not compliant</span>
-    </div>
-    <div class="settings-row">
-      <span class="settings-key">Compliance status validity period (days)</span>
-      <span style="font-family:var(--mono);font-size:11px;color:var(--dim);">30</span>
-    </div>
-    <div class="settings-row">
-      <span class="settings-key">Enhanced jailbreak detection</span>
-      <span class="badge badge-no">No</span>
-    </div>
-  </div>
+  <div class="out">click a row | import the JSON with Graph, the policy lands unassigned</div>
 
   <div class="sub">Policies</div>
-  <div class="sub-desc">Import the JSON with Graph, or through the Deployment Kit script.</div>
 
   <a class="row" href="Win-Compliance-D-Baseline.json" download>
     <span class="icon">🛡️</span><span class="name">Windows Baseline</span>
-    <span class="desc">BitLocker, Secure Boot, code integrity, firewall, Defender real time protection, TPM. The things a healthy device has anyway, so almost nothing fails on day one.</span>
+    <span class="desc">BitLocker, Secure Boot, code integrity, storage encryption, firewall, TPM and antivirus. The things a healthy device passes already, so almost nothing fails on day one.</span>
   </a>
 
-  <a class="row" href="Win-Compliance-D-MinimumOS.json" download>
-    <span class="icon">📅</span><span class="name">Minimum OS Version<span class="tag tag-red">Edit First</span></span>
-    <span class="desc">Blocks devices stuck on old builds. Set the version to something your fleet already meets, then raise it every servicing cycle. Import it as shipped and you will lock out whoever is behind.</span>
-  </a>
-
-  <a class="row" href="custom_compliance.html">
-    <span class="icon">🔍</span><span class="name">Custom Compliance</span>
-    <span class="desc">Discovery script plus a JSON rules file, for checking anything Intune has no setting for.</span>
+  <a class="row" href="custom_av.html">
+    <span class="icon">🧬</span><span class="name">Antivirus<span class="tag tag-yellow">Pick Vendor</span></span>
+    <span class="desc">Custom compliance. Confirms the tenant's antivirus product is registered with Windows Security Center and actively running. Six vendors, one toggle.</span>
   </a>
 
   <div class="row empty">
     <span class="icon">⋯</span><span class="name">More coming</span>
     <span class="desc"></span>
   </div>
-
-  <div class="sub">Notes</div>
-
-  <div class="info-box">Compliance is evaluated on the device and reported up. A device that is off, asleep or offline past the validity period goes not compliant on its own.</div>
-  <div class="warning-box">Do not put a password or PIN rule in here if you already set one in the Settings Catalog. Two sources of truth for the same setting is how you get a fleet that is permanently non compliant for no visible reason.</div>
 
 </div>
 
