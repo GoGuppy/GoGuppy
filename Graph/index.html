@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoGuppy · Graph</title>
+<style>
+/* GoGuppy shared styles */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #0a0a0a;
+  --panel:  #0e0e10;
+  --row:    #151517;
+  --rule:   #1f2024;
+  --ink:    #cbccc6;
+  --dim:    #6e747c;
+  --cyan:   #5ccfe6;
+  --violet: #a37acc;
+  --faint:  #383c42;
+  --mono:   'Cascadia Mono', 'Consolas', ui-monospace, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 0 0 60px;
+}
+
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+
+/* top bar */
+.topbar {
+  border-bottom: 1px solid var(--rule);
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--dim);
+  font-size: 12px;
+}
+.topbar a { color: var(--dim); text-decoration: none; }
+.topbar a:hover { color: var(--violet); }
+
+/* home banner */
+.banner {
+  padding: 34px 0 8px;
+  white-space: pre;
+  color: var(--violet);
+  font-size: 12px;
+  line-height: 1.35;
+  overflow-x: auto;
+}
+.tagline { color: var(--dim); padding-bottom: 26px; font-size: 13px; }
+.tagline .hl { color: var(--ink); }
+
+/* section headings */
+.sec-label, .section-label {
+  color: var(--cyan);
+  padding: 30px 0 6px;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 8px;
+}
+.out { color: var(--dim); font-size: 12px; padding-bottom: 8px; }
+.sub {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 20px 0 2px;
+}
+.sub-desc { color: var(--dim); font-size: 12px; padding-bottom: 8px; }
+
+/* listing rows */
+.row {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 260px) minmax(0, 1fr);
+  gap: 14px;
+  align-items: baseline;
+  padding: 6px 8px 6px 0;
+  text-decoration: none;
+  color: inherit;
+  border-left: 2px solid transparent;
+}
+.row .icon {
+  font-size: 14px;
+  line-height: 1;
+  filter: grayscale(35%);
+}
+.row:hover .icon { filter: none; }
+.row:hover { background: var(--row); border-left-color: var(--violet); padding-left: 8px; }
+.row:hover .name { color: var(--violet); }
+.row .idx { display: none; }
+.row.empty {
+  color: var(--faint);
+  cursor: default;
+  pointer-events: none;
+}
+.row.empty .name, .row.empty .desc { color: var(--faint); }
+.row .name { color: var(--ink); min-width: 0; overflow-wrap: break-word; }
+.row .desc { color: var(--dim); min-width: 0; overflow-wrap: break-word; }
+
+/* detail pages */
+.breadcrumb { color: var(--dim); font-size: 12px; padding: 26px 0 18px; }
+.breadcrumb a { color: var(--dim); text-decoration: none; }
+.breadcrumb a:hover { color: var(--violet); }
+
+h1 {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.subtitle { color: var(--dim); font-size: 12px; padding-bottom: 20px; }
+
+.warning-box {
+  border-left: 2px solid var(--violet);
+  padding: 4px 0 4px 14px;
+  color: var(--dim);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.info-box {
+  border-left: 2px solid var(--cyan);
+  padding: 4px 0 4px 14px;
+  color: var(--dim);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+/* collapsible script cards */
+details.card {
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  margin-bottom: 10px;
+}
+details.card[open] { border-color: var(--faint); }
+summary.card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  list-style: none;
+}
+summary.card-top::-webkit-details-marker { display: none; }
+summary.card-top:hover .card-title { color: var(--violet); }
+.step {
+  border: 1px solid var(--faint);
+  color: var(--cyan);
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.card-info { flex: 1; }
+.card-title { color: var(--ink); font-size: 13px; }
+.card-desc { color: var(--dim); font-size: 12px; }
+.chevron { color: var(--faint); font-size: 15px; }
+details[open] .chevron { color: var(--violet); transform: rotate(90deg); }
+.chevron { display: inline-block; transition: transform .15s, color .15s; }
+
+.tag {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  border: 1px solid var(--rule);
+  padding: 1px 6px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+.tag-yellow { color: var(--cyan); border-color: var(--faint); }
+.tag-red { color: var(--violet); border-color: var(--faint); }
+
+/* code */
+.code-wrap { position: relative; border-top: 1px solid var(--rule); }
+.code-block {
+  padding: 14px 60px 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 2px 9px;
+  cursor: pointer;
+}
+.copy-btn:hover { color: var(--violet); border-color: var(--faint); }
+.copy-btn.done { color: var(--cyan); }
+
+/* settings table */
+.settings-panel { border: 1px solid var(--rule); }
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.settings-row:last-child { border-bottom: 0; }
+.settings-key { color: var(--dim); font-size: 12px; }
+.badge { font-size: 11px; letter-spacing: .06em; }
+.badge-yes { color: var(--cyan); }
+.badge-no { color: var(--dim); }
+
+@media (max-width: 720px) {
+  .wrap { padding: 0 18px; }
+  .banner { font-size: 9px; }
+  .row {
+    grid-template-columns: 24px minmax(0, 1fr);
+    row-gap: 2px;
+    padding-bottom: 10px;
+  }
+  .row .desc { grid-column: 2; }
+}
+
+
+.topbar .home { display: inline-flex; align-items: center; gap: 9px; color: var(--dim); text-decoration: none; }
+.topbar .home:hover { color: var(--violet); }
+.topbar .mark { flex: 0 0 auto; display: block; width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="../assets/guppy-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <a class="home" href="../index.html"><img class="mark" src="../assets/guppy-icon@2x.png" alt=""><span>goguppy.com</span></a>
+    <span>rev 2026.09</span>
+  </div>
+
+  <div class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; Graph</div>
+
+  <h1>🕸️ Graph</h1>
+  <div class="subtitle">Read-only Graph one-liners. Copy, paste, run.</div>
+  <div class="out">26 commands | all read only | write ones coming</div>
+  <div class="info-box">Connect first: <span style="color:var(--ink)">Connect-MgGraph -Scopes SCOPE</span> using the scope listed on each card. Swap USER_UPN, GROUP_ID and GRAPH_ID placeholders. Nothing here writes.</div>
+
+  <div class="section-label">Users and identity</div>
+  <div class="sub-desc">Who exists, who is stale, who is a guest.</div>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">All users</div>
+        <div class="card-desc">User.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c1">(Invoke-MgGraphRequest GET &quot;v1.0/users?`$select=displayName,userPrincipalName,accountEnabled,userType&quot; -OutputType PSObject).value</div>
+      <button class="copy-btn" onclick="copyScript(this,'c1')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Guest accounts</div>
+        <div class="card-desc">User.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c2">(Invoke-MgGraphRequest GET &quot;v1.0/users?`$filter=userType eq &#x27;Guest&#x27;&amp;`$select=displayName,userPrincipalName,createdDateTime&quot; -OutputType PSObject).value</div>
+      <button class="copy-btn" onclick="copyScript(this,'c2')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Disabled but still licensed</div>
+        <div class="card-desc">User.Read.All, Directory.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c3">(Invoke-MgGraphRequest GET &quot;v1.0/users?`$filter=accountEnabled eq false&amp;`$select=displayName,userPrincipalName,assignedLicenses&quot; -OutputType PSObject).value | ? { $_.assignedLicenses.Count -gt 0 }</div>
+      <button class="copy-btn" onclick="copyScript(this,'c3')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">A user&#x27;s auth methods</div>
+        <div class="card-desc">UserAuthenticationMethod.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c4">(Invoke-MgGraphRequest GET &quot;v1.0/users/USER_UPN/authentication/methods&quot; -OutputType PSObject).value | Select-Object &#x27;@odata.type&#x27;</div>
+      <button class="copy-btn" onclick="copyScript(this,'c4')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Licenses in the tenant</div>
+        <div class="card-desc">Organization.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c5">(Invoke-MgGraphRequest GET &quot;v1.0/subscribedSkus&quot; -OutputType PSObject).value | Select-Object skuPartNumber, @{n=&#x27;used&#x27;;e={$_.consumedUnits}}, @{n=&#x27;total&#x27;;e={$_.prepaidUnits.enabled}}</div>
+      <button class="copy-btn" onclick="copyScript(this,'c5')">copy</button>
+    </div>
+  </details>
+
+  <div class="section-label">Devices</div>
+  <div class="sub-desc">Intune managed estate, compliance, and local admin.</div>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">All managed devices</div>
+        <div class="card-desc">DeviceManagementManagedDevices.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c6">(Invoke-MgGraphRequest GET &quot;v1.0/deviceManagement/managedDevices?`$select=deviceName,userPrincipalName,operatingSystem,complianceState,lastSyncDateTime&quot; -OutputType PSObject).value</div>
+      <button class="copy-btn" onclick="copyScript(this,'c6')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Non-compliant devices</div>
+        <div class="card-desc">DeviceManagementManagedDevices.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c7">(Invoke-MgGraphRequest GET &quot;v1.0/deviceManagement/managedDevices?`$filter=complianceState eq &#x27;noncompliant&#x27;&amp;`$select=deviceName,userPrincipalName,operatingSystem&quot; -OutputType PSObject).value</div>
+      <button class="copy-btn" onclick="copyScript(this,'c7')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Stale devices, no sync in 30 days</div>
+        <div class="card-desc">DeviceManagementManagedDevices.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c8">$cut=(Get-Date).AddDays(-30).ToString(&quot;o&quot;); (Invoke-MgGraphRequest GET &quot;v1.0/deviceManagement/managedDevices?`$filter=lastSyncDateTime lt $cut&amp;`$select=deviceName,userPrincipalName,lastSyncDateTime&quot; -OutputType PSObject).value</div>
+      <button class="copy-btn" onclick="copyScript(this,'c8')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">LAPS device inventory</div>
+        <div class="card-desc">DeviceLocalCredential.ReadBasic.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c9">(Invoke-MgGraphRequest GET &quot;v1.0/directory/deviceLocalCredentials&quot; -OutputType PSObject).value | Select-Object deviceName, id, lastBackupDateTime</div>
+      <button class="copy-btn" onclick="copyScript(this,'c9')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">LAPS password for every device</div>
+        <div class="card-desc">DeviceLocalCredential.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c10">(Invoke-MgGraphRequest GET &quot;v1.0/directory/deviceLocalCredentials&quot; -OutputType PSObject).value | % { $c=(Invoke-MgGraphRequest GET &quot;v1.0/directory/deviceLocalCredentials/$($_.id)`?`$select=credentials&quot; -OutputType PSObject).credentials[0]; &quot;$($_.deviceName)`t$($c.accountName)`t$([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($c.passwordBase64)))&quot; }</div>
+      <button class="copy-btn" onclick="copyScript(this,'c10')">copy</button>
+    </div>
+  </details>
+
+  <div class="section-label">Groups</div>
+  <div class="sub-desc">Membership, dynamic rules, the empty ones.</div>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">All groups</div>
+        <div class="card-desc">Group.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c11">(Invoke-MgGraphRequest GET &quot;v1.0/groups?`$select=displayName,id,groupTypes,membershipRule&quot; -OutputType PSObject).value</div>
+      <button class="copy-btn" onclick="copyScript(this,'c11')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Dynamic groups and their rules</div>
+        <div class="card-desc">Group.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c12">(Invoke-MgGraphRequest GET &quot;v1.0/groups?`$filter=groupTypes/any(c:c eq &#x27;DynamicMembership&#x27;)&amp;`$select=displayName,membershipRule,membershipRuleProcessingState&quot; -OutputType PSObject).value</div>
+      <button class="copy-btn" onclick="copyScript(this,'c12')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Members of one group</div>
+        <div class="card-desc">GroupMember.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c13">(Invoke-MgGraphRequest GET &quot;v1.0/groups/GROUP_ID/members?`$select=displayName,userPrincipalName&quot; -OutputType PSObject).value</div>
+      <button class="copy-btn" onclick="copyScript(this,'c13')">copy</button>
+    </div>
+  </details>
+
+  <div class="section-label">Conditional Access and risk</div>
+  <div class="sub-desc">Policies, locations, flagged identities.</div>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">All CA policies</div>
+        <div class="card-desc">Policy.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c14">(Invoke-MgGraphRequest GET &quot;v1.0/identity/conditionalAccess/policies&quot; -OutputType PSObject).value | Select-Object displayName, state</div>
+      <button class="copy-btn" onclick="copyScript(this,'c14')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Named locations</div>
+        <div class="card-desc">Policy.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c15">(Invoke-MgGraphRequest GET &quot;v1.0/identity/conditionalAccess/namedLocations&quot; -OutputType PSObject).value</div>
+      <button class="copy-btn" onclick="copyScript(this,'c15')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Risky users</div>
+        <div class="card-desc">IdentityRiskyUser.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c16">(Invoke-MgGraphRequest GET &quot;v1.0/identityProtection/riskyUsers?`$filter=riskState eq &#x27;atRisk&#x27;&quot; -OutputType PSObject).value | Select-Object userPrincipalName, riskLevel, riskLastUpdatedDateTime</div>
+      <button class="copy-btn" onclick="copyScript(this,'c16')">copy</button>
+    </div>
+  </details>
+
+  <div class="section-label">Sign-in and audit</div>
+  <div class="sub-desc">What happened, who did it.</div>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Recent sign-ins for a user</div>
+        <div class="card-desc">AuditLog.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c17">(Invoke-MgGraphRequest GET &quot;v1.0/auditLogs/signIns?`$filter=userPrincipalName eq &#x27;USER_UPN&#x27;&amp;`$top=25&quot; -OutputType PSObject).value | Select-Object createdDateTime, appDisplayName, ipAddress, @{n=&#x27;status&#x27;;e={$_.status.errorCode}}</div>
+      <button class="copy-btn" onclick="copyScript(this,'c17')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Failed sign-ins, last 24h</div>
+        <div class="card-desc">AuditLog.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c18">$cut=(Get-Date).AddDays(-1).ToString(&quot;o&quot;); (Invoke-MgGraphRequest GET &quot;v1.0/auditLogs/signIns?`$filter=createdDateTime ge $cut and status/errorCode ne 0&amp;`$top=50&quot; -OutputType PSObject).value | Select-Object createdDateTime, userPrincipalName, ipAddress</div>
+      <button class="copy-btn" onclick="copyScript(this,'c18')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Directory changes, last 50</div>
+        <div class="card-desc">AuditLog.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c19">(Invoke-MgGraphRequest GET &quot;v1.0/auditLogs/directoryAudits?`$top=50&quot; -OutputType PSObject).value | Select-Object activityDateTime, activityDisplayName, @{n=&#x27;by&#x27;;e={$_.initiatedBy.user.userPrincipalName}}</div>
+      <button class="copy-btn" onclick="copyScript(this,'c19')">copy</button>
+    </div>
+  </details>
+
+  <div class="section-label">Mail</div>
+  <div class="sub-desc">Rules and forwarding, per mailbox.</div>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Inbox rules for a user</div>
+        <div class="card-desc">MailboxSettings.Read</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c20">(Invoke-MgGraphRequest GET &quot;v1.0/users/USER_UPN/mailFolders/inbox/messageRules&quot; -OutputType PSObject).value | Select-Object displayName, isEnabled, actions</div>
+      <button class="copy-btn" onclick="copyScript(this,'c20')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Forwarding settings for a user</div>
+        <div class="card-desc">MailboxSettings.Read</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c21">(Invoke-MgGraphRequest GET &quot;v1.0/users/USER_UPN/mailboxSettings&quot; -OutputType PSObject) | Select-Object automaticRepliesSetting, @{n=&#x27;fwd&#x27;;e={$_.forwardingSmtpAddress}}</div>
+      <button class="copy-btn" onclick="copyScript(this,'c21')">copy</button>
+    </div>
+  </details>
+
+  <div class="section-label">Apps and roles</div>
+  <div class="sub-desc">Service principals, secret expiry, admin assignments.</div>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Enterprise apps</div>
+        <div class="card-desc">Application.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c22">(Invoke-MgGraphRequest GET &quot;v1.0/servicePrincipals?`$select=displayName,appId,accountEnabled&quot; -OutputType PSObject).value</div>
+      <button class="copy-btn" onclick="copyScript(this,'c22')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">App secrets and expiry dates</div>
+        <div class="card-desc">Application.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c23">(Invoke-MgGraphRequest GET &quot;v1.0/applications?`$select=displayName,passwordCredentials&quot; -OutputType PSObject).value | % { foreach($c in $_.passwordCredentials){ &quot;$($_.displayName)`t$($c.endDateTime)&quot; } }</div>
+      <button class="copy-btn" onclick="copyScript(this,'c23')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">OAuth consent grants</div>
+        <div class="card-desc">Directory.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c24">(Invoke-MgGraphRequest GET &quot;v1.0/oauth2PermissionGrants&quot; -OutputType PSObject).value | Select-Object clientId, scope, consentType</div>
+      <button class="copy-btn" onclick="copyScript(this,'c24')">copy</button>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">Directory role holders</div>
+        <div class="card-desc">RoleManagement.Read.Directory</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c25">(Invoke-MgGraphRequest GET &quot;v1.0/directoryRoles&quot; -OutputType PSObject).value | % { $r=$_.displayName; (Invoke-MgGraphRequest GET &quot;v1.0/directoryRoles/$($_.id)/members&quot; -OutputType PSObject).value | % { &quot;$r`t$($_.userPrincipalName)&quot; } }</div>
+      <button class="copy-btn" onclick="copyScript(this,'c25')">copy</button>
+    </div>
+  </details>
+
+  <div class="section-label">SharePoint and OneDrive</div>
+  <div class="sub-desc">Sites and storage.</div>
+
+  <details class="card">
+    <summary class="card-top">
+      <div class="card-info">
+        <div class="card-title">All sites</div>
+        <div class="card-desc">Sites.Read.All</div>
+      </div>
+      <span class="chevron">&rsaquo;</span>
+    </summary>
+    <div class="code-wrap">
+      <div class="code-block" id="c26">(Invoke-MgGraphRequest GET &quot;v1.0/sites?search=*&quot; -OutputType PSObject).value | Select-Object displayName, webUrl</div>
+      <button class="copy-btn" onclick="copyScript(this,'c26')">copy</button>
+    </div>
+  </details>
+
+</div>
+
+<script>
+function copyScript(btn, id) {
+  const code = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = '\u2713 copied';
+    btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('done'); }, 1600);
+  });
+}
+</script>
+</body>
+</html>
