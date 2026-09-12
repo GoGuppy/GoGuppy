@@ -251,10 +251,8 @@ h1 { font-size: 22px; font-weight: 500; letter-spacing: .01em; color: var(--ink)
 </div>
 
 <script>
-const PS = n => `# Checks whether the named antivirus is registered and on.
-$name = '${n}'
-$av = Get-CimInstance -Namespace root\\SecurityCenter2 -ClassName AntiVirusProduct |
-      Where-Object { $_.displayName -like "*$name*" -and ('{0:x6}' -f $_.productState).Substring(2,2) -eq '10' }
+const PS = n => `$name = '${n}'
+$av = Get-CimInstance -Namespace root\\SecurityCenter2 -ClassName AntiVirusProduct | ? { $_.displayName -like "*$name*" -and ('{0:x6}' -f $_.productState).Substring(2,2) -eq '10' }
 @{ AVOk = [bool]$av } | ConvertTo-Json -Compress`;
 
 const JS = n => JSON.stringify({
@@ -263,11 +261,10 @@ const JS = n => JSON.stringify({
     Operator: "IsEquals",
     DataType: "Boolean",
     Operand: true,
-    MoreInfoUrl: "https://goguppy.com",
+    MoreInfoUrl: "",
     RemediationStrings: [{
       Language: "en_US",
-      Title: "Antivirus not running",
-      Description: n + " is not the active antivirus on this device."
+      Title: "Antivirus not running"
     }]
   }]
 }, null, 2);
